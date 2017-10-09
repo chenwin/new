@@ -1,0 +1,51 @@
+yum -y install epel-release
+对于RHEL/CentOS 7:
+rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+
+yum repolist
+yum -y install ffmpeg
+或者https://pkgs.org/download/ffmpeg
+http://li.nux.ro/download/nux/dextop/el7/x86_64/ffmpeg-2.6.8-3.el7.nux.x86_64.rpm
+
+
+查看包的依赖关系yum deplist package-name
+从一个可以yum的机器上保存rpm，然后拷贝走
+# cat /etc/yum.conf | grep keep
+keepcache=1
+
+/usr/lib64/下
+可以把依赖的几个包拷出来放在同一个文件夹里 然后 rpm -ivh *.rpm --force --nodeps
+
+彻底卸载，连带依赖包yum autoremove ffmpeg
+/var/cache/yum/x86_64/7/nux-dextop/packages
+/var/cache/yum/x86_64/7/base/packages/
+
+time ffmpeg -i in.mp4 -vcodec h264 -acodec aac -strict -2 -f mp4 -threads 32 -y out.mp4
+
+for i in `seq 50`;
+do
+  sh run.sh
+done
+
+使用nfs
+yum -y install nfs-utils
+mkdir /mnt/video
+mount -t nfs -o vers=3,timeo=600,nolock 共享路径 本地路径
+
+HWS： http://support.hwclouds.com/usermanual-sfs/zh-cn_topic_0054116434.html
+阿里：https://help.aliyun.com/document_detail/27527.html?spm=5176.doc27526.6.550.fB3lUW
+
+文件系统内目录：可以是跟目录/或子目录
+mount -t nfs -o vers=3,nolock,proto=tcp <挂载点域名>:<文件系统内目录> 本地路径
+mount -t nfs4 <挂载点域名>:<文件系统内目录> 本地路径
+
+AWS
+mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 fs-e8a80b41.efs.us-west-2.amazonaws.com:/ efs-mount-point
+
+
+1caa34a054-dtk21.cn-beijing.nas.aliyuncs.com
+
+参考：
+通过 ffmpeg 无损剪切/拼接视频
+https://segmentfault.com/a/1190000000414341
+
