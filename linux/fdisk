@@ -3,3 +3,17 @@ https://help.aliyun.com/document_detail/25426.html?spm=5176.doc25446.6.594.D3gPE
 
 32TB 块存储分区 parted
 https://help.aliyun.com/document_detail/34377.html?pos=19
+
+通过 4K 对齐提高 IO 性能
+https://help.aliyun.com/knowledge_detail/41224.html?spm=5176.7841174.2.19.4G3JQd
+
+kjournald 进程占用 IO 资源高问题
+[root@test new]# dumpe2fs /dev/xvda1 | grep Journal
+dumpe2fs 1.42.9 (28-Dec-2013)
+Journal inode:            8
+Journal backup:           inode blocks
+Journal features:         journal_incompat_revoke
+Journal size:             128M    （关键参数）
+Journal length:           32768
+Journal sequence:         0x0000515c
+Journal start:            1
