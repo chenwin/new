@@ -1,0 +1,8 @@
+xshell下自动保存文件到PC
+
+yum -y install lrzsz
+tar zcvf filaname.tar.gz filename
+sz filaname.tar.gz
+sz中的s意为send（发送）
+rz中的r意为received（接收）
+sz到指定目录：xshell打开->会话，右键属性“zmodem”，"使用下列下载路径"。
