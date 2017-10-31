@@ -1,0 +1,12 @@
+[root@test lmbench3]#wget http://www.bitmover.com/lmbench/lmbench3.tar.gz
+[root@test lmbench3]#tar -xvzf lmbench3.tar.gz
+[root@test lmbench3]#make results see 
+
+
+编译报错gmake[2]: *** No rule to make target `../SCCS/s.ChangeSet', needed by `bk.ver'.  Stop.
+[root@test lmbench3]# mkdir SCCS
+[root@test lmbench3]# touch SCCS/s.ChangeSet
+[root@test lmbench3]# 继续编译
+
+
+参考路径：http://www.lxway.com/412512801.htm
