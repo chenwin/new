@@ -1,0 +1,9 @@
+apt-get update
+apt-get install puppet git
+cd /root
+git clone git://114.80.173.169/smokeping.git
+cd /root/smokeping/manifests
+apt-get install apache2
+/etc/init.d/apache2 restart
+puppet apply site.pp
+service smokeping restart
