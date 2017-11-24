@@ -13,3 +13,6 @@ smokepi+  9068     1  0 11:30 ?        00:00:00 /usr/bin/perl /usr/sbin/smokepin
 smokepi+  9069  9068  0 11:30 ?        00:00:00 /usr/sbin/smokeping [FPingtun]
 smokepi+  9070  9068  0 11:30 ?        00:00:00 /usr/sbin/smokeping [FPingeth0]
 root      9531  1477  0 11:55 pts/2    00:00:00 grep --color=auto smokeping
+
+参考
+http://blog.csdn.net/bittersweet0324/article/details/77585368
