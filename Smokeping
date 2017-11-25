@@ -36,3 +36,22 @@ apt-get install libapache2-mod-fcgid
 
 监控主机
 /etc/smokeping/config.d/Targets
+
+/etc/smokeping/config.d/General
+
+支持中文
+/etc/smokeping/config.d/Presentation
+charset  = utf-8
+
+数据采样周期
+/etc/smokeping/config.d/Database
+step     = 60
+pings    = 50
+
+AVERAGE  0.5   1  5040
+AVERAGE  0.5  12  21600
+    MIN  0.5  12  21600
+    MAX  0.5  12  21600
+AVERAGE  0.5 144   3600
+    MAX  0.5 144   3600
+    MIN  0.5 144   3600
