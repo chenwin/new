@@ -43,7 +43,7 @@ apt-get install libapache2-mod-fcgid
 /etc/smokeping/config.d/Presentation
 charset  = utf-8
 
-数据采样周期
+数据采样周期修改
 /etc/smokeping/config.d/Database
 step     = 60
 pings    = 50
@@ -55,3 +55,5 @@ AVERAGE  0.5  12  21600
 AVERAGE  0.5 144   3600
     MAX  0.5 144   3600
     MIN  0.5 144   3600
+需要删除已经有的测试周期
+/var/lib/smokeping/Local/baidu.rrd
