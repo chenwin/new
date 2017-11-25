@@ -57,3 +57,6 @@ AVERAGE  0.5 144   3600
     MIN  0.5 144   3600
 需要删除已经有的测试周期
 /var/lib/smokeping/Local/baidu.rrd
+
+访问
+http://$IP/cgi-bin/smokeping.cgi
