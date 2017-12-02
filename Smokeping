@@ -27,6 +27,8 @@ apt-get install smokeping -y
 vi /etc/smokeping/config.d/pathnames
 #sendmail = /usr/sbin/sendmail
 
+sed 's/^/\#&/g' /etc/smokeping/config.d/pathnames
+
 cd /etc/apache2/conf-available
 ln -s ../../smokeping/apache2.conf smokeping.conf
 a2enconf smokeping
