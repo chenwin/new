@@ -28,6 +28,9 @@ sysbench --num-threads=32 --max-time=3600 --max-requests=999999999 \
          --mysql-table-engine=innodb --mysql-host=172.31.16.5 \
          --mysql-port=3306 --mysql-user=admin --mysql-password=XXXX prepare
          
+#准备数据报错
+#/home/sysbench/sysbench/tests/db/common.lua，修改prepare函数里的循环变量。for i = 1,oltp_tables_count do
+         
 #压测性能         
 sysbench --num-threads=200 --max-time=1800 \
          --test=/home/sysbench/sysbench/tests/db/oltp.lua --oltp-table-size=10000000 \
