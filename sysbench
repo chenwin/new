@@ -10,16 +10,22 @@ make install
 
 oltp测试模型
 sysbench --help=oltp help
+
+准备数据前先创建，否则报错
+#FATAL: error 1049: Unknown database 'sbtest'
+mysql -h 172.31.16.5 -P 3306 -u admin -pXXXX
+create database sbtest;
+
 准备数据
 sysbench --num-threads=32 --max-time=3600 --max-requests=999999999 \
          --test=/home/sysbench/sysbench/tests/db/oltp.lua --oltp-table-size=10000000 \
-         --oltp-tables-count=10 --db-driver=mysql \
-         --mysql-table-engine=innodb --mysql-host=XXXX \
-         --mysql-port=3306 --mysql-user=XXXX --mysql-password=XXXX prepare
-         
- sysbench --num-threads=200 --max-time=1800 \
-         --test=/home/sysbench/sysbench/tests/db/oltp.lua \
          --oltp-tables-count=10 --db-driver=mysql --mysql-db=sbtest \
-         --mysql-table-engine=innodb --mysql-host=XXXX \
-         --mysql-port=3306 --mysql-user=XXXX --mysql-password=XXXX --report-interval=10 \
-         run > /home/result.log
+         --mysql-table-engine=innodb --mysql-host=172.31.16.5 \
+         --mysql-port=3306 --mysql-user=admin --mysql-password=XXXX
+         
+压测性能         
+sysbench --num-threads=200 --max-time=1800 \
+         --test=/home/sysbench/sysbench/tests/db/oltp.lua --oltp-table-size=10000000 \
+         --oltp-tables-count=10 --db-driver=mysql --mysql-db=sbtest \
+         --mysql-table-engine=innodb --mysql-host=172.31.16.5 \
+         --mysql-port=3306 --mysql-user=admin --mysql-password=XXXX --report-interval=10 run
