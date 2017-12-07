@@ -2,4 +2,9 @@ memtester
 http://pyropus.ca/software/memtester/
 wget http://pyropus.ca/software/memtester/old-versions/memtester-4.3.0.tar.gz
 make
-./memtester 2048 1
+./memtester 2048 1 （2048MB内存，1表示次数）
+
+
+http://cpuburnin.com/
+wget http://cpuburnin.com/downloads/cpuburn-in.tar.gz
+./cpuburn-in 1 (1表示运行1分钟)
