@@ -50,7 +50,7 @@ sysbench --num-threads=200 --max-time=1800 \
 
 DATE=`date +"%Y%m%d_%H%M%S"`
 mkdir -p /home/rds
-for (( i=100; i<=110; i=i+10 ))
+for (( i=100; i<=400; i=i+10 ))
 do
 RESULT=/home/rds/$DATE-$i
 sysbench --num-threads=$i --max-time=1800 \
