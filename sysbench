@@ -60,5 +60,5 @@ sysbench --num-threads=$i --max-time=1800 \
          --mysql-port=3306 --mysql-user=admin --mysql-password=aws@DT1234 --report-interval=10 run > $RESULT
 TPS=`grep transactions $RESULT | awk '{print $3}'`
 QPS=`grep requests $RESULT | awk '{print $4}'`
-echo "$DATE,$TPS,$QPS" >> /home/rds.csv
+echo "$DATE,$i,$TPS,$QPS" >> /home/rds.csv
 done
