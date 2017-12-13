@@ -22,7 +22,7 @@ ulimit -n 1000000
 ulimit -u 65535
 
 #准备数据
-sysbench --num-threads=32 --max-time=3600 --max-requests=999999999 \
+sysbench --num-threads=100 --max-time=3600 --max-requests=999999999 \
          --test=/home/sysbench/sysbench/tests/db/oltp.lua --oltp-table-size=10000000 \
          --oltp-tables-count=10 --db-driver=mysql --mysql-db=sbtest \
          --mysql-table-engine=innodb --mysql-host=172.31.16.5 \
