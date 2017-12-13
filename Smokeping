@@ -62,3 +62,64 @@ AVERAGE  0.5 144   3600
 
 访问
 http://$IP/cgi-bin/smokeping.cgi
+
+
+
+
+++ BGP
+
+menu =  BGP
+title = 43.254.0.229
+host = 43.254.0.229
+#alerts = someloss
+
+++ LOL_shanghai
+
+menu =  LOL_shanghai
+title = 61.151.229.1
+host = 61.151.229.1
+#alerts = someloss
+
+++ DNF_guangdong
+
+menu =  DNF_guangdong
+title = 183.61.160.1
+host = 183.61.160.1
+#alerts = someloss
+                
+++ DNF_tianjin
+
+menu =  DNF_tianjin
+title = 125.39.242.157
+host = 125.39.242.157
+#alerts = someloss
+
+++ DNF_jisu_tianjin
+
+menu =  DNF_jisu_tianjin
+title = 125.39.253.1
+host = 125.39.253.1
+#alerts = someloss
+
+++ DNF_beijing
+
+menu =  DNF_beijing
+title = 61.135.187.246
+host = 61.135.187.246
+#alerts = someloss
+
+
+++ EIP_117_78_47_241
+
+menu =  EIP_117.78.47.241
+title = EIP_117.78.47.241
+host = 117.78.47.241
+#alerts = someloss
+
+
+++ BGP_43_254_0_225
+
+menu =  BGP_43.254.0.225
+title = BGP_43.254.0.225
+host = 43.254.0.225
+#alerts = someloss
