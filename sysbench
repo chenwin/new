@@ -13,6 +13,7 @@ sysbench --help=oltp help
 
 #准备数据前先创建，否则报错
 #FATAL: error 1049: Unknown database 'sbtest'
+#连接远端远程数据库
 mysql -h 172.31.16.5 -P 3306 -u admin -pXXXX
 create database sbtest;
 
