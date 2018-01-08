@@ -1,8 +1,11 @@
 http://blog.csdn.net/juS3Ve/article/details/78526764?locationNum=7&fps=1
 
-yum install perf
+yum install perf git -y
 git clone https://github.com/brendangregg/FlameGraph
 cd FlameGraph
 perf record -F 99 -a -g -- sleep 60
 perf script | ./stackcollapse-perf.pl > out.perf-folded
 ./flamegraph.pl out.perf-folded > perf-kernel.svg
+
+关于火焰图的更多细节和更多种火焰图各自的功能，可以访问： 
+http://www.brendangregg.com/flamegraphs.html
