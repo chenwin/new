@@ -4,6 +4,9 @@ yum install perf git -y
 git clone https://github.com/brendangregg/FlameGraph
 cd FlameGraph
 perf record -F 99 -a -g -- sleep 60
+linux上屏显结果
+perf report -n --stdio
+把结果导出到文件
 perf script | ./stackcollapse-perf.pl > out.perf-folded
 ./flamegraph.pl out.perf-folded > perf-kernel.svg
 
