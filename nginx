@@ -1,0 +1,12 @@
+手工编译版
+yum -y install pcre-devel openssl openssl-devel git gcc
+git clone https://github.com/arut/nginx-rtmp-module.git
+wget http://nginx.org/download/nginx-1.13.8.tar.gz
+tar -zxvf nginx-1.13.8.tar.gz
+cd nginx-1.13.8
+./configure --prefix=/usr/local/nginx  --add-module=../nginx-rtmp-module  --with-http_ssl_module
+make && make install
+
+启动服务
+cd /usr/local/nginx/sbin
+./nginx
