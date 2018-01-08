@@ -1,0 +1,16 @@
+lspci -vnn |grep VGA
+或者
+yum install lshw
+[root@ ~]# lshw -C display
+  *-display                 
+       description: VGA compatible controller
+       product: GD 5446
+       vendor: Cirrus Logic
+       physical id: 2
+       bus info: pci@0000:00:02.0
+       version: 00
+       width: 32 bits
+       clock: 33MHz
+       capabilities: vga_controller rom
+       configuration: driver=cirrus latency=0
+       resources: irq:0 memory:fc000000-fdffffff memory:febd0000-febd0fff memory:febc0000-febcffff
