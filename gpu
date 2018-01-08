@@ -14,3 +14,22 @@ yum install lshw
        capabilities: vga_controller rom
        configuration: driver=cirrus latency=0
        resources: irq:0 memory:fc000000-fdffffff memory:febd0000-febd0fff memory:febc0000-febcffff
+       
+modinfo  <configuration-drive>      
+[root@ ~]# modinfo cirrus
+filename:       /lib/modules/3.10.0-693.11.1.el7.x86_64/kernel/drivers/gpu/drm/cirrus/cirrus.ko.xz
+license:        GPL
+description:    qemu Cirrus emulation
+author:         Matthew Garrett
+rhelversion:    7.4
+srcversion:     0315F6F668DB4E8DEC9A87C
+alias:          pci:v00001013d000000B8sv00005853sd00000001bc*sc*i*
+alias:          pci:v00001013d000000B8sv00001AF4sd00001100bc*sc*i*
+depends:        drm,drm_kms_helper,ttm
+intree:         Y
+vermagic:       3.10.0-693.11.1.el7.x86_64 SMP mod_unload modversions 
+signer:         CentOS Linux kernel signing key
+sig_key:        61:B8:E8:7B:84:11:84:F6:2F:80:D6:07:79:AB:69:2A:49:D8:3B:AF
+sig_hashalgo:   sha256
+parm:           modeset:Disable/Enable modesetting (int)
+parm:           bpp:Max bits-per-pixel (default:24) (int)
