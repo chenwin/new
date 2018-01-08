@@ -33,3 +33,7 @@ sig_key:        61:B8:E8:7B:84:11:84:F6:2F:80:D6:07:79:AB:69:2A:49:D8:3B:AF
 sig_hashalgo:   sha256
 parm:           modeset:Disable/Enable modesetting (int)
 parm:           bpp:Max bits-per-pixel (default:24) (int)
+
+yum install glxinfo
+[root@ ~]# glxinfo |grep OpenGL
+Error: unable to open display
