@@ -34,6 +34,7 @@ sig_hashalgo:   sha256
 parm:           modeset:Disable/Enable modesetting (int)
 parm:           bpp:Max bits-per-pixel (default:24) (int)
 
+3D硬件加速
 yum install glxinfo
 [root@ ~]# glxinfo |grep OpenGL
 Error: unable to open display
