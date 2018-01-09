@@ -14,7 +14,7 @@ cd /usr/local/nginx/sbin
 下载VLC播放器，打开网络串流
 rtmp://49.4.2.7/vod/in4K_3_5G_h264.mp4
 
-srs-bench测试自动化
+srs-bench测试流媒体
 git clone https://github.com/simple-rtmp-server/srs-bench.git &&
 yum install gcc-c++ -y
 cd srs-bench && ./configure && make &&
