@@ -20,3 +20,6 @@ git clone https://github.com/simple-rtmp-server/srs-bench.git
 yum install gcc-c++ -y
 cd srs-bench && ./configure && make
 ./objs/sb_rtmp_load -c 1 -r rtmp://127.0.0.1:1935/vod/in4K_3_5G_h264.mp4
+
+失败，会提示
+[2018-01-09 11:33:53.542][188][error] rtmp client dump url failed. ret=104 errno=104(Connection reset by peer)
