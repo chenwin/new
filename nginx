@@ -7,6 +7,18 @@ cd nginx-1.13.8
 ./configure --prefix=/usr/local/nginx  --add-module=../nginx-rtmp-module  --with-http_ssl_module
 make && make install
 
+vi /usr/local/nginx/conf/nginx.conf
+rtmp {                 #RTMP服务
+    server {
+        listen 1935;   #//服务端口 
+    chunk_size 4096;   #//数据传输块的大小
+
+    application vod {
+        play /opt/vide/vod; #//视频文件存放位置。
+    }
+    }
+}
+
 启动服务
 cd /usr/local/nginx/sbin
 ./nginx
