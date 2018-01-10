@@ -61,6 +61,7 @@ location /hls {
         alias /tmp/app;    
         expires -1;    
         } 
-在vlc中打开 测试地址：  http://192.168.1.105:8080/hls/test.m3u8
+在vlc中打开 测试地址：http://192.168.1.105:8080/hls/test.m3u8
+统计信息http://192.168.1.105:8080/stat
 
 参考：http://blog.csdn.net/tao_627/article/details/22271559
