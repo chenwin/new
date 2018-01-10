@@ -64,4 +64,4 @@ location /hls {
         } 
 在vlc中打开 测试地址：  http://192.168.1.105:8080/hls/test.m3u8
 
-参考：http://lib.csdn.net/article/57/37915?knId=1549
+参考：http://blog.csdn.net/tao_627/article/details/22271559
