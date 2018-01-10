@@ -7,6 +7,7 @@ cd nginx-1.13.8
 ./configure --prefix=/usr/local/nginx  --add-module=../nginx-rtmp-module  --with-http_ssl_module
 make && make install
 
+点播
 vi /usr/local/nginx/conf/nginx.conf
 rtmp {                 #RTMP服务
     server {
@@ -35,3 +36,30 @@ cd srs-bench && ./configure && make
 
 失败，会提示
 [2018-01-09 11:33:53.542][188][error] rtmp client dump url failed. ret=104 errno=104(Connection reset by peer)
+
+
+直播
+rtmp {    
+    server {    
+        listen 1935;    
+       application hls {    
+             live on;    
+             hls on;    
+             hls_path /tmp/app;    
+             hls_fragment 5s;    
+  
+       }    
+    }    
+} 
+
+http 下面增加
+location /hls {    
+           #server hls fragments    
+           types{    
+             application/vnd.apple.mpegurl m3u8;    
+             video/mp2t ts;    
+           }    
+        alias /tmp/app;    
+        expires -1;    
+        } 
+在vlc中打开 测试地址：  http://192.168.1.105:8080/hls/test.m3u8
