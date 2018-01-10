@@ -61,6 +61,10 @@ location /hls {
         alias /tmp/app;    
         expires -1;    
         } 
+        
+视频文件转流（注意test后面关联使用）
+ffmpeg -re -i sample.flv -vcodec copy -acodec copy -f flv rtmp://192.168.1.105/hls/test
+
 在vlc中打开 测试地址：http://192.168.1.105/hls/test.m3u8
 统计信息http://192.168.1.105/stat
 
