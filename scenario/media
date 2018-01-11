@@ -49,3 +49,6 @@ mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=
 通过 ffmpeg 无损剪切/拼接视频
 https://segmentfault.com/a/1190000000414341
 
+合并ts文件
+ffmpeg -i "concat:input1.ts|input2.ts|input3.ts" -c copy output.ts
+ffmpeg -f concat -i filelist.txt -c copy output.ts
