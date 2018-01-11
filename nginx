@@ -67,6 +67,10 @@ ffmpeg -re -i sample.flv -vcodec copy -acodec copy -f flv rtmp://192.168.0.231/h
 ffmpeg -re -i sample.flv -r 30 -s 1280*720 -f flv rtmp://192.168.0.231/hls/test
 ffmpeg -re -i 920801331E50069CC28342532C7C57A7.flv -vcodec copy -acodec copy -f flv rtmp://192.168.0.231/hls/test
 注意：不要用自己转换的flv文件
+推流会存到/tmp/app（上面的hls_path）目录下
+转流最后会报错，但是不影响
+[flv @ 0xf5b540] Failed to update header with correct duration.rate=1087.1kbits/s    
+[flv @ 0xf5b540] Failed to update header with correct filesize.
 
 在vlc中打开 测试地址：http://192.168.1.105/hls/test.m3u8
 统计信息http://192.168.1.105/stat
