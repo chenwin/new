@@ -1,0 +1,50 @@
+华为云 
+http://support.huaweicloud.com/obs_dld/index.html
+安装指导
+http://static.huaweicloud.com/upload/files/pdf/20170519/20170519170342_77767.pdf
+
+
+安装
+http://s3tools.org/s3cmd
+wget https://nchc.dl.sourceforge.net/project/s3tools/s3cmd/2.0.1/s3cmd-2.0.1.zip
+unzip s3cmd-2.0.1.zip
+python setup.py install
+
+
+执行以下命令，对S3cmd进行基础配置。
+s3cmd --configure
+
+根据命令行提示，依次输入OBS的AK、SK、region等信息。
+一路根据提示操作，最后Test access with supplied credentials? [Y/n]选n
+
+保存配置后，S3cmd会在$HOME目录下自动生成一个名为.s3cfg的文件，它包含了
+S3cmd的所有配置信息。
+
+执行以下命令，打开.s3cfg文件。
+vi ~/.s3cfg
+host_base = OBS域名地址
+
+重新配置s3cmd --configure，一路回车，到Test access with supplied credentials? [Y/n]选Y
+
+Please wait, attempting to list all buckets...
+Success. Your access key and secret key worked fine :-)
+表示OK了。
+
+测试
+s3cmd du s3://obs-1
+
+上传对象至OBS指定位置 
+s3cmd put params object s3://my-bucket
+s3cmd put --no-ssl --recursive /dev/shm s3://obs-1
+
+调优
+s3cmd 提供了send_chunk和recv_chunk这两个选项，可以调整buffer。
+send_chunk调整成了262144字节（256KB），整体性能立刻显著提升
+
+
+for i in `seq 3`
+do
+  (time s3cmd put --no-ssl test$i.mp4 s3://obs-1) >& $i.txt &
+done
+
+cat *.txt |grep real
