@@ -52,3 +52,6 @@ https://segmentfault.com/a/1190000000414341
 合并ts文件
 ffmpeg -i "concat:input1.ts|input2.ts|input3.ts" -c copy output.ts
 ffmpeg -f concat -i filelist.txt -c copy output.ts
+
+视频转分辨率和帧数，截取大小
+ffmpeg -i in4K_3_5G_h264.mp4 -r 30 -s 1280*720 -ss 00:00:00 -to 00:00:15 test.mp4
