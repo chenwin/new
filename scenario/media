@@ -54,4 +54,5 @@ ffmpeg -i "concat:input1.ts|input2.ts|input3.ts" -c copy output.ts
 ffmpeg -f concat -i filelist.txt -c copy output.ts
 
 视频转分辨率和帧数，截取大小
-ffmpeg -i in4K_3_5G_h264.mp4 -r 30 -s 1280*720 -ss 00:00:00 -to 00:00:15 test.mp4
+-r 帧率 -s 分辨率 -b:v视频码率 -b:a音频码率 -ss开始时间 -to结束时间
+ffmpeg -i in4K_3_5G_h264.mp4 -r 30 -s 1280*720 -b:v 2160k -b:a 44k -ss 00:00:00 -to 00:00:15 test.mp4
