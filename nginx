@@ -14,22 +14,22 @@ vi /usr/local/nginx/conf/nginx.conf
 点播
 vi /usr/local/nginx/conf/nginx.conf
 放到http前面和http并列
-        rtmp {                   #RTMP服务
-            server {
-                listen 1935;     #//服务端口 
-                chunk_size 4096; #//数据传输块的大小
+rtmp {                          #RTMP服务
+    server {
+        listen 1935;            #//服务端口 
+        chunk_size 4096;        #//数据传输块的大小
 
-            application vod {    #//点播
-                play /opt/vide/vod; #//视频文件存放位置。
-            }
-            application hls {  #//直播
-                live on;     
-                hls on;     
-                hls_path /tmp/app; #//点播ts文件存放路径    
-                hls_fragment 5s;     
-            }  
-            }
+        application vod {       #//点播
+            play /opt/vide/vod; #//视频文件存放位置。
         }
+    application hls {           #//直播
+            live on;     
+            hls on;     
+            hls_path /tmp/app;  #//直播ts文件存放路径    
+            hls_fragment 5s;     
+        }  
+    }
+}
 
 启动服务
 cd /usr/local/nginx/sbin
