@@ -12,6 +12,10 @@ vi /usr/local/nginx/conf/nginx.conf
 2) worker_rlimit_nofile 200000; //ulimit -n 200000
 安全组需要放开1935端口
 
+定位文件句柄问题：
+lsof -n|awk '{print$2}' |sort|uniq -c |sort -nr|more
+第一列是打开的文件句柄数量，第二列是进程号
+
 点播
 vi /usr/local/nginx/conf/nginx.conf
 放到http前面和http并列
