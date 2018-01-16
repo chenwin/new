@@ -13,6 +13,7 @@ vi /usr/local/nginx/conf/nginx.conf
 
 点播
 vi /usr/local/nginx/conf/nginx.conf
+放到http前面和http并列
         rtmp {                   #RTMP服务
             server {
                 listen 1935;     #//服务端口 
