@@ -23,3 +23,13 @@ r/s=read IOPS
 w/s=write IOPS
 avgrq-sz=FIO块大小=扇区35.58*512(Byte)=18KB,即FIO压测的bs参数
 avgqu-sz=FIO队列深度，即FIO压测的iodepth参数
+
+网络
+Average:        IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s
+Average:         eth0  12255.30  11317.05 113529.90  24609.34      0.00      0.00      0.00
+
+rxpck/s 收PPS
+txpck/s 发PPS
+rxkB/s  收带宽
+txkB/s  发带宽
+
