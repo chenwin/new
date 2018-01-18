@@ -1,0 +1,4 @@
+chmod 700 /etc/rc.d/rc.local
+
+vi /etc/rc.d/rc.local
+add-video.sh /home/add-video.sh
