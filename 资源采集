@@ -46,6 +46,8 @@ usr sys idl wai hiq siq| read  writ| recv  send|  in   out | int   csw
 dstat -N eth0 --output ./200.csv
 
 dstat -cdny --socket --fs -N eth0 -T
+dstat -cdny --socket --fs -N eth0 -D /dev/vdb -t
+
 
 
 dmidecode --type memory
