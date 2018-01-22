@@ -27,6 +27,7 @@ rtmp {                          #RTMP服务
 
         application vod {       #//点播
             play /opt/vide/vod; #//视频文件存放位置。
+            play_temp_path /mnt/nginx/tmp; #VOD下载到本地文件路径，默认为/tmp
         }
     application hls {           #//直播
             live on;     
