@@ -55,7 +55,10 @@ https://github.com/ossrs/srs-bench
 git clone https://github.com/simple-rtmp-server/srs-bench.git
 yum install gcc-c++ unzip git -y
 cd srs-bench && ./configure && make
+
+点播和直播压测
 ./objs/sb_rtmp_load -c 1 -r rtmp://127.0.0.1:1935/vod/in4K_3_5G_h264.mp4
+./objs/sb_rtmp_publish -i doc/source.200kbps.768x320.flv -c 1 -r rtmp://172.18.205.253:1935/hls/test
 
 参考：http://blog.csdn.net/u011455056/article/details/78775262
 失败，会提示
