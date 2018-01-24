@@ -71,7 +71,7 @@ http 下面增加
              application/vnd.apple.mpegurl m3u8;    
              video/mp2t ts;    
            }    
-        alias /tmp/app;    
+        alias /tmp/app;  #注意要与hls_path一致
         expires -1;    
         } 
         
