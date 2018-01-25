@@ -10,6 +10,13 @@ wget https://nchc.dl.sourceforge.net/project/s3tools/s3cmd/2.0.1/s3cmd-2.0.1.zip
 unzip s3cmd-2.0.1.zip
 python setup.py install
 
+腾讯安装报错
+ImportError: No module named setuptools
+
+wget https://pypi.python.org/packages/source/s/setuptools/setuptools-0.6c11.tar.gz
+tar zxvf setuptools-0.6c11.tar.gz
+cd setuptools-0.6c11
+python setup.py install
 
 执行以下命令，对S3cmd进行基础配置。
 s3cmd --configure
