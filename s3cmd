@@ -23,7 +23,7 @@ s3cmd --configure
 s3cmd --configure s3://some-bucket #测试指定桶
 
 增加header
-s3cmd --configure --add-header=Appid: 1255453111 --debug
+s3cmd --configure --add-header=Appid:1255453111 --debug
 
 腾讯云的AK/SK在“云API密钥”里
 
