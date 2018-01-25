@@ -1,0 +1,2 @@
+抓HTTP的消息体
+tcpdump -i eth0 -A -s 0 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)' and 'src net 169.254.0.47 or dst net 169.254.0.47'
