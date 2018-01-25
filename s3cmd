@@ -13,6 +13,9 @@ python setup.py install
 
 执行以下命令，对S3cmd进行基础配置。
 s3cmd --configure
+s3cmd --configure s3://some-bucket #测试指定桶
+
+腾讯云的AK/SK在“云API密钥”里
 
 根据命令行提示，依次输入OBS的AK、SK、region等信息。
 一路根据提示操作，最后Test access with supplied credentials? [Y/n]选n
