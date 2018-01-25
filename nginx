@@ -20,7 +20,7 @@ lsof -p 进程号
 
 点播
 vi /usr/local/nginx/conf/nginx.conf
-放到http前面和http并列
+放到http前面和events之间，与http并列
 rtmp {                          #RTMP服务
     server {
         listen 1935;            #//服务端口 
@@ -70,7 +70,7 @@ cd srs-bench && ./configure && make
 
 直播
 
-http 下面增加
+http  location /后面增加
         location /hls {    
            #server hls fragments    
            types{    
