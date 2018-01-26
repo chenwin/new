@@ -1,3 +1,4 @@
+压力构造工具
 ubuntu:
 apt-get install stress
 stress -c 1 (2核的虚拟机，写1表示CPU加压50%)
