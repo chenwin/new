@@ -48,3 +48,18 @@ done
 for ip in `cat ips |grep -v ^# |awk '{print $1}'`;
    do ssh $ip '命令';
 done
+
+=================拷贝
+for ip in `cat ips |grep -v ^# |awk '{print $1}'`;
+  do scp -r ./test $ip:/home;
+done
+
+=================并发执行
+for((i=1;i<=1;i++));
+  do
+  for ip in `cat ips |grep -v ^# |awk '{print $1}'`;
+    do ssh $ip 'cd /home/test;python performanceTest.py obs_31.csv &';
+  done
+  sleep 10
+done
+
