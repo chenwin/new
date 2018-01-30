@@ -42,7 +42,7 @@ expect {
 
 ===============================
 ssh-keygen -t rsa一路回车
-for ip in `cat ips |grep -v ^# |awk {print $1}`;
+for ip in `cat ips |grep -v ^# |awk '{print $1}'`;
    do expect -f chroot.exp ${ip};
 done
 
