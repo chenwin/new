@@ -1,3 +1,6 @@
+echo -e "n\np\n1\n\n\nw\n" | fdisk -S 56 /dev/vdb
+mkfs.ext3 /dev/vdb1
+
 Linux 格式化和挂载数据盘 fdisk
 https://help.aliyun.com/document_detail/25426.html?spm=5176.doc25446.6.594.D3gPEm
 
