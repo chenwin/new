@@ -1,6 +1,8 @@
 保存为chroot.exp
 yum install expect
 
+for ip in `cat ips |grep -v ^# |awk '{print $1}'`;do ssh $ip 'yum install -y sysstat';done
+
 ==================================================================
 log_user 0
 set timeout 20
