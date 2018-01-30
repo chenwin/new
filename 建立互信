@@ -1,0 +1,50 @@
+保存为chroot.exp
+yum install expect
+
+==================================================================
+log_user 0
+set timeout 20
+
+set host [lindex $argv 0];
+set targetUser "root"
+set targetPwd "XXXXXX"
+
+spawn ssh-copy-id -i /root/.ssh/id_rsa.pub root@$host
+expect {
+
+	"*continue connecting*" {
+		send "yes\r"
+		exp_continue
+	}
+	"*assword*" {
+		send "${targetPwd}\r"
+		exp_continue
+	}
+	"*(yes/no)?*" {
+		send "yes\r"
+		exp_continue
+	}
+	"locked." {
+		sleep 300
+		close
+		spawn ssh-copy-id -i /root/.ssh/id_rsa.pub root@$host
+		send_user "host $host locked,retry in next 300 seconds"
+		exp_continue
+	}
+	timeout {
+		send_user "copy key to $host failed\n"
+		close
+	}
+}
+
+
+===============================
+ssh-keygen -t rsa
+for ip in `cat ips |grep -v ^# |awk {print $1}`;
+   do ecpect -f chroot.exp ${ip};
+done
+
+=============
+for ip in `cat ips |grep -v ^# |awk {print $1}`;
+   do ssh $ip '命令';
+done
