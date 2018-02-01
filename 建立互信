@@ -47,6 +47,11 @@ for ip in `cat ips |grep -v ^# |awk '{print $1}'`;
    do expect -f chroot.exp ${ip};
 done
 
+===================并发替换
+for ip in `cat ips |grep -v ^# |awk '{print $1}'`;
+  do ssh $ip 'sed -i 's/100.125.1.250/100.125.1.26/g' /etc/resolv.conf'
+done
+
 =============
 for ip in `cat ips |grep -v ^# |awk '{print $1}'`;
    do ssh $ip '命令';
