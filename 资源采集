@@ -69,12 +69,7 @@ Valid type keywords are:
   connector
   slot
 
-dstat --top-io --top-cpu --top-mem --disk-util --net-packets
-----most-expensive---- -most-expensive- --most-expensive- vda-
-     i/o process      |  cpu process   |  memory process |util
-systemd    2964k 6786k|barad_agent  0.0|tuned       18.0M|0.59
-sshd: root@ 455B  500B|                |tuned       18.0M|   0
-barad_agent1051B 1132B|                |tuned       18.0M|   0
-barad_agent1351B 1029B|                |tuned       18.0M|   0
+最全面，用这个good
+dstat -msdnl -D vda -N eth0 --top-io --top-cpu --top-mem --disk-util --output ./200vod_server.csv
 
 
