@@ -69,7 +69,7 @@ Valid type keywords are:
   connector
   slot
 
-dstat --top-io --top-cpu --top-mem --disk-util
+dstat --top-io --top-cpu --top-mem --disk-util --net-packets
 ----most-expensive---- -most-expensive- --most-expensive- vda-
      i/o process      |  cpu process   |  memory process |util
 systemd    2964k 6786k|barad_agent  0.0|tuned       18.0M|0.59
