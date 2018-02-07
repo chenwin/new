@@ -71,3 +71,5 @@ for((i=1;i<=1;i++));
   sleep 10
 done
 
+==============并发kill
+ps -ef |grep performanceTest.py |grep python | cut -c 9-15 | xargs kill -s 9
