@@ -1,3 +1,7 @@
+在线获取视频源文件地址网址
+http://www.flvcd.com/
+
+
 yum -y install epel-release
 对于RHEL/CentOS 7:
 rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
