@@ -23,7 +23,7 @@ r/s=read IOPS
 w/s=write IOPS
 rkB/s=读带宽
 wkB/s=写带宽
-avgrq-sz=FIO块大小=扇区35.58*512(Byte)=18KB,即FIO压测的bs参数
+avgrq-sz=FIO块大小=扇区35.58*512(Byte)/1024=18KB，即35.58除以2，即FIO压测的bs参数
 avgqu-sz=FIO队列深度，即FIO压测的iodepth参数
 
 网络
