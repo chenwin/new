@@ -70,6 +70,6 @@ Valid type keywords are:
   slot
 
 最全面，用这个good
-dstat -msdnl -D vda -N eth0 --top-io --top-cpu --top-mem --disk-util --output ./200vod_server.csv
+dstat -cmsdnl -D vda -N eth0 --top-io --top-cpu --top-mem --disk-util --output ./200vod_server.csv
 
 
