@@ -19,6 +19,12 @@ lsof -n|awk '{print$2}' |sort|uniq -c |sort -nr|more
 第一列是打开的文件句柄数量，第二列是进程号
 lsof -p 进程号
 
+
+推流报错errno=99(Cannot assign requested address)
+查看端口范围sysctl net.ipv4.ip_local_port_range
+修改端口范围
+sysctl net.ipv4.ip_local_port_range="32768    62000"
+
 点播
 vi /usr/local/nginx/conf/nginx.conf
 放到http前面和events之间，与http并列
