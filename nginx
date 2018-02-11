@@ -21,7 +21,10 @@ lsof -p 进程号
 
 
 推流报错errno=99(Cannot assign requested address)
-查看端口范围sysctl net.ipv4.ip_local_port_range
+查看端口范围、所有进程打开的文件描述符数、单个进程打开的文件描述符数（soft limit<=hard limit<=nr_open<=file-max）
+sysctl net.ipv4.ip_local_port_range
+sysctl fs.file-max
+sysctl fs.nr_open
 修改端口范围
 sysctl net.ipv4.ip_local_port_range="1024    65535"
 
