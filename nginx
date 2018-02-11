@@ -23,7 +23,7 @@ lsof -p 进程号
 推流报错errno=99(Cannot assign requested address)
 查看端口范围sysctl net.ipv4.ip_local_port_range
 修改端口范围
-sysctl net.ipv4.ip_local_port_range="32768    62000"
+sysctl net.ipv4.ip_local_port_range="1024    65535"
 
 点播
 vi /usr/local/nginx/conf/nginx.conf
