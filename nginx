@@ -19,6 +19,8 @@ lsof -n|awk '{print$2}' |sort|uniq -c |sort -nr|more
 第一列是打开的文件句柄数量，第二列是进程号
 lsof -p 进程号
 
+查看并发请求数及其TCP连接状态
+netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 
 推流报错errno=99(Cannot assign requested address)
 查看端口范围、所有进程打开的文件描述符数、单个进程打开的文件描述符数（soft limit<=hard limit<=nr_open<=file-max）
