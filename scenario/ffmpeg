@@ -1,0 +1,5 @@
+mp4转gif
+ffmpeg -t 3 -ss 00:00:02 -i in.mp4 -b 2048k out.gif
+-ss 视频截取开始时间
+-t 3表示3持续3秒的视频
+-b 波特率，高质量
