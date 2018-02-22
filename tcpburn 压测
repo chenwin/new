@@ -10,8 +10,8 @@ make install
 
 cd ../tcpburn
 make clean
-#./configure --single  
-./configure --single  --comet
+#./configure --single  ##支持--single模式
+./configure --single  --comet  ##支持comet 模式即长连接模式
 make
 make install
 配置
