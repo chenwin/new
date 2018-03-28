@@ -1,2 +1,11 @@
 替换字符串
 sed -i 's/100.125.1.250/100.125.1.26/g' /etc/resolv.conf
+
+在13行加入service smokeping start
+sed -i '13a\service smokeping start' /etc/rc.local
+
+注释掉41行和42行
+sed -i -e '41 s/# //' -i -e '42 s/# //' /etc/inputrc
+
+只显示41行到42行
+sed -n '41,42p' /etc/inputrc
