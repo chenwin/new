@@ -1,0 +1,8 @@
+supperputty
+
+Edit编辑会话
+Login username:用户名
+Extra Putty Arguments:-pw 密码
+批量执行命令
+在上面的标签栏Commands输入命令，注意此处只能输入命令，不支持粘贴命令。
+在绿色的对号右侧Script Editor才支持粘贴命令，send发送。
