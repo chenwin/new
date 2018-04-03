@@ -1,5 +1,7 @@
 supperputty
 
+依赖putty（必选）和pscp
+
 自动带用户名和密码登录
 Edit编辑会话
 Login username:用户名
