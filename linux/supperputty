@@ -1,5 +1,6 @@
 supperputty
 
+自动带用户名和密码登录
 Edit编辑会话
 Login username:用户名
 Extra Putty Arguments:-pw 密码
