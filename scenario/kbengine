@@ -1,0 +1,260 @@
+#查看gcc版本
+strings /usr/lib64/libstdc++.so.6 |grep GLIBC
+
+
+yum install unzip -y
+
+#download kbengine
+wget https://github.com/kbengine/kbengine/archive/v1.1.5.zip -O /home/kbengine.zip
+cd /home
+unzip /home/kbengine.zip
+mv kbengine-1.1.5/ kbengine
+#自动化安装一步（数据库存在风险），否则build、install.这样安装还是不能用，必须make
+python /home/kbengine/kbe/tools/server/install/installer.py install
+
+#build kbengine
+#mysql-server mysql-devel
+rpm -ivh https://repo.mysql.com/mysql-community-release-el7-7.noarch.rpm
+yum install openssl-devel gcc gcc-c++ mysql-community-devel -y （必须配置mysql repo才能安装mysql-community-devel；mysql-community-server 数据库节点才装）
+cd /home/kbengine/kbe/src
+chmod -R 755 .
+make
+
+In file included from db_exception.cpp:22:0:
+db_interface_mysql.h:32:25: fatal error: mysql/mysql.h: No such file or directory
+ #include "mysql/mysql.h"
+原因是没有安装mysql-community-devel
+
+#make error
+注意：installer.py文件中findMysqlService函数中判断进程存在，
+service --status-all修改为ret, cret = syscommand('bash -c \'ps aux | grep \"mysql\"\'', True)
+
+#install mysql
+wget https://repo.mysql.com/mysql-community-release-el7-7.noarch.rpm
+rpm -ivh mysql-community-release-el7-7.noarch.rpm
+yum install mysql-community-server -y
+chown -R mysql:mysql /var/lib/mysql
+service mysqld start
+chkconfig mysqld on
+
+#set mysql passwd
+mysql_secure_installation
+
+#install
+python /home/kbengine/kbe/tools/server/install/installer.py install
+
+
+#download warring 服务器
+wget https://github.com/kbengine/kbengine_demos_assets/archive/v1.1.5.zip -O /home/warring.zip
+cd /home
+unzip warring.zip
+cp -r /home/kbengine_demos_assets-1.1.5 /home/kbengine/
+cd /home/kbengine/kbengine_demos_assets-1.1.5
+
+#配置服务端，配置公网访问地址。添加安全组20013-20019
+vi /home/kbengine/kbengine_demos_assets-1.1.5/res/server/kbengine.xml
+在baseapp、loginapp中间增加<externalAddress>弹性IP地址</externalAddress>
+<loginapp>
+</loginapp>
+
+#启动游戏
+cd /home/kbengine/kbengine_demos_assets-1.1.5;sh start_server.sh
+#启动机器人
+cd /home/kbengine/kbengine_demos_assets-1.1.5;sh start_bots.sh
+
+#配置机器人
+#所有的internalInterface都配置（不执行也行？？？）
+<internalInterface> eth0 </internalInterface>
+#增加机器人数量defaultAddBots之间
+<totalCount> 1000 </totalCount>
+<forceInternalLogin> true </forceInternalLogin>  #true使用内网
+<numConnections> 5 </numConnections>             #数据库允许的连接数
+<bots> </bots>
+/home/kbengine/kbe/res/server/kbengine_defaults.xml
+
+#改kbengine.xml里的totalCount压力才能上去
+#取消打印<debug_type> 0 </debug_type>
+vi /home/kbengine/kbengine_demos_assets-1.1.5/res/server/kbengine.xml
+<totalCount> 1000  </totalCount>
+
+#内核调优
+wget http://kbengine.org/assets/other/Centos_Config.zip
+yum install dos2unix
+dos2unix socket_optimization.sh
+
+日志路径
+/home/kbengine/kbengine_demos_assets-1.1.5/logs
+
+#部署stresstest游戏
+wget https://github.com/kbengine/kbengine_stresstest/archive/master.zip -O /home/stresstest.zip
+unzip stresstest.zip
+cp -r /home/kbengine_stresstest-master /home/kbengine/kbengine_stresstest
+
+（这个demo一共只有100个space也会产生100个副本。不会因为进程数量改变）
+#启动游戏
+cd /home/kbengine/kbengine_stresstest/mmorpg/server_assets;sh start_server.sh > /dev/null 2>&1
+#启动机器人
+cd /home/kbengine/kbengine_stresstest/mmorpg/server_assets;sh start_bots.sh > /dev/null 2>&1
+
+vi /home/kbengine/kbengine_stresstest/mmorpg/server_assets/res/server/kbengine.xml
+loginapp地址
+ <host> 172.16.66.32 </host>
+
+/home/kbengine/kbengine_stresstest/mmorpg/server_assets/logs
+
+批量杀机器人进程
+ps -ef |grep /server//bots |grep -v color=auto |cut -c 9-15 |xargs kill -9
+
+
+性能监控console
+cd /home/kbengine/kbe/tools/server/django_packages
+tar -zxvf Django-1.8.9.tar.gz
+cd /home/kbengine/kbe/tools/server/webconsole
+sh sync_db.sh
+sh run_server.sh
+http://139.159.235.95:8000/wc
+
+
+[root@kbe ~]# id kbe
+uid=1000(kbe) gid=1000(kbe) groups=1000(kbe)
+第一次使用Admin进入后台，根据启动服务器的用户账号名和用户uid创建新的控制用户，完成后使用新账号登录才能看到性能分析等信息。
+
+必须通过页面启动（uid!=0,即非root）服务才能监控到数据。/home/kbengine/kbe/bin/server/下的可执行程序
+/home/kbengine/kbengine_demos_assets-1.1.5
+$KBE_BIN_PATH/machine --cid=2129652375332859700 --gus=1&修改为
+$KBE_BIN_PATH/machine --cid=2129652375332859700 --gus=1&
+
+======如下手工操作才需要========
+配置数据库Database连接，关键字Database address
+vi /home/kbengine/kbe/res/server/kbengine_defaults.xml
+mysql> grant all privileges on *.* to kbe@'%' identified by 'pwd123456';
+mysql> grant select,insert,update,delete,create,drop on *.* to kbe@'%' identified by 'pwd123456';
+mysql> FLUSH PRIVILEGES;
+
+create database sbtest;
+
+python /home/kbengine/kbe/tools/server/pycluster/cluster_controller.py query
+
+访问游戏
+http://IP/index.html
+
+
+
+统计游戏中玩家/机器人个数
+python /home/kbengine/kbe/tools/server/pycluster/cluster_controller.py query
+
+numProxices的数量，继承自Proxy的实体数量，通常代表已经创建出的玩家相关实体
+配置的机器人Count + avatar = numProxices
+
+对于server_assets
+bots总数=bost线程*配置的bots * 2
+
+机器人创建的人数
+cat *.log* |grep "onCreateAccountResult" |wc -l
+机器人创建成功的人数
+cat *.log* |grep "create is successfully" |wc -l
+机器人创建失败的人数
+cat *.log* |grep "create is failed" |wc -l
+
+
+失败log会重复打印2次
+[root@gm-bot logs]#  cat *.log* |grep "bot_6539773326791802880_3362207525993710878 create is failed"
+  INFO root [2018-04-02 17:02:47,346] - ClientObject::onCreateAccountResult: bot_6539773326791802880_3362207525993710878 create is failed! code=SERVER_ERR_BUSY.
+  INFO root [2018-04-02 17:02:47,385] - ClientObject::onCreateAccountResult: bot_6539773326791802880_3362207525993710878 create is failed! code=SERVER_ERR_BUSY.
+
+python /home/kbengine/kbe/tools/server/pycluster/cluster_controller.py console cellapp01
+
+[cellapp@password ~]# KBEngine.entities[玩家ID].position
+
+关掉logger
+在start_server.sh中注释掉logger启动那行
+
+
+如果要配置成外网服务登录的服务器
+kbengine.xml中baseapp和loginapp的externalAddress 都需要配置为122.112.224.86
+<forceInternalLogin> true </forceInternalLogin>不能为true
+
+一个tick的时间由配置中updateHZ决定，默认是10hz， 一个tick就是0.1秒。
+
+
+========================客户端================================================================
+#下载unity3d编译器
+http://unity3d.com/unity/download/archive（不用）
+https://unity3d.com/cn/get-unity/download/archive
+
+
+#安装破解补丁（非必须，可试用40天）
+http://blog.sina.com.cn/s/blog_710225790101e378.html
+
+#下载客户端
+#download warring 客户端(windows)
+wget https://github.com/kbengine/kbengine_demos_assets/archive/v1.1.5.zip
+wget https://github.com/kbengine/kbengine_unity3d_plugins/archive/v1.1.5.zip -O /home/unity3d.zip
+git clone https://github.com/kbengine/kbengine_unity3d_plugins.git
+
+#unity build
+
+修改127.0.0.1为服务端IP
+\warring\Assets\Olugins\KBEngine.cs
+
+
+
+
+kbengine0.1.5_完整服务端源码+完整客户端源码+完整资源
+https://yun.baidu.com/s/1c0xkYu0#list/path=%2F
+
+====================================================================================================================================================
+自带的游戏测试
+/home/kbengine/assets/
+sh start_server.sh
+sh kill_server.sh
+netstat -an |grep 20013
+
+参考
+http://kbengine.org/docs/build.html（编译,配置）
+http://kbengine.org/docs/installation.html
+https://github.com/kbengine/kbengine_unity3d_warring
+http://kbengine.org/cn/docs/（文档全）
+https://github.com/kbengine?tab=repositories（作者github库）
+kbengine新手必看（论坛地址https://github.com/kbengine?tab=repositories）
+http://bbs.kbengine.org/forum.php?mod=viewthread&tid=1&extra=page%3D1 chen9527-test1234
+
+
+http://www.gameres.com/478430.html   游戏协议
+
+
+炉石传说kbengine版demo制作教程-从零开始系列
+https://www.bilibili.com/video/av18788363/
+
+客户端
+https://unity3d.com/cn/get-unity/download
+
+
+今天重度手游出现的时候，数据库的I/O要求越来越高了，单点的计算性能也要求越来越高了，核心节点的网流量也要求越来越高了
+
+NavTileHandle::findStraightPath: Search terminated. Did not find goal state
+这个不用管， 这是cocosjs的demo中的怪随机移动时给出的移动位置不合法， 不会影响游戏，随后怪会不断随机总会有可走区域。
+
+服务器端：内存消耗（主要看是否泄漏）
+Cpu占用
+登陆压力，主要是验证登陆系统对于大量登陆请求的响应情况
+单服承载
+同屏承载
+同地图承载
+带宽
+
+客户端：流量、帧数(FPS)、内存消耗、Cpu占用、流畅度
+
+
+服务器这块测试都差不多，服务器通信都用长连接，少部分手游是用http短链接的，都要做服务器性能测试和优化。
+还有协议测试，压测工具用过Windows系统的Load Runner（惠普开发的）、Linux系统的GAPS（腾讯游戏部门开发的，目前在http://wetest.qq.com/gaps已经对外了）
+
+https://blog.csdn.net/u010217427/article/details/78922924
+
+
+
+机器人相关：
+1、机器人每次使用相同的账号登陆
+注意：bots程序启动时的cid参数设置为固定，具体参考服务器启动脚本，机器人账号由"前缀+cid+后缀组成"。account_name_suffix_inc写成非0，建议用1
+
+2、
