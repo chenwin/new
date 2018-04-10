@@ -40,3 +40,28 @@ mysql-community-client-5.6.38-2.el7.x86_64
 # whereis mysql
 # rm -rf /usr/lib64/mysql
 
+
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| information_schema  |
+| kbe                 |
+| #mysql50#lost+found |
+| mysql               |
+| performance_schema  |
++---------------------+
+
+mysql> use kbe;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+
+mysql> show tables;
++-------------------------------+
+| Tables_in_kbe                 |
++-------------------------------+
+| kbe_accountinfos              |
+| kbe_email_verification        |
+
