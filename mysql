@@ -65,3 +65,4 @@ mysql> show tables;
 | kbe_accountinfos              |
 | kbe_email_verification        |
 
+mysql> select * from table_name limit 第几行,行数
