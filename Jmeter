@@ -8,6 +8,12 @@ set NEW=-XX:NewSize=128m -XX:MaxNewSize=512m
 根据经验，heap最多设置为物理内存的一半，默认设置为512M.如果heap超过物理内存的一半，
 可能运行jmeter会慢，甚至出现内存溢出，原因java比较吃内存，占CPU.
 
+cookies问题
+先用谷歌chrome浏览器F12获取请求（请求旁边就有cookies，记录下cookies下的头和值），添加HTTP Cookie Manager。
+Implementation：HC4CookieHander；Cookie Policy：compatibility（添加：名称、值、路径）
+
+
+
 
 http://blog.csdn.net/xiaoxiao_renhe/article/details/50854505
 
