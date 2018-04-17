@@ -1,3 +1,14 @@
+超过10MB的文件，下载后只有10MB（1024KB）的问题。
+bin下的user.properties配置文件，增加一行（不需要设置超时时间：HTTP请求，高级Advanced，Timeouts里面）
+httpsampler.max_bytes_to_store_per_request=512000000，最大支持512MB
+
+修改jmeter.bat
+set HEAP=-Xms256m -Xmx1024m
+set NEW=-XX:NewSize=128m -XX:MaxNewSize=512m
+根据经验，heap最多设置为物理内存的一半，默认设置为512M.如果heap超过物理内存的一半，
+可能运行jmeter会慢，甚至出现内存溢出，原因java比较吃内存，占CPU.
+
+
 http://blog.csdn.net/xiaoxiao_renhe/article/details/50854505
 
 http://blog.csdn.net/miss_hua/article/details/50484095
