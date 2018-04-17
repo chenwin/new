@@ -12,6 +12,18 @@ cookies问题
 先用谷歌chrome浏览器F12获取请求（请求旁边就有cookies，记录下cookies下的头和值），添加HTTP Cookie Manager。
 Implementation：HC4CookieHander；Cookie Policy：compatibility（添加：名称、值、路径）
 
+一个线程组下面请求，按照每4个请求一组，间隔1秒，发送5组。
+1）线程组->配置线程数4
+2）Ramp-Up Period（in seconds）:0
+3) 循环控制器，配置循环次数5
+4）线程组增加固定定时器，1000毫秒
+
+JMeter设置线程组循环不起作用的问题：
+jmeter中的循环控制器和badboy录制的脚本的step1循环控制器是不相同的。
+1、badboy录制的脚本，循环要在step中设置。
+2、jmeter代理录制的脚本，循环在循环控制器中设置。
+3、如果要使bodboy录制的脚本，设置线程组循环也起作用，只需讲step控制器更替为jmeter中的循环控制器即可。即通过，添加配置元件-循环控制器进行添加。
+
 
 
 
