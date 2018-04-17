@@ -16,6 +16,10 @@ https://www.blazemeter.com/blog/http-cookie-manager-advanced-usage-a-guide
 录制Jmeter脚本的几种方法
 https://www.jianshu.com/p/6468cbd89aa6
 
+高级用法1和2
+http://blog.51cto.com/7080696/1885513
+https://cloud.tencent.com/info/bdfdfdd897fc0a8559b964ae344ddd7c.html
+
 一个线程组下面请求，按照每4个请求一组，间隔1秒，发送5组。
 1）线程组->配置线程数4
 2）Ramp-Up Period（in seconds）:0
