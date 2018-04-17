@@ -1,1 +1,55 @@
-1
+#fdisk
+dev=$1
+#np1回车回车w
+echo -e "n\np\n1\n\n\nw\n" | fdisk -S 56 /dev/$dev
+echo -e "n\nw\n" | mkfs.ext3 /dev/${dev}1
+mkdir -p /mnt/mysql
+mount /dev/${dev}1 /mnt/mysql
+echo /dev/${dev}1 '/mnt/mysql ext3    defaults    0  0' >> /etc/fstab
+
+#install
+echo "install mysql"
+yum install wget -y
+cd /home
+wget https://repo.mysql.com/mysql-community-release-el7-7.noarch.rpm
+rpm -ivh mysql-community-release-el7-7.noarch.rpm
+yum install mysql-community-server -y
+chown -R mysql:mysql /var/lib/mysql
+service mysqld start
+chkconfig mysqld on
+echo "install mysql success"
+
+#config
+ip=$(ifconfig eth0 |awk -F '[ :]+' 'NR==2 {print $3}')
+mnt="/mnt/mysql/"
+#22行之后和22行之前添加
+sed -i "N;22idatadir=/mnt/mysql" /etc/my.cnf
+sed -i "N;20abind-address=$ip" /etc/my.cnf
+sed -i "N;20amax_connections=500" /etc/my.cnf
+chown mysql:mysql $mnt
+#/usr/bin/mysql_install_db --user=mysql --basedir=/usr/ --datadir=$mnt
+#datadir=/mnt/mysql
+#vi /usr/lib/systemd/system/mysqld.service,增加
+#LimitNOFILE=65535
+#LimitNPROC=65535
+echo "LimitNOFILE=65535" >> /usr/lib/systemd/system/mysqld.service
+echo "LimitNPROC=65535" >> /usr/lib/systemd/system/mysqld.service
+systemctl daemon-reload
+service mysqld restart
+
+#secure
+echo -e "n\n\nY\nchen@123\nchen@123\nY\nY\nY\nY\n" | mysql_secure_installation
+
+#kernel
+wget http://kbengine.org/assets/other/Centos_Config.zip -O /home/Centos_Config.zip
+yum install dos2unix -y
+unzip /home/Centos_Config.zip -d /home
+dos2unix /home/socket_optimization.sh
+
+#database config
+grant all privileges on *.* to kbe@'%' identified by 'pwd123456';
+grant select,insert,update,delete,create,drop on *.* to kbe@'%' identified by 'pwd123456';
+create database kbe;
+FLUSH PRIVILEGES;
+
+
