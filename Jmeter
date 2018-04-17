@@ -11,6 +11,10 @@ set NEW=-XX:NewSize=128m -XX:MaxNewSize=512m
 cookies问题
 先用谷歌chrome浏览器F12获取请求（请求旁边就有cookies，记录下cookies下的头和值），添加HTTP Cookie Manager。
 Implementation：HC4CookieHander；Cookie Policy：compatibility（添加：名称、值、路径）
+https://www.blazemeter.com/blog/http-cookie-manager-advanced-usage-a-guide
+
+录制Jmeter脚本的几种方法
+https://www.jianshu.com/p/6468cbd89aa6
 
 一个线程组下面请求，按照每4个请求一组，间隔1秒，发送5组。
 1）线程组->配置线程数4
