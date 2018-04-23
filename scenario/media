@@ -63,3 +63,11 @@ copy /b  F:\f\*.ts  E:\f\new.ts
 视频转分辨率和帧数，截取大小
 -r 帧率 -s 分辨率 -b:v视频码率 -b:a音频码率 -ss开始时间 -to结束时间
 ffmpeg -i in4K_3_5G_h264.mp4 -r 30 -s 1280*720 -b:v 2160k -b:a 44k -ss 00:00:00 -to 00:00:15 test.mp4
+
+去掉视频的logo
+语法：-vf delogo=x:y:w:h[:t[:show]] 
+x:y 离左上角的坐标 
+w:h logo的宽和高 
+t: 矩形边缘的厚度默认值4 
+show：若设置为1有一个绿色的矩形，默认值0。
+ffmpeg -i input.mp4 -vf delogo=0:0:220:90:100:0 output.mp4 
