@@ -70,4 +70,5 @@ x:y 离左上角的坐标
 w:h logo的宽和高 
 t: 矩形边缘的厚度默认值4 
 show：若设置为1有一个绿色的矩形，默认值0。
-ffmpeg -i input.mp4 -vf delogo=0:0:220:90:100:0 output.mp4 
+ffmpeg -i input.mp4 -vf delogo=0:0:220:90:100:0 output.mp4
+ffmpeg -i input.mp4 -vf delogo=x=15:y=10:w=70:h=90:show=0 output.mp4
