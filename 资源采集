@@ -6,6 +6,7 @@ date1=`date +"%Y-%m-%d"`
 date2=`date +"%H-%M-%S"`
 path=/$2/$date1/$date2
 mkdir -p ./$path
+# top -d 0.1 0.1秒间隔
 top -bd 1 -n $time > ./$path/top-$date2.txt&
 sar -n DEV 1 $time|grep eth0 > ./$path/sar-$date2.txt&
 mpstat -P ALL 1 $time > ./$path/mpstat-$date2.txt&
