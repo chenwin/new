@@ -1,0 +1,2 @@
+去掉注释和空行
+cat /etc/sudoers |grep -v '#' |grep -v '^$'
