@@ -1,0 +1,2 @@
+遍历所有目录，排除后缀
+grep -rn hibench.masters.hostnames / --exclude=*.py --exclude=*.pyc
