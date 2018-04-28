@@ -1,2 +1,7 @@
-遍历/home下所有目录的文件，排除后缀
+遍历/home下所有目录的文件，排除指定文件后缀
 grep -rn hibench.masters.hostnames /home --exclude=*.py --exclude=*.pyc
+
+指定文件后缀查找
+[root@hadoopbench]# grep -rn hibench.masters.hostnames /home --include=*.conf
+/home/HiBench-master/conf/hibench.conf:56:hibench.masters.hostnames
+/home/HiBench-master/bin/functions/test_load_config_answer.conf:4:hibench.masters.hostnames localhost
