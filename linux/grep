@@ -1,2 +1,2 @@
-遍历所有目录，排除后缀
-grep -rn hibench.masters.hostnames / --exclude=*.py --exclude=*.pyc
+遍历/home下所有目录的文件，排除后缀
+grep -rn hibench.masters.hostnames /home --exclude=*.py --exclude=*.pyc
