@@ -1,0 +1,19 @@
+yum install gcc-c++ -y
+wget http://download.redis.io/releases/redis-4.0.9.tar.gz -P /home
+tar -zxvf /home/redis-4.0.9.tar.gz
+make
+make test
+make PREFIX=/usr/local/redis install
+cp /home/redis-4.0.9/redis.conf /usr/local/redis/
+cd /usr/local/redis/bin/
+
+#redis.conf把daemonize no 改成daemonize yes,后台启动。Port: 6379
+./redis-server ./redis.conf
+
+测试
+[root@redis]# ./bin/redis-cli 
+127.0.0.1:6379> ping
+PONG
+
+停止
+[root@redis]#  ./bin/redis-cli shutdown
