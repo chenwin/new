@@ -1,6 +1,7 @@
-yum install gcc-c++ -y
+yum install gcc-c++ tcl -y
 wget http://download.redis.io/releases/redis-4.0.9.tar.gz -P /home
-tar -zxvf /home/redis-4.0.9.tar.gz
+tar -zxvf /home/redis-4.0.9.tar.gz -C /home
+cd /home/redis-4.0.9
 make
 make test
 make PREFIX=/usr/local/redis install
@@ -17,3 +18,20 @@ PONG
 
 停止
 [root@redis]#  ./bin/redis-cli shutdown
+
+-n 总请求数，-c 并发量，-d 大小，-l 永久测试
+./redis-benchmark -h 127.0.0.1 -p 6379 -n 5000000 -c 1000 -t set,get -d 3 --csv
+
+echo 1024 > /proc/sys/net/core/somaxconn
+#表示内核允许分配所有的物理内存,不管当前的内存状态
+echo 1 > /proc/sys/vm/overcommit_memory
+#Transparent huge pages功能必须关闭，配置never
+/sys/kernel/mm/transparent_hugepage/enabled
+
+固有时延
+./redis-cli --intrinsic-latency 100命令查看
+
+somaxconn=128
+overcommit_memory=0
+
+[root@chenliang-redis bin]# ./redis-benchmark -h 127.0.0.1 -p 6379 -n 5000000 -c 1000 -t set,get -d 3 --csv -l
