@@ -1,0 +1,199 @@
+###修改主机名###
+内网IP地址和主机名一一对应，hosts文件里写集群所有的节点
+
+    vi /etc/hosts （注意先IP，后主机名）	
+172.31.7.230 mapr1
+172.31.7.229 mapr2
+172.31.7.231 mapr3
+
+
+不需要执行
+    systemctl status firewalld 
+    systemctl disable firewalld
+    systemctl stop firewalld
+不需要执行
+cat >> /etc/security/limits.conf << EOF
+root soft nofile 65535
+root hard nofile 65535
+* soft nofile 65535
+* hard nofile 65535
+EOF
+
+手工在主节点外的其它所有节点建立文件（异常时，需要检查和手工建立）
+/opt/mapr/conf/disks.txt
+
+    /dev/sda
+    /dev/sdc
+    /dev/sdb
+    /dev/sdd
+
+安装配置ntp
+    yum -y install ntp
+    systemctl enable ntpd
+    systemctl start ntpd
+    vi  /etc/ntp.conf
+    
+    sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+    sed -i 's/Defaults requiretty/#Defaults requiretty/g' /etc/sudoers
+###安装mapr###（每个节点都要执行）
+    wget http://package.mapr.com/releases/installer/mapr-setup.sh -P /home
+    cd /home;sh mapr-setup.sh
+**登录安装界面**
+https://114.115.137.214:9443/#/login
+
+**控制系统界面**
+https://114.115.178.50:8443/app/mcs/
+NFS Gateway在2个节点上报错，/opt/mapr/logs/nfsserver.log
+原因是exiting: No license to run NFS server in servermode
+
+登录报错
+Cannot read property 'data' of undefined
+`密码输入错误导致`。
+
+
+不知道是否必须修改（反正我没修改），修改完需要重启node manager和resource manager.
+vi /opt/mapr/hadoop/hadoop-2.7.0/etc/hadoop/yarn-site.xml
+修改cpu和内存（和实例规格匹配）
+
+<property>
+ <name>yarn.nodemanager.resource.memory-mb</name>
+ <value> </value>
+ <description>memory</description>
+</property>
+<property>
+ <name>yarn.nodemanager.resource.cpu-vcores</name>
+ <value>16</value>
+ <description>memory</description>
+</property>
+
+yarn.nodemanager.resource.memory-mb
+参数解释：NodeManager总的可用物理内存。注意，该参数是不可修改的，一旦设置，整个运行过程中不可动态修改。另外，该参数的默认值是8192MB，即使你的机器内存不够8192MB，YARN也会按照这些内存来使用（傻不傻？），因此，这个值通过一定要配置。不过，Apache已经正在尝试将该参数做成可动态修改的。
+默认值：8192
+
+yarn.nodemanager.resource.cpu-vcores
+参数解释：NodeManager总的可用虚拟CPU个数。
+默认值：8
+
+
+
+不用手工建立目录
+只是`测试hadoop环境是否OK`，数据可以小一点-Dmapred.map.tasks=10100 10995116278
+
+切换到mapr才能执行hadoop命令
+[~]# maprlogin password -user mapr
+teragen <num rows> <output dir>
+
+[产生数据]
+hadoop jar /opt/mapr/hadoop/hadoop-2.7.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.0-mapr-1803.jar teragen 
+-Dmapred.map.tasks=100 10995116277 /tmp/input   （1TB,指定map数，加速）
+[排序]
+hadoop jar /opt/mapr/hadoop/hadoop-2.7.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.0-mapr-1803.jar terasort 
+-Dmapred.reduce.tasks=50 /tmp/input /tmp/output   (指定reduce数，加速)
+[校验]
+hadoop jar /opt/mapr/hadoop/hadoop-2.7.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.0-mapr-1803.jar teravalidate 
+/tmp/output /tmp/output-validate
+
+###导入license###
+到https://mapr.com/user/输入集群ID，注册的用户支持添加多个集群，获取1个月的license
+
+###安装HiBench###
+wget https://github.com/intel-hadoop/HiBench/archive/master.zip
+
+官方文档
+    https://github.com/intel-hadoop/HiBench/blob/master/docs/build-hibench.md
+    https://github.com/intel-hadoop/HiBench/blob/master/docs/run-hadoopbench.md
+
+###安装maven###
+https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+vi /etc/profile，增加
+    export MAVEN_HOME=/home/apache-maven-3.5.2
+    export PATH=$PATH:$MAVEN_HOME/bin
+
+source /etc/profile
+检查安装成功mvn -version
+
+
+进入HiBench目录
+###安装hadoopbench###
+mvn -Phadoopbench -Dspark=2.21 -Dscala=2.21 clean package（安装过程大概50分钟@华为1Mbps，23分钟@阿里5Mbps。）
+
+============================================================================================================
+[ERROR] Failed to execute goal com.googlecode.maven-download-plugin:download-maven-plugin:1.2.0:wget (extra-download-execution) on project mahout: IO Error: Could not get content -> [Help 1]
+
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+    再重试一次OK，估计是网络问题。
+
+确认spark和scala版本号
+find / -name spark或find / -name scala
+
+cd /home/HiBench-master
+**准备数据**
+bin/workloads/micro/terasort/prepare/prepare.sh
+报错
+please check hibench.hadoop.configure.dir and "yarn-site.xml" file
+please set `hibench.masters.hostnames` and `hibench.slaves.hostnames` manually
+/prepare.sh: line 26: INPUT_HDFS: unbound variable
+
+    cp /home/HiBench-master/conf/hadoop.conf.template /home/HiBench-master/conf/hadoop.conf
+    修改hadoop.conf里的hibench.hadoop.home为安装的hadoop根目录,配置hibench.hadoop.home和hibench.hdfs.master 
+    #通过find / -name core-site.xml来确认hadoop根目录
+    #/opt/mapr/hadoop/hadoop-2.7.0/etc/hadoop/core-site.xml
+    配置/home/HiBench-master/conf/hibench.conf:56的hibench.masters.hostnames和hibench.slaves.hostnames
+
+/home/HiBench-master/conf/hibench.conf修改完效果如下：
+hibench.masters.hostnames mapr-0001
+hibench.slaves.hostnames mapr-0002,mapr-0003
+
+
+/home/HiBench-master/conf/hadoop.conf修改完效果如下：   
+    hibench.hadoop.home       /opt/mapr/hadoop/hadoop-2.7.0
+    hibench.hdfs.master       maprfs://     （maprfs://；hadoop fs -ls //；hadoop fs -ls ///HiBench/Terasort
+                                              hadoop fs -du ///HiBench/Terasort）
+  
+
+###配置数据规模###
+数据大小规模由hibench.sacle.profile指定
+/home/HiBench-master/conf/hibench.conf（修改）和
+/home/HiBench-master/conf/workloads/micro/terasort.conf（增加）
+保持单位一致，增加或修改`hibench.sacle.profile gigantic`
+默认6种数据大小，hibench.sacle.profile可选为tiny, small, large, huge, gigantic and bigdata
+
+**执行测试**   https://www.aliyun.com/jiaocheng/450499.html
+
+压测工作负载   类型
+Tera Sort     Map和Shuffle阶段CPU密集，IO中等；Reduce阶段I/O密集，CPU中等。
+
+bin/workloads/micro/terasort/hadoop/run.sh
+
+查看报告,性能测试包括测试作业完成时间，内存利用率，数据吞吐量和类似的系统指标。
+[root@chenliang-mapr-0001 HiBench-master]# cat report/hibench.report
+Type         Date       Time     Input_data_size      Duration(s)          Throughput(bytes/s)  Throughput/node
+HadoopTerasort 2018-04-28 15:41:42 320000000000         4120.939             77652204             77652204
+HadoopTerasort 2018-05-02 17:45:40 320000000000         4192.691             76323296             76323296
+HadoopTerasort 2018-05-03 10:27:48 320000000000         4243.337             75412346             75412346
+HadoopTerasort 2018-05-03 12:41:28 320000000000         4242.610             75425268             75425268
+
+
+ali
+[root@mapr1 HiBench-master]# cat report/hibench.report
+Type         Date       Time     Input_data_size      Duration(s)          Throughput(bytes/s)  Throughput/node
+HadoopTerasort 2018-05-03 18:00:07 320000000000         4996.748             64041652             64041652
+HadoopTerasort 2018-05-03 20:19:32 320000000000         5220.338             61298712             61298712
+HadoopTerasort 2018-05-04 10:41:31 320000000000         4979.106             64268565             64268565
+
+
+hadoop jar $HADOOP_HOME/hadoop-test-1.1.2.jar TestDFSIO -write -nrFiles 10 -fileSize 1000
+
+
+查看命令
+service mapr-zookeeper status
+service mapr-warden status
+maprcli acl show -type cluster -user mapr
+
+]# id mapr
+uid=5000(mapr) gid=5000(mapr) groups=5000(mapr),5001(shadow)
+tail -100 /opt/mapr/logs/cldb.log报“ CLDB is not yet initialized”
+确保mapr可以访问/etc/shadow。
+将mapr添加到组root中 # usermod -G mapr,root,shadow mapr
+
+不需要执行
