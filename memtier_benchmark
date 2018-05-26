@@ -37,12 +37,46 @@ memcached配置文件/etc/sysconfig/memcached，端口PORT="11211"
 
 测试方法http://ghoulich.xninja.org/2016/12/11/how-to-use-memtier-benchmark-to-measure-redis-performance/
 
--x选项指定迭代次数
 -n选项每个客户端发出的请求总数（默认值为10000）
 -P选项使用的协议（默认值为redis）memcache_text和memcache_binary.
 -d选项对象数据的大小（默认值为32）
-随机化数据
+-t基准测试使用的线程数量（默认值为4）
+-c每个线程驱动的客户端的数量（默认值为50）
+
+伪随机数据
 memtier_benchmark -s 127.0.0.1 -p 11211 -n 4000000 -x 1 --ratio=1:1 --random-data --data-size-range=4-204 --data-size-pattern=S --key-minimum=200 --key-maximum=400 -P memcache_binary
+
+memtier_benchmark -s 127.0.0.1 -p 11211 -n 2000000 -x 1 --ratio=7:3 --random-data --data-size-range=128-2048 --data-size-pattern=S --key-minimum=128 --key-maximum=2048 -P memcache_binary --out-file=./1.out > ./1.log 2>&1 &
+
+高斯访问
+memtier_benchmark -s 127.0.0.1 -p 11211 -n 4000000 -x 1 -t 8 --ratio=1:1 --random-data --data-size-range=4-204 --data-size-pattern=S --key-minimum=200 --key-maximum=400 --key-pattern=G:G --key-stddev=10 --key-median=300 -P memcache_binary
+
+memtier_benchmark -s 127.0.0.1 -p 11211 -n 2000000 -x 1 -t 8 --ratio=7:3 --random-data --data-size-range=128-2048 --data-size-pattern=S --key-minimum=128 --key-maximum=2048 --key-pattern=G:G --key-stddev=10 --key-median=300 -P memcache_binary --out-file=./2.out > ./2.log 2>&1 &
+
+
+sh
+==============================================================================
+function process_is_running
+{
+    while true
+    do
+        i=$(ps -fe|grep memtier_benchmark |grep -v grep|wc -l)
+        if [ $i -le 0 ]
+        then
+            echo "not running"
+            break
+        else
+            echo "runing"
+            sleep 600
+        fi
+    done
+}
+DATE=`date +"%Y%m%d_%H%M%S"`
+mkdir -p /home/$DATE
+memtier_benchmark -s 127.0.0.1 -p 11211 -n 2000000 -x 1 --ratio=7:3 --random-data --data-size-range=128-2048 --data-size-pattern=S --key-minimum=128 --key-maximum=2048 -P memcache_binary --out-file=/home/$DATE/1.out > /home/$DATE/1.log 2>&1 &
+process_is_running
+memtier_benchmark -s 127.0.0.1 -p 11211 -n 2000000 -x 1 -t 8 --ratio=7:3 --random-data --data-size-range=128-2048 --data-size-pattern=S --key-minimum=128 --key-maximum=2048 --key-pattern=G:G --key-stddev=10 --key-median=300 -P memcache_binary --out-file=/home/$DATE/2.out > /home/$DATE/2.log 2>&1 &
+
 
 AWS，固定大小数据100
 memtier_benchmark -s 127.0.0.1 -p 11211 -x 1 --ratio=1:1 -n 4000000 -d 100 -t 1 -c 50 --pipeline=75 --key-pattern=S:S
