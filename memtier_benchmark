@@ -1,0 +1,48 @@
+redis或memcached性能压测工具
+
+yum install libevent memcached -y
+memcached -u root -d
+
+
+安装方法参见https://github.com/RedisLabs/memtier_benchmark
+
+可能需要手工安装libevent
+wget https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz
+tar xfz libevent-2.0.21-stable.tar.gz
+pushd libevent-2.0.21-stable
+./configure
+make
+make install
+popd
+echo "export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:\${PKG_CONFIG_PATH}" >> /etc/profile
+source /etc/profile
+ldconfig /usr/local/lib
+
+yum install gcc autoconf automake libtool make pcre-devel zlib-devel gcc-c++ -y
+git clone https://github.com/RedisLabs/memtier_benchmark.git
+cd memtier_benchmark
+autoreconf -ivf
+#export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH}
+./configure --prefix=/usr/local/memtier
+make && make install
+echo "export PATH=/usr/local/memtier/bin:\${PATH}" >> /etc/profile
+source /etc/profile
+
+memtier_benchmark --help
+memtier_benchmark 1.2.12
+
+memcached配置文件/etc/sysconfig/memcached，端口PORT="11211"
+
+
+
+测试方法http://ghoulich.xninja.org/2016/12/11/how-to-use-memtier-benchmark-to-measure-redis-performance/
+
+-x选项指定迭代次数
+-n选项每个客户端发出的请求总数（默认值为10000）
+-P选项使用的协议（默认值为redis）memcache_text和memcache_binary.
+-d选项对象数据的大小（默认值为32）
+随机化数据
+memtier_benchmark -s 127.0.0.1 -p 11211 -n 4000000 -x 1 --ratio=1:1 --random-data --data-size-range=4-204 --data-size-pattern=S --key-minimum=200 --key-maximum=400 -P memcache_binary
+
+AWS，固定大小数据100
+memtier_benchmark -s 127.0.0.1 -p 11211 -x 1 --ratio=1:1 -n 4000000 -d 100 -t 1 -c 50 --pipeline=75 --key-pattern=S:S
