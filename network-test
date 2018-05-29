@@ -1,0 +1,8 @@
+网络
+时延
+yum install qperf
+server:
+qperf &
+
+client:
+qperf 192.168.0.171 -t 120 -m 64 -vvs tcp_lat
