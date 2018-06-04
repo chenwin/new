@@ -1,0 +1,20 @@
+http://tools.zih.tu-dresden.de/2011/downloads/treibig-likwid-ParTools.pdf
+
+网卡队列数，多队列
+查看
+ethtool -l eth0
+核对
+ll /sys/class/net/eth0/queues/
+修改
+ethtool -L eth0 combined 2
+
+
+问题：
+压测过程中产生的中断都落在CPU0上处理,占用率100%(进程名ksoftirdq)，没有均衡到各个CPU，导致单个CPU过载而形成瓶颈。
+解决方法：
+启用irqbalance服务
+service irqbalance start
+
+中断在CPU上的分布情况
+cat /proc/interrupts|tr -s ' ' '\t'|cut -f 1-3
+输出的第一列是中断号，后面的2列是在CPU0，CPU1的中断次数
