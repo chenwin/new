@@ -2,7 +2,19 @@ redis或memcached性能压测工具
 
 yum install libevent memcached -y
 memcached -u root -d
+开源memcached，默认4线程。-t 指定线程数
+memcached使用了多线程模式，一般设置线程数为CPU核数，系统调度的时间最少，效率最高。
 
+memcached配置文件/etc/sysconfig/memcached，端口PORT="11211"
+memcached 服务器配置参数
+PORT: 监听的 TCP 端口号为 11211，这是默认值。如非必要，不用修改。
+USER: 使用 memcached 用户来运行 memcached 服务。
+MAXCONN: 最大同时连接数，默认为 1024。
+CACHESIZE: 最大使用的内存数。默认是 64MB。注意单位是 MB（兆字节）。
+OPTIONS=”-l 127.0.0.1″: 监听的网络地址 127.0.0.1。这个地址的变数比较多。
+如果是单台服务器，用 127.0.0.1 没问题；
+如果是多台服务器，就用内网地址，比如 10.10.1.2；
+如果要通过互联网连接，当然就得用公网 IP 了。放在内网的好处是可以避免网络攻击该 memcached 服务器。
 
 安装方法参见https://github.com/RedisLabs/memtier_benchmark
 
@@ -30,10 +42,6 @@ source /etc/profile
 
 memtier_benchmark --help
 memtier_benchmark 1.2.12
-
-memcached配置文件/etc/sysconfig/memcached，端口PORT="11211"
-
-
 
 测试方法http://ghoulich.xninja.org/2016/12/11/how-to-use-memtier-benchmark-to-measure-redis-performance/
 
@@ -80,3 +88,23 @@ memtier_benchmark -s 127.0.0.1 -p 11211 -n 2000000 -x 1 -t 8 --ratio=7:3 --rando
 
 AWS，固定大小数据100
 memtier_benchmark -s 127.0.0.1 -p 11211 -x 1 --ratio=1:1 -n 4000000 -d 100 -t 1 -c 50 --pipeline=75 --key-pattern=S:S
+
+
+
+memtier_benchmark -s 127.0.0.1 -p 11211 -n 2000000 -x 1 -t 4 -c 50 --ratio=3:7 --random-data --data-size-range=128-2048 --data-size-pattern=S --key-minimum=128 --key-maximum=2048 -P memcache_binary --out-file=/home/$DATE/1.out > /home/$DATE/1.log 2>&1 &
+process_is_running
+memtier_benchmark -s 127.0.0.1 -p 11211 -n 2000000 -x 1 -t 8 -c 50 --ratio=3:7 --random-data --data-size-range=128-2048 --data-size-pattern=S --key-minimum=128 --key-maximum=2048 --key-pattern=G:G --key-stddev=10 --key-median=300 -P memcache_binary --out-file=/home/$DATE/2.out > /home/$DATE/2.log 2>&1 &
+process_is_running
+memtier_benchmark -s 127.0.0.1 -p 11211 -n 2000000 -x 1 -t 8 -c 50 --ratio=1:100 -d 200 --pipeline=75 --key-pattern=S:S -P memcache_binary --out-file=/home/$DATE/3.out > /home/$DATE/3.log 2>&1 &
+
+#测试用这个
+memtier_benchmark -s 192.168.0.171 -p 11211 -t 200 -c 50 -d 200 --ratio=1:100 --test-time=600 --hide-histogram -P memcache_binary
+
+memtier_benchmark -s 192.168.0.171 -p 11211 -t 40 -c 50 -d 200 --ratio=1:100 --test-time=600 --hide-histogram --authenticate=:Admin123 -P memcache_binary
+
+memcached-tool 127.0.0.1:11211 stats
+memcached-tool 127.0.0.1:11211 display
+
+
+telnet 127.0.0.1 11211
+stats
