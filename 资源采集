@@ -18,6 +18,9 @@ vmstat -t -S M 1 $time > ./$path/vmstat-$date2.txt&
 CPU top20
 ps -eo pcpu,pid,user,args | sort -k 1 -r | head -20
 
+top -p 进程号      单独查看该进程的CPU/内存等使用情况
+ps -eLf |grep XXX 查看程序运行所产生的线程情况
+
 [root@hec-mysql ~]# iostat -dx 1
 Linux 3.10.0-327.el7.x86_64 (hec-mysql) 	12/21/2017 	_x86_64_	(4 CPU)
 
