@@ -15,6 +15,9 @@ vmstat -t -S M 1 $time > ./$path/vmstat-$date2.txt&
 
 # sleep 5;sh res.sh 600
 
+CPU top20
+ps -eo pcpu,pid,user,args | sort -k 1 -r | head -20
+
 [root@hec-mysql ~]# iostat -dx 1
 Linux 3.10.0-327.el7.x86_64 (hec-mysql) 	12/21/2017 	_x86_64_	(4 CPU)
 
