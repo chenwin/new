@@ -1,0 +1,52 @@
+使用wrk测试对象存储的上传和下载
+阿里云使用ab和wrk对OSS进行benchmark测试
+https://yq.aliyun.com/articles/35251
+
+wrk只支持HTTP类协议，长链接
+https://github.com/wg/wrk
+
+
+git clone https://github.com/wg/wrk.git
+cd wrk
+make
+ln -s /home/wrk/wrk /usr/local/bin
+wrk -t500 -c2000 -d30s https://127.0.0.1:80/index.html
+
+-c, --connections: total number of HTTP connections to keep open with
+                   each thread handling N = connections/threads。链接数，不能超过文件句柄数设置
+-t, --threads:     total number of threads to use. 最好与CPU核数相同
+
+
+nginx
+wget http://nginx.org/download/nginx-1.13.8.tar.gz
+tar -zxvf nginx-1.13.8.tar.gz
+cd nginx-1.13.8
+./configure --prefix=/usr/local/nginx
+make && make install
+
+vi /usr/local/nginx/conf/nginx.conf
+1）worker_processes 24;//不能超过 CPU 的总核数
+2) worker_rlimit_nofile 200000; //ulimit -n 200000。 用来在不重启主进程的情况下增加限制
+3）worker_connections 要与worker_rlimit_nofile相同
+4) worker_cpu_affinity auto 貌似新版本默认开启
+nginx默认是没有开启利用多核cpu的配置的。需要通过增加worker_cpu_affinity配置参数来充分利用多核cpu.
+worker_cpu_affinity 01 10;
+表示开启两个进程，第一个进程对应第一个CPU内核，第二个进程对应第二个CPU内核
+压测后，如果多个cpu内核的利用率差不多，就证明nginx已经成功利用了多核cpu
+
+
+
+启动服务
+cd /usr/local/nginx/sbin
+./nginx
+
+
+性能调优
+在用wrk测试GET请求的时候，发现无论如何提高连接数，QPS都是在250左右，此时CPU和内存都没有占满。
+发现Spring Boot内嵌的tomcat线程无法突破200，默认最大线程数是200，对application.yml进行了调整
+（同时调整了多个服务，包括gateway）
+
+server:
+  tomcat:
+    max-threads: 1000
+    max-connections: 2000
