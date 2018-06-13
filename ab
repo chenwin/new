@@ -1,0 +1,38 @@
+ab是apache自带的一个很好用的压力测试工具，当安装完apache的时候，就可以在bin下面找到ab
+yum install httpd -y
+
+-n 代表请求数
+-c 代表并发数
+-k Use HTTP KeepAlive feature，增加请求头 Connection: Keep-Alive。开启HTTP长连接
+-t 整个测试最大持续的时间,单位秒，与-n互斥
+ab -n 2000000 -c 20000  http://192.168.0.115:80/index.html
+
+
+参考
+http://httpd.apache.org/docs/2.4/install.html
+http://httpd.apache.org/docs/2.4/programs/ab.html
+
+
+cat >> /etc/security/limits.conf << EOF
+
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_fin_timeout = 30
+kernel.printk = 7 4 1 7
+EOF
+
+sysctl -p
+
+1）报错
+The timeout specified has expired (70007)
+
+-c从20000修改为2000-10000。
+net.nf_conntrack_max = 655360
+===============================================================================
+wget http://nginx.org/download/nginx-1.13.8.tar.gz
+tar -zxvf nginx-1.13.8.tar.gz
+cd nginx-1.13.8
+./configure --prefix=/usr/local/nginx
+cd /usr/local/nginx/sbin
+./nginx
