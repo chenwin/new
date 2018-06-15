@@ -1,0 +1,23 @@
+查看系统命令在最近时间是否有修改过。查看命令的 Change时间，是否是和CPU使用率出现100%的时间点吻合
+stat /usr/bin/top
+stat /bin/ps
+
+rpm 验证一下命令是否有被修改。
+正常情况应该是查看不到任何修改信息的
+rpm -Vf /bin/ps
+rpm -Vf /usr/bin/top
+
+观察服务器对外的网络连接情况。
+iftop -i eth0 -n -P
+是否对外连接一些异常的地址，例如 crypto-pool.fr 之类的异常域名地址
+
+iftop安装脚本
+#!/bin/sh
+cd /tmp
+yum install make gcc autoconf flex byacc  libpcap ncurses ncurses-devel libpcap-devel -y
+wget http://www.ex-parrot.com/pdw/iftop/download/iftop-0.17.tar.gz
+tar -zxvf iftop-0.17.tar.gz
+cd iftop-0.17
+./configure
+make
+make install
