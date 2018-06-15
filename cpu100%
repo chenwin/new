@@ -34,3 +34,6 @@ kswapd0 是虚拟内存管理中负责换页的进程，当服务器内存不足
 
 yum install perf -y
 perf stat -e cycles,instructions,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses,dTLB-loads,dTLB-load-misses -p PID-XXX sleep 10
+
+perf top就能列举出当前系统或者进程的热点事件，函数的排序。 
+perf record能够纪录和保存系统或者进程的性能事件
