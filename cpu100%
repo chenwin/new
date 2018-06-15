@@ -31,3 +31,6 @@ kswapd0 是虚拟内存管理中负责换页的进程，当服务器内存不足
 1.通过 top 命令查看 kswapd0 进程。
 2.检查该进程是否持续处于非睡眠状态，且运行时间较长。若是，可以初步判定系统在持续地进行换页操作，kswapd0 进程占用了系统大量 CPU 资源。
 3.您可以通过 free 、ps 等指令进一步查询系统及系统内进程的内存占用情况，做进一步排查分析。
+
+yum install perf -y
+perf stat -e cycles,instructions,L1-dcache-loads,L1-dcache-load-misses,LLC-loads,LLC-load-misses,dTLB-loads,dTLB-load-misses -p PID-XXX sleep 10
