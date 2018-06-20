@@ -1,0 +1,48 @@
+上传下载web服务器
+yum install go -y
+go get -v github.com/codeskyblue/gohttpserver
+cd /root/go/src/github.com/codeskyblue/gohttpserver
+go build && ./gohttpserver
+
+
+#https://github.com/codeskyblue/gohttpserver
+
+帮助文档./gohttpserver --help，常用参数如下
+--root=ROOT                root directory, default ./
+--addr=ADDR                listen address, default :8000
+--title=TITLE              server title
+--auth-type=AUTH-TYPE      Auth type <http|openid>
+--auth-http=AUTH-HTTP      HTTP basic auth (ex: user:pass)
+--upload                   enable upload support
+--delete                   enable delete support
+
+指定目录作为存放路径root,访问鉴权
+./gohttpserver --root=/mnt/test --title=xian --upload --auth-type http --auth-http username:password
+
+
+Flags:
+  -h, --help                     Show context-sensitive help (also try --help-long and --help-man).
+      --version                  Show application version.
+      --conf=CONF                config file path, yaml format
+  -r, --root=ROOT                root directory, default ./
+  -a, --addr=ADDR                listen address, default :8000
+      --cert=CERT                tls cert.pem path
+      --key=KEY                  tls key.pem path
+      --auth-type=AUTH-TYPE      Auth type <http|openid>
+      --auth-http=AUTH-HTTP      HTTP basic auth (ex: user:pass)
+      --auth-openid=AUTH-OPENID  OpenID auth identity url
+      --theme=THEME              web theme, one of <black|green>
+      --upload                   enable upload support
+      --delete                   enable delete support
+      --xheaders                 used when behide nginx
+      --cors                     enable cross-site HTTP request
+      --debug                    enable debug mode
+  -p, --plistproxy=PLISTPROXY    plist proxy when server is not https
+      --title=TITLE              server title
+      --google-tracker-id=GOOGLE-TRACKER-ID
+                                 set to empty to disable it
+
+
+vi ./res/js/index.js，不需要了。配置--root=即可
+if (f.name == 'README.md')修改为if (f.name == 'README.md1')
+去掉预览README.md
