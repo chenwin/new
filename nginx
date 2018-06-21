@@ -44,7 +44,8 @@ rtmp {                          #RTMP服务
             play /opt/vide/vod;  #//视频文件存放位置,或对象存储路径，注意要用http，不要用https。腾讯尤其注意
             ##Sets location where remote VOD files copied from play_temp_path directory after they are completely downloaded. 
             ##Empty value disables the feature. By default it's empty. The feature can be used for caching remote files locally.
-            #play_temp_path /tmp; #本地缓存远程文件,与play_temp_path相同
+            #play_local_path /tmp; #本地缓存远程文件,把play_temp_path下载的文件缓存起来
+            #参数说明见https://github.com/arut/nginx-rtmp-module/wiki/Directives#play_temp_path
         }
     application hls {           #//直播
             live on;     
