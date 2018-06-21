@@ -73,6 +73,10 @@ cd srs-bench && ./configure && make
 ./objs/sb_rtmp_load -c 1 -r rtmp://127.0.0.1:1935/vod/in4K_3_5G_h264.mp4
 ./objs/sb_hls_load -c 1 -r http://172.18.205.253/hls/chen.m3u8
 
+输出，threads:3000表示3000并发，alive:3000表示3000个OK
+[2018-06-21 15:17:37.479] [report] [20663] threads:3000 alive:3000 duration:30 tduration:0 nread:866.98 nwrite:2.77 tasks:3000 etasks:0 stasks:0 estasks:0
+
+
 添加水印
 ffmpeg -i chen-test.mp4 -vf "movie=water.png [logo]; [in][logo] overlay=10:10 [out]" out.mp4
 
