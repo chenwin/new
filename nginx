@@ -30,7 +30,8 @@ sysctl fs.nr_open
 修改端口范围
 sysctl net.ipv4.ip_local_port_range="1024    65535"
 
-点播
+
+点播，如果把视频放在本地内存中play /dev/shm，则网络出带宽可以测到最大；放在对象存储中，则网络入带宽可以测到最大。
 vi /usr/local/nginx/conf/nginx.conf
 放到http前面和events之间，与http并列
 rtmp {                          #RTMP服务
