@@ -1,0 +1,37 @@
+网络带宽netperf
+参考https://help.aliyun.com/document_detail/58625.html[物理专线网络性能测试方法]
+yum install gcc
+wget https://codeload.github.com/HewlettPackard/netperf/tar.gz/netperf-2.7.0 -O netperf-netperf-2.7.0.tar.gz
+tar -zxvf netperf-netperf-2.7.0.tar.gz
+cd netperf-netperf-2.7.0
+./configure
+make
+make install
+
+服务端
+netserver -p 11256
+客户端
+netperf -H 172.16.2.147 -p 11256 -t TCP_STREAM -l 120s -- -m 1440
+netperf -H 172.16.0.2 -c -C -f m -p 11256 -t TCP_STREAM -l 120s -- -m 1440
+
+
+报错
+establish_control could not establish the control connection from 0.0.0.0 port 0 address family AF_UNSPEC
+原因是没关闭防火墙
+systemctl status firewalld
+
+==============================================================================
+ -f G|M|K|g|m|k    Set the output units,默认m
+ -c [cpu_rate]     Report local CPU usage
+ -C [cpu_rate]     Report remote CPU usage
+
+
+SERVER_IP=10.66.85.230
+
+for proto in TCP_STREAM UDP_STREAM
+do
+    for sz in 32 64 128 256 512 1024 2048 4096 8192 16384 32768
+    do
+        netperf -H $SERVER_IP -c -C -t $proto -f m -l 180s -- -m $sz
+    done
+done
