@@ -1,0 +1,4 @@
+开启root登录
+打开/etc/ssh/sshd_config文件，
+开启并修改相应参数使PermitRootLogin以及PasswordAuthentication的值为yes。
+重启sshd服务：service sshd restart
