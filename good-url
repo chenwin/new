@@ -1,2 +1,28 @@
 定位思路good，东西非常多
 https://zhuanlan.zhihu.com/p/21348220
+
+阿里云ECS最佳实践（数据库主从MySQL-Proxy，FTP）
+http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/pdf/ecs-best-practices-cn-zh-2017-11-24.pdf
+
+https://yq.aliyun.com/articles/57224
+OSS 性能测试经验总结
+1、CPU 相关
+1.1 进程使用CPU
+1.2 软中断使用CPU
+1.3 总结
+2、网络
+2.1 大量小包情况下
+2.2 上游网络环境差丢包严重导致
+2.3 网卡软中断打满单核CPU造成性能瓶颈
+2.3.1 现象及原因
+2.3.2 网卡软中断打满单核CPU造成的影响
+2.3.3 如何判断网卡软中断是否分流及如何设置
+2.4 总结
+3、磁盘
+3.1 关于磁盘使用率（IOPS争抢）
+3.2 因IOPS 争抢丢日志案例
+3.3 总结
+4、内存
+4.1 关于可用内存
+4.2 总结
+附录
