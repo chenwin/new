@@ -1,0 +1,78 @@
+依赖JRE
+yum install java curl -y
+
+
+手工安装java（yum install java的话就不需要了）
+mkdir /usr/java; cp /home/jdk-6u45-linux-x64.bin /usr/java; chmod u+x /usr/java/jdk-6u45-linux-x64.bin; cd /usr/java/; ./jdk-6u45-linux-x64.bin;
+# vi /etc/profile  在最后加下下面几行export
+cat << EOF >> /etc/profile
+export JAVA_HOME=/usr/java/jdk1.6.0_45
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export PATH=$PATH:$JAVA_HOME/bin
+EOF
+# reboot
+如果出现错误，请检查/etc/profile文件。
+
+压缩包里有说明文档：COSBenchUserGuide.pdf
+wget http://github.com/intel-cloud/cosbench/releases/download/v0.4.2.c4/0.4.2.c4.zip
+chmod +x *.sh
+#取消代理
+unset htt_proxy
+sh start-all.sh
+
+
+打开 http://ip:19088/controller/
+点击“submit new workloads”
+报错：
+Note: cannot parse the xml configuration from , due to The markup in the document following the root element must be well-formed.!
+注意xml格式正确.
+配置xml文件说明：
+workers表示并发数，totalOps表示总的操作数，driver为不同的压力机器
+c(number)   常量
+u(min, max) 范围随机选取
+r(min,max)  范围顺序选取
+containers  表示桶数
+objects     表示对象数
+sizes       表示对象大小
+<work name="main" workers="8" totalOps="1600">
+  <operation type="read" ratio="100" config="containers=r(1,32);objects=r(51,100);sizes=c(64)KB" />
+</work>
+
+
+压测记录，在/0.4.2.c4/archive目录下。进程重启后，界面上不显示压测记录
+
+
+
+【get对象报错】
+Unable to verify integrity of data download. Client calculated content hash didn't match hash calculated by Amazon S3. The data may be corrupt.
+
+解决方案：
+stop-all.sh 停止 cosbench 进程(controller, drivers)
+编辑 cosbench-start.sh 文件,找到java启动命令行参数, 增加"-Dcom.amazonaws.services.s3.disableGetObjectMD5Validation=true" 关闭S3的MD5校验功能
+start-all.sh 启动所有的cosbench processes.
+
+【添加多台driver】
+配置Control.conf
+[driver1]
+name = driver1
+url = http://*.11:18088/driver
+
+[driver2]
+name = driver2
+url = http://*.12:18088/driver
+
+Driver.conf的配置
+如果要在不同机器启动dirver，需要分别运行start-driver.sh，并确保通信是否正常。
+可以通过 curl http://<dirver-host>:18088/driver/index.html确定通信是否正常
+
+【查看结果】
+1、Avg-ResTime  响应平均时间
+2、Avg-ProcTime 平均处理时间
+3、Throughput：吞吐量，也就是我们常说的TPS
+4、bandwith：带宽
+5、succ-ratio :成功数
+
+
+参考
+https://blog.csdn.net/u010390063/article/details/78337997
+https://www.cnblogs.com/landhu/p/5843282.html
