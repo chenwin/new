@@ -5,6 +5,7 @@ http://static.huaweicloud.com/upload/files/pdf/20170519/20170519170342_77767.pdf
 
 
 安装
+yum install s3cmd
 http://s3tools.org/s3cmd
 wget https://nchc.dl.sourceforge.net/project/s3tools/s3cmd/2.0.1/s3cmd-2.0.1.zip
 unzip s3cmd-2.0.1.zip
