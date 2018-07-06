@@ -22,3 +22,12 @@ do
   iperf3 -c 192.168.0.95 -b 0 -u -t 300 -l 64 -p $i > /dev/null 2>&1 &
 done
 
+
+注意 ：
+iperf3，1条流会打满1个CPU，因此流一定要小于CPU核数，否则系统卡死了。
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+12213 root      20   0   43620   2260   1728 R 100.0  0.0   0:36.66 iperf3
+12214 root      20   0   43620   2260   1728 R 100.0  0.0   0:36.65 iperf3
+
+
