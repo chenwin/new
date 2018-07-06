@@ -7,5 +7,18 @@ yum install iperf3
 服务端
 iperf3 -s -p 50001
 
+
+for i in `seq 50001 50016`
+do
+  iperf3 -s -p $i > /dev/null 2>&1 &
+done
+
+
 客户端
 iperf3 -c 172.31.96.47 -b 200M -u -t 86400 -l 64 -p 50001
+
+for i in `seq 50001 50016`
+do
+  iperf3 -c 192.168.0.95 -b 0 -u -t 300 -l 64 -p $i > /dev/null 2>&1 &
+done
+
