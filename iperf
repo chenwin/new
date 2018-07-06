@@ -13,6 +13,7 @@ do
   iperf3 -s -p $i > /dev/null 2>&1 &
 done
 
+杀进程 pkill -9 iperf3
 
 客户端
 iperf3 -c 172.31.96.47 -b 200M -u -t 86400 -l 64 -p 50001
