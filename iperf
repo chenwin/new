@@ -2,6 +2,8 @@ https://github.com/esnet/iperf.git
 
 wget https://github.com/esnet/iperf/archive/3.3.tar.gz
 
+yum install iperf3
+
 服务端
 iperf3 -s -p 50001
 
