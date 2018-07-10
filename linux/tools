@@ -71,15 +71,27 @@ server:
 qperf &
 
 client:
-qperf 192.168.0.171 -t 120 -m 64 -vvs tcp_lat
+qperf 192.168.0.171 -t 120 -m 64 -vvs tcp_lat conf
 
+-------------------------------------------------------------------------------------------------
+加conf能显示双方主机名、CPU和OS内核信息、qperf版本
+conf:
+    loc_node   =  vod-0002.novalocal
+    loc_cpu    =  8 Cores: Intel Xeon Gold 6151 @ 3.00GHz
+    loc_os     =  Linux 3.10.0-693.11.1.el7.x86_64
+    loc_qperf  =  0.4.9
+    rem_node   =  vod-0001.novalocal
+    rem_cpu    =  8 Cores: Intel Xeon Gold 6151 @ 3.00GHz
+    rem_os     =  Linux 3.10.0-693.11.1.el7.x86_64
+    rem_qperf  =  0.4.9
+--------------------------------------------------------------------------------------------------
 SERVER_IP=10.66.85.230
 
 for proto in TCP_STREAM UDP_STREAM
 do
     for sz in 32 64 128 256 512 1024 2048 4096 8192 16384 32768
     do
-        qperf $SERVER_IP -t 180 -m $sz -vvs tcp_lat > file_path/$sz.txt
+        qperf $SERVER_IP -t 180 -m $sz -vvs tcp_lat conf > file_path/$sz.txt
     done
 done
 
