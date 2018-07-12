@@ -61,6 +61,25 @@ rtmp {                          #RTMP服务
 cd /usr/local/nginx/sbin
 ./nginx
 
+==================================================================================
+client端自动压测和采集
+date1=`date +"%Y-%m-%d-%H-%M-%S"`
+mkdir -p ./$date1
+for i in `seq 4000 100 6000`
+do
+  ./objs/sb_rtmp_load -c $i -r rtmp://192.168.0.95:1935/vod/2m25s.mp4 > ./$date1/$i.report 2>&1 &
+  sleep 30
+  sar -n DEV 1 90 > ./$date1/$i.sar 2>&1 &
+  sleep 115
+  ps -ef |grep sb_rtmp_load |grep -v grep |awk '{print $2}' |xargs kill -9
+  sleep 30
+done
+
+==================================================================================
+server端自动采集
+nohup sar -n DEV 1 2400 > server.sar 2>&1 &
+
+
 下载VLC播放器，打开网络串流
 rtmp://49.4.2.7/vod/in4K_3_5G_h264.mp4
 
