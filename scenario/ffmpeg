@@ -3,3 +3,7 @@ ffmpeg -t 3 -ss 00:00:02 -i in.mp4 -b 2048k out.gif
 -ss 视频截取开始时间
 -t 3表示3持续3秒的视频
 -b 波特率，高质量
+
+https://www.nvidia.cn/object/cudazone-cn.html
+[FFMPEG硬件加速]nvidia方案
+https://blog.csdn.net/weixin_35804181/article/details/54377365
