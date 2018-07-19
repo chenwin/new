@@ -1,0 +1,8 @@
+网络抖动也可以通过ping命令来进行测试
+
+Ping statistics for 202.105.135.211:
+Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+Minimum = 80ms, Maximum = 93ms, Average = 85ms
+
+这里面，丢包率0%,抖动是-5ms到+8ms，延时是 85ms（毫秒）
