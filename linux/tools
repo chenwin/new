@@ -14,6 +14,7 @@ geekbench_x86_64 -n | tee file_path
 stream
 wget http://www.cs.virginia.edu/stream/FTP/Code/stream.c
 gcc -O3 -fopenmp -DSTREAM_ARRAY_SIZE=<num> -DNTIMES=<num> stream.c -o stream
+6400000 10
 ln -s /home/stream /usr/local/bin/stream
 stream | tee file_path
 
