@@ -128,8 +128,8 @@ fio -filename=/dev/sdb1 -direct=1 -rw=randread -bs=16k -size=200G -iodepth=1 -io
 
 -ramp_time=120 -time_based -runtime=600
 
-iops:8krandwrite/randread
-bw:  1024kwrite/read
+iops:8k-128队列randwrite/randread
+bw:  1024k-32队列write/read
 lat: 8krandwrite/randread
 
 local disk:
