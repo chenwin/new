@@ -1,0 +1,11 @@
+在怀疑目录，执行。找到最大的目录文件，一直执行下去。
+du -ah --max-depth=1 |sort -gr
+du -m --max-depth=1 |sort -gr
+
+]# ll -h
+total 35G
+-rw-r--r-- 1 named named 35G Jul 27 11:02 named.run
+
+删除后空间不释放
+用lsof检查后才发现原因是,有文件被删除,而进程还活着,因而造成还占用空间的现象
+[root@/]# lsof |grep delete
