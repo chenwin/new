@@ -1,0 +1,109 @@
+yum -y install bind
+service named restart
+
+
+缓存DNS服务器，转发查询的配置文件，当第二次查询相同主机名的时候相对的比一条快多了，即缓存生效
+/etc/named.conf:主机的设定值都在这个档案
+listen-on port 53 { any; };
+allow-query     { any; };
+
+recursion yes  启用递归查询
+file "data/named.run" size 100m; [修改]限定大小100M，防止日志打爆
+
+
+关闭dnssec(可以不需要配置)
+dnssec-enable no;
+dnssec-validation no;
+dnssec-lookaside no;
+
+
+转发功能，才配置。缓存的不需要配置
+forward first;
+forwarders { 114.114.114.114; };
+
+
+
+【错误处理】network unreachable resolving
+编译配置文件/etc/sysconfig/named，去除去IPv6的解析，只解析IPv4
+OPTIONS="whatever" 改为  OPTIONS="-4"，注意OPTIONS选项的值可以是：whatever、-4、-6中的一个
+/etc/sysconfig/named
+
+【错误处理】unexpected RCODE REFUSED
+
+
+
+访问日志路径，里面可以查看是否有error
+/var/named/data/named.run
+
+
+allow-query-cache     { any; };         
+//DNS查询的缓存功能。实际上不建议开启此功能，即删除这一行配置。
+如果打开了，当DNS解析修改后，因为缓存原因，需等待一段时间才能生效。
+
+
+/etc/named.rfc1912.zones:设定zone,定义hostname <--> IP 的对应关系
+/var/named/:存放zone规定的档案
+
+说到这里,有几个概念需要了解下
+1、zone:区域,一个正解或者反解的设定就是一个zone。
+2、正解:hostname到ip的映射,不唯一
+3、反解:ip到hostname的映射,唯一
+
+客户端
+yum -y install bind-utils
+dig -t 资源记录类型(A)  www.baidu.com @server-ip
+
+清理dns缓存
+yum install nscd -y
+service nscd restart
+
+
+参考
+http://blog.51cto.com/xuweitao/1912150-----关键字“缓存DNS服务器配置步骤”
+
+
+高级压测工具
+yum install git -y
+git clone https://github.com/cobblau/dnsperf.git
+cd dnsperf
+make
+cp dnsperf /usr/bin
+
+
+dnsperf -d dns.txt -s 192.168.198.222
+]# cat dns.txt
+www.baidu.com A
+
+
+压测端脚本
+server-ip=$1
+ip=$(ifconfig eth0 |awk -F '[ :]+' 'NR==2 {print $3}')
+echo > dns-$ip.result
+for i in `seq 1 17280`
+do
+  date +%F" "%H:%M:%S >> dns-$ip.result
+  dnsperf -d dns.txt -Q 50000 -s $server-ip >> dns-$ip.result
+done
+
+
+
+ps -ef |grep dns.sh |grep -v color |awk {'print $2'} |xargs kill -9
+
+
+
+[root@memory ~]# tail -n 10 dns.result
+[Status] Sending queries to 192.168.0.95:53
+
+[Status]DNS Query Performance Testing Finish
+[Result]Quries sent:            50000
+[Result]Quries completed:       49901
+[Result]Complete percentage:    99.80
+
+[Result]Elapsed time(s):        4.44600
+
+[Result]Queries Per Second:     11246.06388
+
+
+
+selinux防火墙
+setenforce 0
