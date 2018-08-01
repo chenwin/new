@@ -1,5 +1,5 @@
 yum -y install bind
-service named restart
+service named restart或systemctl start named
 
 
 缓存DNS服务器，转发查询的配置文件，当第二次查询相同主机名的时候相对的比一条快多了，即缓存生效
