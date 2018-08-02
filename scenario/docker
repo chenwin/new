@@ -1,0 +1,40 @@
+镜像https://hub.docker.com
+
+docker pull phensley/docker-dns （有问题）
+
+
+docker run -d --name foo ubuntu bash -c "sleep 600"  //过一会退出终止
+
+-t选项让Docker分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上
+-i则让容器的标准输入保持打开
+
+
+[root@25d27693a24d ~]# systemctl start sshd
+Failed to get D-Bus connection: Operation not permitted
+解决办法就是在docker run 的时候运行/usr/sbin/init 
+
+docker run --privileged -t -i centos:latest /bin/bash   （此方式模式可联网）
+
+生成容器，然后在连入容器。
+注意DNS是udp协议，如果不写udp，默认是tcp。
+导致DNS服务无法解析、定位了1天多。（--restart always 有问题？）
+docker run -p 5353:53/udp -it centos:latest /usr/sbin/init
+
+
+docker ps  查看容器ID
+docker ps --all
+
+docker start containerID 启动
+docker exec -it containerID /bin/bash 连入
+
+查看容器IP
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' containerID
+
+
+host方式： –net=”host” ,系统默认方式
+容器和主机公用网络资源，使用宿主机的IP和端口
+
+
+容器和主机互相拷贝文件。
+将容器30026605dcfe的/home/cloudera/RS-MapReduce目录拷贝到主机的/tmp目录中
+docker cp  30026605dcfe:/home/cloudera/RS-MapReduce /tmp/
