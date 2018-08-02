@@ -13,6 +13,22 @@ mpstat -P ALL 1 $time > ./$path/mpstat-$date2.txt&
 iostat -xdmt 1 $time > ./$path/iostat-$date2.txt&
 vmstat -t -S M 1 $time > ./$path/vmstat-$date2.txt&
 
+
+
+不知道哪个CPU会高，用下面，存为一个单独文件
+for i in `seq 1 5`
+do
+  top -bd 1 -n 1 > 1.txt
+  grep ^top -A 10 1.txt >> 2.txt
+  sleep 1
+done
+
+
+已知某个进程CPU高，用下面,n3表示采集3次，间隔1秒
+pid=$(pidof named)
+top -bp $pid -n1
+
+
 # sleep 5;sh res.sh 600
 
 CPU top20
