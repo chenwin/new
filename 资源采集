@@ -25,6 +25,18 @@ do
   sleep 1
 done
 
+seq接受入参
+[root@opt]# sh chen.sh 3
+haha
+haha
+haha
+[root@opt]# cat chen.sh
+for i in `seq 1 $1`
+do
+  echo haha
+done
+
+
 
 已知某个进程CPU高，用下面,n3表示采集3次，间隔1秒
 pid=$(pidof named)
