@@ -15,10 +15,12 @@ vmstat -t -S M 1 $time > ./$path/vmstat-$date2.txt&
 
 
 
-不知道哪个CPU会高，用下面，存为一个单独文件
+不知道哪个CPU会高，用下面采集TOP4（如果要采集更多，修改-A 10为更大），存为一个单独文件。
+1.txt只是中间过程文件，2.txt才是最终结果
+每轮采集10组数据，采集seq里指定的5次，做成入参
 for i in `seq 1 5`
 do
-  top -bd 1 -n 1 > 1.txt
+  top -bd 1 -n 10 > 1.txt
   grep ^top -A 10 1.txt >> 2.txt
   sleep 1
 done
