@@ -38,9 +38,9 @@ done
 
 
 
-已知某个进程CPU高，用下面,n3表示采集3次，间隔1秒
+已知某个进程CPU高，用下面,n3表示采集3次，间隔1秒.(如果不指定-d,默认间隔3秒)
 pid=$(pidof named)
-top -bp $pid -n1
+top -bp $pid -d 1 -n1
 
 
 # sleep 5;sh res.sh 600
