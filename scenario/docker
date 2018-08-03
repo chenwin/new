@@ -19,6 +19,8 @@ docker run --privileged -t -i centos:latest /bin/bash   （此方式模式可联
 注意DNS是udp协议，如果不写udp，默认是tcp。
 导致DNS服务无法解析、定位了1天多。（--restart always 有问题？）
 docker run -p 5353:53/udp -it centos:latest /usr/sbin/init
+DNS占用53号端口，同时使用TCP和UDP协议。那么DNS在什么情况下使用这两种协议？
+DNS在区域传输的时候使用TCP协议，其他时候使用UDP协议。
 
 
 docker ps  查看容器ID
