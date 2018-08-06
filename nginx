@@ -10,8 +10,9 @@ make && make install
 
 vi /usr/local/nginx/conf/nginx.conf
 1）worker_processes 24;//不能超过 CPU 的总核数
-2) worker_rlimit_nofile 200000; //ulimit -n 200000
-3）worker_connections 要与worker_rlimit_nofile相同
+2) worker_cpu_affinity auto //开启CPU亲和性
+3) worker_rlimit_nofile 200000; //ulimit -n 200000
+4）worker_connections 要与worker_rlimit_nofile相同
 安全组需要放开1935端口。注意分析/usr/local/nginx/logs的日志
 
 定位文件句柄问题：
