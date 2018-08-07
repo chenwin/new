@@ -40,3 +40,7 @@ mpstat -P ALL 1
 
 查看多队列网卡对应的中断号：
 cat /proc/interrupts | grep eth | awk '{print $1 " " $NF}'
+
+
+windows分布式测试工具
+https://github.com/IKende/Beetle.DT/
