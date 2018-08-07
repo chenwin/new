@@ -1,0 +1,33 @@
+cat /proc/sys/net/ipv4/ip_local_port_range
+cat /proc/sys/fs/nr_open
+cat /proc/sys/fs/file-max
+cat /proc/net/sockstat //动态变化
+
+sysctl -w XXX
+
+fs.nr_open=1048575  //单个进程可分配的最大文件数,100000000
+fs.file-max=1048575 //内核可分配的最大文件数
+net.ipv4.ip_local_port_range= 1024 65535
+net.ipv4.tcp_mem= 786432 2097152 3145728  //缓存，三个值分别为low, pressure, high
+net.ipv4.tcp_rmem= 4096 4096 16777216     //读缓存
+net.ipv4.tcp_wmem= 4096 4096 16777216     //写缓存
+net.ipv4.tcp_max_orphans= 131072
+ulimit -n 1048575   //最大1048575
+
+
+最大孤儿套接字(orphan sockets)数，单位是个
+当cat /proc/net/sockstat看到的orphans数量达到net.ipv4.tcp_max_orphans的约一半时，
+就会报：Out of socket memory
+
+
+mesg命令查看，发现大量TCP: toomany of orphaned sockets错误
+最后通过，观察TCP或UDP的链接数
+watch ss -s
+
+Transport Total     IP        IPv6
+*         250       -         -
+RAW       0         0         0
+UDP       3         2         1
+TCP       10        5         5
+INET      13        7         6
+FRAG      0         0         0
