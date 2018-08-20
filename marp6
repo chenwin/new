@@ -105,6 +105,8 @@ wget https://github.com/intel-hadoop/HiBench/archive/master.zip
 
 ###安装maven###
 https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+
+https://mirrors.aliyun.com/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
 vi /etc/profile，增加
     export MAVEN_HOME=/home/apache-maven-3.5.2
     export PATH=$PATH:$MAVEN_HOME/bin
