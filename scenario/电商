@@ -1,0 +1,97 @@
+
+docker run -d -p 1521:1521 --name oralce-xe wnameless/oracle-xe-11g
+docker exec -it 1ae9d11d12c8 /bin/bash
+
+切换到操作Oracle数据库
+su - oracle
+sqlplus /nolog
+conn system/oracle
+
+conn miaosha/miaosha
+
+root@1ae9d11d12c8:/# su - oracle
+oracle@1ae9d11d12c8:~$ sqlplus /nolog
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mon Aug 20 08:21:39 2018
+
+Copyright (c) 1982, 2011, Oracle.  All rights reserved.
+
+SQL> conn system/oracle
+Connected.
+
+SQL> CREATE USER miaosha IDENTIFIED BY "miaosha";
+
+User created.
+
+#允许连接和增、删、改、查
+SQL> grant create session,resource to miaosha;
+
+Grant succeeded.
+SQL> conn miaosha/miaosha
+
+# 2 3 4 5表示行号，复制命令时自动出来的
+SQL> CREATE TABLE ITEM (
+  ID     NUMBER(19) PRIMARY KEY,
+  NAME   VARCHAR2(500),
+  AMOUNT NUMBER(19) DEFAULT 0 NOT NULL
+);  2    3    4    5
+
+Table created.
+
+
+JAVA_ARGS="-XX:+UseParallelGC -XX:+AggressiveOpts -XX:+UseFastAccessorMethods -Xms4G -Xmx4G"
+
+
+
+
+
+
+cp /home/ojdbc7.jar /home/apache-maven-3.5.4/
+
+mvn install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0.2 -Dpackaging=jar
+
+mvn install
+编译打包报错
+there is no POM in this directory (/root/.m2/repository)
+
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MissingProjectException
+
+下载主干代码，再编译打包
+wget https://github.com/chanjarster/artemis-disruptor-miaosha/archive/master.zip
+mvn -f /home/artemis-disruptor-miaosha-master/pom.xml install
+
+编译生成webapp的war包
+/home/artemis-disruptor-miaosha-master/web/target/artemis-disruptor-miaosha-web-1.1.0-SNAPSHOT.war
+编译生成后端程序的jar包
+/home/artemis-disruptor-miaosha-master/backend/target/artemis-disruptor-miaosha-backend-1.1.0-SNAPSHOT.jar
+
+
+执行 miaosha-broker/bin/artemis-service start报错
+Could not start artemis-service
+解决：先运行artemis run这个命令，来查看错误日志
+[Fatal Error] :141:17: The string "--" is not permitted within comments.
+xml文件里的注释错误导致，全部删除掉即可
+
+
+wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.tgz
+
+
+启动服务
+cd /home/apache-tomcat-8.0.53/bin;sh startup.sh
+vi /home/artemis-disruptor-miaosha-master/jms-server/target/classes/application-jms-server.properties
+spring.datasource.url=jdbc:oracle:thin:@127.0.0.1:1521:xe
+
+java -jar -server -Xms2g -Xmx2g \
+  -Dspring.config.location=/home/artemis-disruptor-miaosha-master/jms-server/target/classes/application-jms-server.properties \
+  /home/artemis-disruptor-miaosha-master/backend/target/artemis-disruptor-miaosha-backend-1.1.0-SNAPSHOT.jar
+
+
+压测
+JVM_ARGS="-Xms1g -Xmx1g" /home/apache-jmeter-3.1/bin/jmeter.sh -n -t /home/artemis-disruptor-miaosha-master/jmeter/benchmark.jmx
+
+
+
+
+参考url
+https://github.com/chanjarster/artemis-disruptor-miaosha/blob/master/Environment.md
+https://github.com/chanjarster/artemis-disruptor-miaosha
