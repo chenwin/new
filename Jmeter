@@ -44,3 +44,9 @@ http://blog.csdn.net/miss_hua/article/details/50484095
  注： 1099 为 JMeter 的 Controller 和 Agent 之间进行通讯的默认 RMI 端口号
 3、  运行主控台172.16.200.18 JMeter的jmeter.bat，打开GUI界面，打开“运行”菜单下的“远程控制”，可以看到新添加的负载机172.16.200.11:1109，172.16.200.77:1109
 
+Linux
+JVM_ARGS="-Xms1g -Xmx1g" /home/apache-jmeter-3.1/bin/jmeter.sh -n -t /home/artemis-disruptor-miaosha-master/jmeter/benchmark.jmx
+
+远端压测：
+vi /home/apache-jmeter-3.1/bin/jmeter.properties
+找到属性"remote_hosts"，使用JMeter远程服务器的IP地址作为其属性值。可以添加多个服务器的IP地址，以逗号作为分隔
