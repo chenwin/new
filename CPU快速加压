@@ -1,5 +1,10 @@
 https://www.cnblogs.com/zk47/p/4771105.html
 
+
+http://freshmeat.sourceforge.net/projects/lookbusy
+lookbusy是在Linux系统上生成合成CPU、内存和/或磁盘负载的实用工具。
+
+
 1 单个核 100%：
 代码 kill_cpu.c
 #include <stdlib.h>
