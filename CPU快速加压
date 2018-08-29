@@ -1,0 +1,78 @@
+https://www.cnblogs.com/zk47/p/4771105.html
+
+1 单个核 100%：
+代码 kill_cpu.c
+#include <stdlib.h>
+
+int main()
+{
+    while(1);
+    return 0;
+}
+运行
+$ gcc -o out kill_cpu.c
+$  ./out
+看top的结果：
+$ top
+top - 15:44:08 up 207 days, 21:29,  2 users,  load average: 0.08, 0.13, 0.10
+Tasks: 231 total,   2 running, 229 sleeping,   0 stopped,   0 zombie
+Cpu0  :  1.0%us,  1.0%sy,  0.0%ni, 98.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu1  :100.0%us,  0.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu2  :  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu3  :  1.0%us,  1.0%sy,  0.0%ni, 98.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+看到某一个核的cpu已经达到了100%。这是由于这个进程被调度到了一个核上，没有使用多线程，所以自然就是一个核的cpu是100%。那么如何让所有的cpu都是100%呢。
+
+2 让所有的核都是100%
+$ for i in `seq 1 $(cat /proc/cpuinfo | grep "physical id" | wc -l)`; do ./out & done
+[1] 5992
+[2] 5993
+[3] 5994
+[4] 5995
+
+$ top
+top - 15:56:54 up 207 days, 21:42,  2 users,  load average: 1.03, 0.35, 0.17
+Tasks: 234 total,   5 running, 229 sleeping,   0 stopped,   0 zombie
+Cpu0  : 98.0%us,  1.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  1.0%si,  0.0%st
+Cpu1  :100.0%us,  0.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu2  : 99.0%us,  1.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu3  :100.0%us,  0.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+我们看到所有的核都是100%，cat /proc/cpuinfo | grep "physical id" | wc -l是获取到CPU的核数，逻辑核数。这样每一个cpu上都会调度到一个死循环的进程。
+
+批量kill进程
+$ ps aux | grep [.]/out | awk '{print $2}' | xargs sudo kill -9
+3 让某个核 100%
+$ top
+top - 16:11:03 up 207 days, 21:56,  2 users,  load average: 0.81, 0.47, 0.27
+Tasks: 232 total,   2 running, 230 sleeping,   0 stopped,   0 zombie
+Cpu0  :  1.0%us,  2.0%sy,  0.0%ni, 94.1%id,  0.0%wa,  2.0%hi,  1.0%si,  0.0%st
+Cpu1  :  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu2  :100.0%us,  0.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu3  :  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+我们看到当前的进程在cpu2上，可以通过taskset 命令绑定cpu
+
+# taskset -cp 0 7368
+pid 7368's current affinity list: 0-3
+pid 7368's new affinity list: 0
+进程实际上四个核都是可以使用的，当时由于没有使用多线程，所以只调度到了一个核上。现在经过taskset设置后，现在我们再来看看top的输出：
+
+$ top
+top - 16:14:09 up 207 days, 21:59,  2 users,  load average: 0.99, 0.71, 0.39
+Tasks: 230 total,   3 running, 227 sleeping,   0 stopped,   0 zombie
+Cpu0  : 98.0%us,  0.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  1.0%hi,  1.0%si,  0.0%st
+Cpu1  :  0.0%us,  1.0%sy,  0.0%ni, 99.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu2  :  1.0%us,  1.0%sy,  0.0%ni, 98.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu3  :  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+现在跑到了cpu0上了。
+
+4 lookbusy
+$ lookbusy -c 30
+让所有的cpu使用率都是30%
+
+$ lookbusy -c 75 -n 2
+让两个cpu的使用率为30%
+
+$ lookbusy --cpu-mode curve --cpu-curve-peak 14h -c 20-80
+让cpu在20%-%80之间，周期为24H，在14点，即下午2点达到峰值
+
+$ lookbusy -c 20-30 --cpu-mode curve --cpu-curve-period 60m --cpu-curve-peak 30m
+让cpu以60分钟为周期，30分钟是峰值，使用率在20% - 30%之间。
