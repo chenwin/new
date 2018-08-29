@@ -1,0 +1,4 @@
+Gearman是一个分发任务的程序框架，它会对作业进行排队自动分配到一系列机器上。
+gearman跨语言跨平台，很方便的实现异步后台任务。php官方收录：http://php.net/manual/zh/book.gearman.php
+
+https://images2015.cnblogs.com/blog/886928/201610/886928-20161021102604857-1168586120.png
