@@ -21,8 +21,14 @@ vi /usr/local/nginx/conf/nginx.conf
 
 9 设置存活时间  这是指cline端打开browser页面没有关闭就自动断开的时间
   keepalive_timeout 60;  # 长连接才有意义
-  
-10 隐藏版本信息
+
+10 关闭日志打印
+nginx使用长连接后多进程同时写log文件和Linux为了支持多进程访问共享资源引入了锁（mutex_lock，spin_lock，osq_lock等）。 
+针对这个问题，现有解决办法就是不记录log，利用以下设置就可以突破写log带来的性能瓶颈： 
+access_log /dev/null; //将存储access_log的路径设置为“垃圾桶” 
+error_log /dev/null;  //将存储error_log的路径设置为“垃圾桶”
+
+11 隐藏版本信息
    隐藏nginx版本：在server内增加server_tokens off;
    隐藏php版本：  vi /usr/local/php/lib/php.ini, expose_php=off
   
