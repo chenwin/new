@@ -49,7 +49,7 @@ worker_rlimit_nofile 50000;
 2.2调整Socket连接相关参数
 修改操作系统参数
 vi /etc/sysctl.conf 新增或者修改
-net.core.somaxconn = 50000     #最大连接：somaxconn
+net.core.somaxconn = 65535     #最大连接：somaxconn.最大只能调到65535
 net.ipv4.tcp_tw_recycle = 1    #加快tcp回收
 net.ipv4.tcp_tw_reuse = 1      #空tcp回收
 net.ipv4.tcp_syncookies = 0    #去除洪水攻击抵御
