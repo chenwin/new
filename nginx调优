@@ -1,6 +1,9 @@
 nginx 的性能调优
-1 修改CPU的核心数对应的Nginx work进程 这个一般是你CPU核心数的两倍，方正是倍数，具体要几倍可看具体硬件配置
-
+1 修改CPU的核心数对应的Nginx work进程，worker进程数量=等于CPU的核数*2倍或1倍
+  worker_processes 8;
+  
+  绑定不同的nginx进程到不同的CPU上：
+  worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;
 2 修改文件描述符  65536 ulimit -n 永久生效可改/etc/sysctl.conf
   worker_rlimit_nofile 102400;
 3 修改Linux内核的调度算法    epoll
@@ -16,4 +19,7 @@ nginx 的性能调优
 8 设置分页的buffer 
 
 9 设置存活时间  这是指cline端打开browser页面没有关闭就自动断开的时间
-  keepalive_timeout 60;
+  keepalive_timeout 60;  # 长连接才有意义
+  
+  参考url
+  http://blog.51cto.com/13055758/2084529
