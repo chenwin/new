@@ -31,7 +31,21 @@ error_log /dev/null;  //将存储error_log的路径设置为“垃圾桶”
 11 隐藏版本信息
    隐藏nginx版本：在server内增加server_tokens off;
    隐藏php版本：  vi /usr/local/php/lib/php.ini, expose_php=off
-  
+
+worker_processes  8;
+worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;
+worker_rlimit_nofile 65535;
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+#pid        logs/nginx.pid;
+
+events {
+    worker_connections  65535; //不能超过内核的net.core.somaxconn
+    use epoll;
+}
+
+
   参考url
   http://blog.51cto.com/13055758/2084529
   http://blog.51cto.com/12227558/2096244
