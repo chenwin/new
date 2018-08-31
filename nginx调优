@@ -67,9 +67,15 @@ net.core.somaxconn = 65535     #最大连接：somaxconn.最大只能调到65535
 net.ipv4.tcp_tw_recycle = 1    #加快tcp回收
 net.ipv4.tcp_tw_reuse = 1      #空tcp回收
 net.ipv4.tcp_syncookies = 0    #去除洪水攻击抵御
-让sysctl.conf生效
 
+sysctl -w net.core.somaxconn=65535
+sysctl -w net.ipv4.tcp_tw_recycle=1
+sysctl -w net.ipv4.tcp_tw_reuse=1
+sysctl -w net.ipv4.tcp_syncookies=0
+
+让sysctl.conf生效
 sysctl -p
+
 修改nginx.conf
 worker_connections 50000        #每个子进程允许打开的连接数
 keepalive_timeout 0             #连接的保持时间
