@@ -3,7 +3,7 @@ vi /usr/local/nginx/conf/nginx.conf
 1 修改CPU的核心数对应的Nginx work进程，worker进程数量=等于CPU的核数*2倍或1倍
   worker_processes 8;
   
-  绑定不同的nginx进程到不同的CPU上：
+  绑定不同的nginx进程到不同的CPU上：CPU有多少个核，就有几位数，1代表内核开启，0代表内核关闭
   worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;
 2 修改文件描述符 ulimit -n  65536, 永久生效可改/etc/sysctl.conf
   worker_rlimit_nofile 102400;  #每个子进程允许打开的文件数
