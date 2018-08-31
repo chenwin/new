@@ -20,6 +20,9 @@ go build && ./gohttpserver
 ./gohttpserver --root=/mnt/test --title=xian --upload --auth-type http --auth-http username:password
 访问http://IP:8000/
 
+快速启动服务，共享文件放到/mnt下
+nohup ./gohttpserver --root=/mnt/ > /dev/null 2>&1 &
+
 
 Flags:
   -h, --help                     Show context-sensitive help (also try --help-long and --help-man).
