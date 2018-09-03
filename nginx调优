@@ -1,3 +1,95 @@
+./configure: error: the HTTP rewrite module requires the PCRE library.//URL重写
+./configure: error: the HTTP gzip module requires the zlib library
+
+
+You can either disable the module by using --without-http_rewrite_module
+You can either disable the module by using --without-http_gzip_module
+
+yum install -y pcre-devel
+yum install -y zlib-devel
+
+
+Jmeter提示信息
+Waiting for possible shutdown message on port 4445
+修改jmeter.properties里的配置
+# To disable, set the port to 0.
+#jmeterengine.nongui.port=4445
+
+
+server端
+yum install gcc pcre-devel zlib-devel -y
+wget http://nginx.org/download/nginx-1.13.12.tar.gz -O /home/nginx-1.13.12.tar.gz
+tar -zxvf /home/nginx-1.13.12.tar.gz -C /home
+cd /home/nginx-1.13.12
+./configure --prefix=/usr/local/nginx
+make && make install
+vi /usr/local/nginx/conf/nginx.conf  修改调优参数
+cd /usr/local/nginx/sbin启动nginx
+
+
+===========================================================================================================
+内核参数调优
+cat >> /etc/security/limits.conf << EOF
+root soft nofile 65535
+root hard nofile 65535
+* soft nofile 65535
+* hard nofile 65535
+EOF
+
+sysctl -w net.core.somaxconn=65535
+sysctl -w net.ipv4.tcp_tw_recycle=1
+sysctl -w net.ipv4.tcp_tw_reuse=1
+sysctl -w net.ipv4.tcp_syncookies=0
+sysctl -w net.ipv4.ip_local_port_range="1024 65535"
+
+============================================================================================================
+nginx调优
+worker_processes  8;
+worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;
+worker_rlimit_nofile 65535;
+error_log /dev/null;
+
+
+events {
+    worker_connections  65535; //不能超过内核的net.core.somaxconn
+    use epoll;
+}
+
+http {
+        access_log /dev/null;
+
+
+vi /usr/local/nginx/html/index.html，减少页面显式的字数，只保留如下，其它的都删除掉
+<body>
+<h1>Welcome to nginx!</h1>
+</body>
+</html>
+
+============================================================================================================
+client端
+yum install java
+wget http://mirrors.shu.edu.cn/apache//jmeter/binaries/apache-jmeter-4.0.tgz -O /home/apache-jmeter-4.0.tgz
+tar -zxvf /home/apache-jmeter-4.0.tgz -C /home
+cd apache-jmeter-4.0
+vi /home/apache-jmeter-4.0/bin/jmeter.properties, jmeterengine.nongui.port显式写成0
+
+JVM_ARGS="-Xms2g -Xmx2g" /home/apache-jmeter-4.0/bin/jmeter.sh -n -t /home/web.jmx
+
+
+
+参考
+https://www.cnblogs.com/kevingrace/p/6094007.html
+http://www.ttlsa.com/nginx/web-server-nginx-optimization/
+
+
+
+
+
+
+
+
+
+
 nginx 的性能调优
 vi /usr/local/nginx/conf/nginx.conf
 1 修改CPU的核心数对应的Nginx work进程，worker进程数量=等于CPU的核数*2倍或1倍
