@@ -1,20 +1,3 @@
-./configure: error: the HTTP rewrite module requires the PCRE library.//URL重写
-./configure: error: the HTTP gzip module requires the zlib library
-
-
-You can either disable the module by using --without-http_rewrite_module
-You can either disable the module by using --without-http_gzip_module
-
-yum install -y pcre-devel
-yum install -y zlib-devel
-
-
-Jmeter提示信息
-Waiting for possible shutdown message on port 4445
-修改jmeter.properties里的配置
-# To disable, set the port to 0.
-#jmeterengine.nongui.port=4445
-
 
 server端
 yum install gcc pcre-devel zlib-devel -y
@@ -88,7 +71,22 @@ http://www.ttlsa.com/nginx/web-server-nginx-optimization/
 
 
 
+./configure: error: the HTTP rewrite module requires the PCRE library.//URL重写
+./configure: error: the HTTP gzip module requires the zlib library
 
+
+You can either disable the module by using --without-http_rewrite_module
+You can either disable the module by using --without-http_gzip_module
+
+yum install -y pcre-devel
+yum install -y zlib-devel
+
+
+Jmeter提示信息
+Waiting for possible shutdown message on port 4445
+修改jmeter.properties里的配置
+# To disable, set the port to 0.
+#jmeterengine.nongui.port=4445
 
 nginx 的性能调优
 vi /usr/local/nginx/conf/nginx.conf
