@@ -3,14 +3,14 @@ https://zhuanlan.zhihu.com/p/21348220
 
 Yahoo! Cloud Serving Benchmark (YCSB)测试工具集合
 https://github.com/brianfrankcooper/YCSB/
-
-phoronix-test测试工具集合
-http://www.phoronix-test-suite.com/
-
 参考url：
 https://blog.csdn.net/u012249132/article/details/51133368
 https://blog.csdn.net/zx8167107/article/details/78753283
 redis benchmark:http://robertlehmann.de/img/redis.pdf
+
+phoronix-test测试工具集合
+http://www.phoronix-test-suite.com/
+参考：https://www.cnblogs.com/tanyongli/p/7767804.html
 
 JAVA JVM阿里云调优
 https://www.aliyun.com/jiaocheng/277081.html
