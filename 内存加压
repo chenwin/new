@@ -1,0 +1,7 @@
+wget http://pyropus.ca/software/memtester/old-versions/memtester-4.2.2.tar.gz
+tar zxvf memtester-4.2.2.tar.gz
+cd memtester-4.2.2
+make && make install
+
+memtester 2G 1
+nohup memtester 2G  > /tmp/memtest.log &
