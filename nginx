@@ -109,6 +109,14 @@ ffmpeg -i chen-test.mp4 -vf "movie=water.png [logo]; [in][logo] overlay=10:10 [o
 [2018-01-09 11:33:53.542][188][error] rtmp client dump url failed. ret=104 errno=104(Connection reset by peer)
 
 
+调整输出块大小带来的变化
+1、主要用于发布媒体的源流媒体服务器CPU下降10%
+2、通过调整流媒体服务器的输出块大小与媒体流发布客户端一致，流媒体不再需要分块了，而是可以直接转发，这样也会节省一定CPU
+3、每一路媒体流流量下降15%
+outChunkSize大小可以选择1500-20(IP头)-20（TCP头）=1460，
+考虑到IP头、TCP头有扩展选项，加之PPPoE，为保证起见可选为1360，
+也可以设为大于MTU的其它值，不过这样的话就会出现IP分片了，不是好习惯。
+
 直播
 
 http  location /后面增加
