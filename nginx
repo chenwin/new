@@ -116,6 +116,7 @@ ffmpeg -i chen-test.mp4 -vf "movie=water.png [logo]; [in][logo] overlay=10:10 [o
 outChunkSize大小可以选择1500-20(IP头)-20（TCP头）=1460，
 考虑到IP头、TCP头有扩展选项，加之PPPoE，为保证起见可选为1360，
 也可以设为大于MTU的其它值，不过这样的话就会出现IP分片了，不是好习惯。
+“chunk_size越小PPS越高，带宽越小。”
 
 直播
 
