@@ -4,6 +4,13 @@ ffmpeg -t 3 -ss 00:00:02 -i in.mp4 -b 2048k out.gif
 -t 3表示3持续3秒的视频
 -b 波特率，高质量
 
+4路视频（2*2）转成一路输出，ffmpeg命令为：
+ffmpeg -i out1.mp4 -i out2.mp4 -i out3.mp4 -i out4.mp4 -filter_complex "[0:v]pad=iw*2:ih*2[a];[a][1:v]overlay=w[b];[b][2:v]overlay=0:h[c];[c][3:v]overlay=w:h" out.mp4
+操作如下：
+在FFmpeg输入如上命令：（out1.mp4 -i out2.mp4 -i out3.mp4 -i out4.mp4视频文件应在FFmpeg文件夹下）
+
+
+
 https://www.nvidia.cn/object/cudazone-cn.html
 [FFMPEG硬件加速]nvidia方案
 https://blog.csdn.net/weixin_35804181/article/details/54377365
