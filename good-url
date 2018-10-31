@@ -7,8 +7,11 @@ https://github.com/winlinvip/simple-rtmp-server
 https://github.com/ossrs/srs/wiki/v3_CN_Home
 SRS测网速
 http://winlinvip.github.io/srs.release/trunk/research/players/srs_bwt.html?vhost=players&server=192.168.1.170
+
 基于SRS+OBS搭建直播系统
 https://blog.csdn.net/fonyer/article/details/79975063
+配置参考srs.conf
+https://www.cnblogs.com/lanqie/p/7667450.html
 
 Yahoo! Cloud Serving Benchmark (YCSB)测试工具集合
 https://github.com/brianfrankcooper/YCSB/
