@@ -1,6 +1,13 @@
 定位思路good，东西非常多
 https://zhuanlan.zhihu.com/p/21348220
 
+SRS
+SRS(Simple Rtmp Server)的性能测试，请参考：
+https://github.com/winlinvip/simple-rtmp-server
+https://github.com/ossrs/srs/wiki/v3_CN_Home
+SRS测网速
+http://winlinvip.github.io/srs.release/trunk/research/players/srs_bwt.html?vhost=players&server=192.168.1.170
+
 Yahoo! Cloud Serving Benchmark (YCSB)测试工具集合
 https://github.com/brianfrankcooper/YCSB/
 参考url：
