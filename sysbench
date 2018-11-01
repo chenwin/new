@@ -1,3 +1,8 @@
+curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh | sudo bash
+sudo yum -y install sysbench
+
+
+
 #https://help.aliyun.com/document_detail/35264.html?spm=5176.doc53632.3.2.RzuA15  阿里云 云数据库 RDS 版 > 性能白皮书 
 cd /home
 yum install gcc gcc-c++ autoconf automake make libtool bzr mysql-devel -y
