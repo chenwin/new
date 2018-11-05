@@ -1,0 +1,56 @@
+
+前TOP 20切换，- limit 20控制
+stap -DMAXMAPENTRIES=10240 cs.stp 1
+
+==============================================================================
+#! /usr/bin/env stap
+#
+#
+global csw_count
+global idle_count
+probe scheduler.cpu_off {
+csw_count[task_prev, task_next]++
+idle_count+=idle
+}
+
+function fmt_task(task_prev, task_next)
+{
+    return sprintf("%s(%d)->%s(%d)",
+    task_execname(task_prev),
+    task_pid(task_prev),
+    task_execname(task_next),
+    task_pid(task_next))
+}
+
+function print_cswtop () {
+    printf ("%45s %10s\n", "Context switch", "COUNT")
+    foreach ([task_prev, task_next] in csw_count- limit 20) {
+    printf("%45s %10d\n", fmt_task(task_prev, task_next), csw_count[task_prev, task_next])
+}
+
+printf("%45s %10d\n", "idle", idle_count)
+    delete csw_count
+    delete idle_count
+}
+
+probe timer.s($1) {
+print_cswtop ()
+printf("--------------------------------------------------------------\n")
+}
+
+
+============================================================================
+for i in `seq 1 100`
+do
+  for XX in 32 64 128
+  do
+    DATE=`date +"%Y%m%d_%H%M%S"`
+    #rcu_sched,有时候有sysbench?  grep rcu_sched
+    pidstat -w 1 11 > $XX-$DATE.pidstat &
+    vmstat 1 11 > $XX-$DATE.vmstat &
+    #stap -DMAXMAPENTRIES=10240 cs.stp 1 > $XX-$DATE.stap &
+    sysbench --threads=$XX --test=threads --thread-yields=2000 --thread-locks=2 run > $XX-$DATE.sysbench
+    #pkill -9 stap
+  done
+done
+
