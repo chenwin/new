@@ -40,9 +40,9 @@ printf("--------------------------------------------------------------\n")
 
 
 ============================================================================
-for i in `seq 1 100`
+for i in `seq 1 10`
 do
-  for XX in 32 64 128
+  for XX in 16 32 64 128 256 512
   do
     DATE=`date +"%Y%m%d_%H%M%S"`
     #rcu_sched,有时候有sysbench?  grep rcu_sched
@@ -54,3 +54,11 @@ do
   done
 done
 
+查看结果
+for XX in 16 32 64 128 256 512
+do
+  echo "threads=$XX"
+  cat $XX-*.sysbench |grep "events (avg/stddev):" |awk '{print $3}' |awk -F'/' '{sum+=$1}; END {print sum/NR}'
+  cat $XX-*.sysbench |grep "avg:" |awk '{sum+=$2}; END {print sum/NR}'
+  echo "=========================="
+done
