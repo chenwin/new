@@ -40,6 +40,7 @@ printf("--------------------------------------------------------------\n")
 
 
 ============================================================================
+多线程测试
 for i in `seq 1 10`
 do
   for XX in 16 32 64 128 256 512
@@ -54,6 +55,7 @@ do
   done
 done
 
+
 查看结果
 for XX in 16 32 64 128 256 512
 do
@@ -62,3 +64,30 @@ do
   cat $XX-*.sysbench |grep "avg:" |awk '{sum+=$2}; END {print sum/NR}'
   echo "=========================="
 done
+
+===========================================================================
+内存测试
+for i in `seq 1 5`
+do
+  for XX in 8 16 32 64 128 256 512
+  do
+    DATE=`date +"%Y%m%d_%H%M%S"`
+    sysbench --test=memory --memory-block-size=8k --memory-total-size=10G run --num-threads=$XX > $XX-$DATE.sysbench
+  done
+done
+
+for XX in 8 16 32 64 128 256 512
+do
+  echo "threads=$XX"
+  cat $XX-*.sysbench |grep "events (avg/stddev):" |awk '{print $3}' |awk -F'/' '{sum+=$1}; END {print sum/NR}'
+  cat $XX-*.sysbench |grep "execution" |awk '{print $4}' |awk -F'/' '{sum+=$1}; END {print sum/NR}'
+  echo "=========================="
+done
+
+查看缺页次数
+cat /proc/interrupts |grep RES;
+echo 1 > /sys/kernel/debug/tracing/events/exceptions/enable;
+sysbench --test=memory --memory-block-size=8k --memory-total-size=10G run --num-threads=8
+echo 0 > /sys/kernel/debug/tracing/events/exceptions/enable;
+cd /sys/kernel/debug/tracing/;
+cat trace |grep sysbench |wc -l
