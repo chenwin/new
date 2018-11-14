@@ -31,6 +31,10 @@ linux设置开机自启动
 或者" cd /opt && ./hello.sh "
 添加在：exit 0 之前
 
+
+cd /root/go/src/github.com/codeskyblue/gohttpserver
+nohup ./gohttpserver --root=/mnt/ > /dev/null 2>&1 &
+
 Flags:
   -h, --help                     Show context-sensitive help (also try --help-long and --help-man).
       --version                  Show application version.
