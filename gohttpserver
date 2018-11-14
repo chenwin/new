@@ -18,11 +18,18 @@ go build && ./gohttpserver
 
 指定目录作为存放路径root,访问鉴权
 ./gohttpserver --root=/mnt/test --title=xian --upload --auth-type http --auth-http username:password
+
 访问http://IP:8000/
 
 快速启动服务，共享文件放到/mnt下
 nohup ./gohttpserver --root=/mnt/ > /dev/null 2>&1 &
 
+linux设置开机自启动
+一.、在/etc/rc.local文件中添加自启动命令
+编辑"/etc/rc.local"，添加你想开机运行的命令
+例如，每次开机时要执行一个hello.sh，这个脚本放在/usr下面，那就可以在"/etc/rc.local"中加一行"/usr/./hello.sh"，
+或者" cd /opt && ./hello.sh "
+添加在：exit 0 之前
 
 Flags:
   -h, --help                     Show context-sensitive help (also try --help-long and --help-man).
