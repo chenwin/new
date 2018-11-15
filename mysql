@@ -3,6 +3,9 @@
 # rpm -ivh mysql-community-release-el7-7.noarch.rpm (或者yum localinstall安装)
 # yum install mysql-community-server
 
+service mysql start
+chkconfig mysql on
+
 # 客户端mysql-community-client，开发包mysql-community-devel
 # yum install mysql-community-devel
 # service mysqld start
