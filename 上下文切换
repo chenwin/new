@@ -2,7 +2,7 @@
 前TOP 20切换，- limit 20控制
 stap -DMAXMAPENTRIES=10240 cs.stp 1
 
-升级内核版本
+升级内核版本 update kernel
 wget https://buildlogs.centos.org/c7.1708.u.x86_64/kernel/20171204203818/3.10.0-693.11.1.el7.x86_64/kernel-3.10.0-693.11.1.el7.x86_64.rpm
 yum install kernel-3.10.0-693.11.1.el7.x86_64.rpm
 awk -F\' '$1=="menuentry " {print $2}' /etc/grub2.cfg
