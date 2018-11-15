@@ -19,6 +19,7 @@ kbengine.xml中baseapp和loginapp的externalAddress 都需要配置
 
 批量杀机器人进程
 ps -ef |grep /server//bots |grep -v color=auto |cut -c 9-15 |xargs kill -9
+ps -ef |grep /server//bots |grep -v color=auto |awk '{print $2}' |xargs kill -9
 
 
 guiconsole选择第一个baseapp看watcher页面的scripts中看players数量
