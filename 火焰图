@@ -12,3 +12,23 @@ perf script | ./stackcollapse-perf.pl > out.perf-folded
 
 关于火焰图的更多细节和更多种火焰图各自的功能，可以访问： 
 http://www.brendangregg.com/flamegraphs.html
+
+==========================================================================================
+on-cpu火焰图，off-cpu火焰图
+如果瓶颈是 CPU则使用 On-CPU 火焰图, 如果瓶颈是 IO 或锁则使用 Off-CPU 火焰图。
+
+off-cpu火焰图安装及使用
+yum install systemtap perl kernel-devel -y
+yum install /usr/bin/debuginfo-install
+vim /etc/yum.repos.d/CentOS-Debuginfo.repo,修改为enable=1
+debuginfo-install kernel
+git clone https://github.com/openresty/openresty-systemtap-toolkit.git
+或者wget https://github.com/openresty/openresty-systemtap-toolkit/archive/master.zip
+./sample-bt-off-cpu -p 10901 -t 5 > a.bt
+./stackcollapse-stap.pl a.bt > a.cbt
+./flamegraph.pl a.cbt > a.svg
+
+火焰图参考url（FlameGraph）
+https://github.com/openresty/openresty-systemtap-toolkit/blob/master/README-CN.markdown
+https://www.jianshu.com/p/2e5dac1a5014?from=singlemessage
+https://blog.csdn.net/gatieme/article/details/78885908
