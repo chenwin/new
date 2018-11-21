@@ -1,0 +1,5 @@
+每秒钟监控命令结果变化
+watch -d -n1 "CMD"
+
+top
+ps -mp 21518 -o THREAD,tid,time
