@@ -75,3 +75,8 @@ vbDataObject 13 数据访问对象
 
 相似度90%
 -metric ae -fuzz 90% D:\1.bmp D:\3.bmp NULL
+
+-compose CopyOpacity", "-compose CopyRed", "-compose CopyYellow", "-compose Darken", "-compose Divide", "-compose Dst", "-compose Difference"
+
+magick.exe composite -compose copy_opacity D:\1.bmp D:\2.bmp D:\result.bmp
+https://yq.aliyun.com/ziliao/590284
