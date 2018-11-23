@@ -1,0 +1,77 @@
+制作透明图（背景为单一颜色的图片）要点：
+1、透明色必须为单一颜色
+2、最终图片四角必须为同一种颜色
+3、图片尺寸尽量小
+参考http://loginapi.anjian.com/showtopic-637393-1.aspx
+
+一键去背景色软件
+http://loginapi.anjian.com/showtopic-319883-1.aspx
+
+免费的Ramdisk软件，支持自定义大小，支持img、iso、raw格式
+https://sourceforge.net/projects/imdisk-toolkit/
+
+OSFMount，免费的Ramdisk软件，支持自定义大小,支持iso、vmdk、vhd格式
+https://www.osforensics.com/tools/mount-disk-images.html
+
+
+ImageMagick cmd to resize picture
+https://stackoverflow.com/questions/40456998/a-batch-script-to-resize-images
+
+
+
+http://airtest.netease.com/changelog.html
+Airtest Project是网易游戏团队新开源出来的一款用于UI自动化测试的项目.
+AirtestIDE 是一个跨平台的UI自动化测试编辑器，适用于游戏和App。
+自动化脚本录制、一键回放、报告查看，轻而易举实现自动化测试流程
+支持基于图像识别的Airtest框架，适用于所有Android和Windows游戏
+支持基于UI控件搜索的Poco框架，适用于Unity3d，Cocos2d与Android App
+在网易游戏内部，这个项目被应用在梦幻西游、大话西游、阴阳师、荒野行动等数十个游戏的自动化测试中
+
+图片合并
+https://superuser.com/questions/316132/appending-images-vertically-in-imagemagick
+
+http://www.imagemagick.org/script/index.php
+
+cd "c:\Program Files"
+convert.exe -append D:\1.bmp D:\2.bmp D:\out.bmp
+convert.exe +append D:\1.bmp D:\2.bmp D:\out.bmp
+https://www.jianshu.com/p/43223d87a11d
+https://blog.csdn.net/zaffix/article/details/7058587
+
+montage.exe D:\1.bmp D:\2.bmp -geometry +5+5 -tile 2x1 D:\out.bmp
+
+dir /b /s *.png > filelist.txt
+montage.exe @filelist.txt -geometry +0+0 -tile 2x4 -background #00000000 big.png
+
+
+
+
+相同等于0,-fuzz 10%
+compare.exe -metric phash D:\1.bmp D:\2.bmp NULL:
+compare.exe -metric rmse D:\1.bmp D:\2.bmp NULL:
+
+
+https://stackoverflow.com/questions/12680227/vbs-how-to-get-result-from-a-command-line-command
+
+https://stackoverflow.com/questions/12680227/vbs-how-to-get-result-from-a-command-line-command
+
+
+
+
+vbEmpty 0 未初始化（默认）
+vbNull 1 不包含任何有效数据
+vbInteger 2 整型子类型
+vbLong 3 长整型子类型
+vbSingle 4 单精度子类型
+vbDouble 5 双精度子类型
+vbCurrency 6 货币子类型
+vbDate 7 日期子类型
+vbString 8 字符串子类型
+vbObject 9 对象
+vbError 10 错误子类型
+vbBoolean 11 Boolean 子类型
+vbVariant 12 Variant （仅用于变量数组）
+vbDataObject 13 数据访问对象
+
+相似度90%
+-metric ae -fuzz 90% D:\1.bmp D:\3.bmp NULL
