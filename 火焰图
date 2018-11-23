@@ -13,6 +13,7 @@ perf script | ./stackcollapse-perf.pl > out.perf-folded
 关于火焰图的更多细节和更多种火焰图各自的功能，可以访问： 
 http://www.brendangregg.com/flamegraphs.html
 
+以上为on-cpu火焰图
 ==========================================================================================
 on-cpu火焰图，off-cpu火焰图
 如果瓶颈是 CPU则使用 On-CPU 火焰图, 如果瓶颈是 IO 或锁则使用 Off-CPU 火焰图。
@@ -32,3 +33,40 @@ git clone https://github.com/openresty/openresty-systemtap-toolkit.git
 https://github.com/openresty/openresty-systemtap-toolkit/blob/master/README-CN.markdown
 https://www.jianshu.com/p/2e5dac1a5014?from=singlemessage
 https://blog.csdn.net/gatieme/article/details/78885908
+
+============================================================================
+显示内核和模块中，消耗最多CPU周期的函数：
+# perf top -e cycles:k
+
+perf top
+主要用于实时分析各个函数在某个性能事件上的热度，可以高速的定位热点函数
+
+perf top -p <pid>                 定位热点函数
+perf top -p <pid> -g -F 2000      具体哪些方法条用热点函数
+
+spinset比较消耗CPU资源，不适合竞争比较厉害的场景，强烈建议改用metux.
+
+基准测试
+mkdir 1 1024
+for i in `seq 1 10`
+do
+  for XX in 1 16 32 64 128 256 512
+  do
+    DATE=`date +"%Y%m%d_%H%M%S"`
+    sysbench --test=mutex --mutex-num=1 --mutex-locks=50000000 --mutex-loops=$XX run > 1/$XX-$DATE.sysbench
+    sleep 10
+    sysbench --test=mutex --num-threads=$XX --mutex-num=1024 --mutex-locks=10000 --mutex-loops=5000 run > 1024/$XX-$DATE.sysbench
+    sleep 10
+  done
+done
+
+查看测试结果
+for XX in 1 16 32 64 128 256 512
+do
+  echo "threads=$XX"
+  cat $XX-*.sysbench |grep "avg:" |awk '{sum+=$2}; END {print sum/NR}'
+  echo "=========================="
+done
+
+参考url
+http://www.cnblogs.com/mengfanrong/p/4853026.html
