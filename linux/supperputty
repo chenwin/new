@@ -2,7 +2,9 @@ supperputty或者用MobaXterm
 
 依赖putty（必选）和pscp(文件传输，会话->右键File Transfer)
 
-putty会话老断开，unexpect closed
+putty会话老断开，错误"unexpectedly closed network"
+解决方法：
+在Connection选项配置以下2项：
 "Sending of null packets to keep session alive", 心跳间隔不能为0
 同时，勾选"Enable TCP keepalives"
 
