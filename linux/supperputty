@@ -20,3 +20,8 @@ sudo.spsl写sudo su -
 win2008下启动报错“CLR20R3 程序终止”
 修改配置文件SuperPutty.exe.config，.Net的版本指定为v4.0.30319
 startup><supportedRuntime version="v4.0.30319"/></startup></configuration>
+
+<转换private key设置putty>
+使用winscp (推荐)或者psftp.exe或者ftp把id_rsa下载到本地
+运行puttygen.exe,选择菜单Conversions->Import key
+然后save private key (比如key.ppk),就可以使用这个private key设置putty了
