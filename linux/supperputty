@@ -8,10 +8,16 @@ Edit编辑会话
 Login username:用户名
 Extra Putty Arguments:-pw 密码
 
-登录自动执行命令
-Extra Putty Arguments:-t -m D:\chenliang\sudo.spsl
-sudo.spsl写sudo su -
-
+登录自动执行命令,(简单命令用cmd.txt)
+Extra Putty Arguments:-t -m D:\chenliang\cmd.txt
+cmd.txt写TMOUT=0
+(复杂命令用sudo.spsl)
+SPSL Script: D:\chenliang\sudo.spsl
+sudo.spsl内容如下
+SENDLINE su
+SLEEP 1000
+SENDLINE <CMD>
+TMOUT=0
 
 批量执行命令
 在上面的标签栏Commands输入命令，注意此处只能输入命令，不支持粘贴命令。
