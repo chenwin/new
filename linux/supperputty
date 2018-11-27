@@ -2,6 +2,12 @@ supperputty或者用MobaXterm
 
 依赖putty（必选）和pscp(文件传输，会话->右键File Transfer)
 
+putty会话老断开，unexpect closed
+"Sending of null packets to keep session alive", 心跳间隔不能为0
+同时，勾选"Enable TCP keepalives"
+
+
+
 【编辑会话】
 自动带用户名和密码登录
 Edit编辑会话
