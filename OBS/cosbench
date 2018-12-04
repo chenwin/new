@@ -14,6 +14,7 @@ EOF
 如果出现错误，请检查/etc/profile文件。
 
 压缩包里有说明文档：COSBenchUserGuide.pdf
+最新版本在https://github.com/intel-cloud/cosbench/releases下
 wget http://github.com/intel-cloud/cosbench/releases/download/v0.4.2.c4/0.4.2.c4.zip
 chmod +x *.sh
 #取消代理
