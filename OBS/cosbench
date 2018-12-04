@@ -39,6 +39,9 @@ sizes       表示对象大小
   <operation type="read" ratio="100" config="containers=r(1,32);objects=r(51,100);sizes=c(64)KB" />
 </work>
 
+config="cprefix=chen-az;containers=r(1,1)
+桶名为chen-az1
+上传的对象命名为myobjects<XXX>
 
 压测记录，在/0.4.2.c4/archive目录下。进程重启后，界面上不显示压测记录
 
