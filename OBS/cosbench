@@ -23,6 +23,7 @@ sh start-all.sh
 
 
 打开 http://ip:19088/controller/
+（安全组规则，添加TCP 19088端口即可。AWS的http默认端口是80，且不可修改。）
 点击“submit new workloads”
 报错：
 Note: cannot parse the xml configuration from , due to The markup in the document following the root element must be well-formed.!
