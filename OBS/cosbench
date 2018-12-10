@@ -33,8 +33,11 @@ curl http://127.0.0.1:19088/controller/index.html
 
 打开 http://ip:19088/controller/
 （安全组规则，添加TCP 19088端口即可。AWS的http默认端口是80，且不可修改。）
+准备好test_case.xml,点击“submit new workloads”
 
-点击“submit new workloads”
+AWS的AK、SK，在我的安全凭证里（您的安全凭证）
+https://help.bittitan.com/hc/en-us/articles/115008255268-How-do-I-find-my-AWS-Access-Key-and-Secret-Access-Key-
+
 报错：
 Note: cannot parse the xml configuration from , due to The markup in the document following the root element must be well-formed.!
 注意xml格式正确.
