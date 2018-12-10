@@ -62,6 +62,12 @@ oprefix表示对象名前缀，默认为myobjects_
 
 AWS使用失败，卡在无法创建桶这一步，手工创建后就好了。
 
+AWS配置走内网
+1.VPC->配置终端节点
+2.选择s3服务，选择vpc（VPC这里选择的是跟你EC2主机关联的vpc策略）
+3.
+
+
 判断网络走内网
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 yum install iftop -y
