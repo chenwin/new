@@ -44,7 +44,8 @@ sizes       表示对象大小
 </work>
 
 config="cprefix=chen-az;containers=r(1,1)
-桶名为chen-az1
+cprefix表示桶名前缀，如上桶名为chen-az1
+oprefix表示对象名前缀，默认为myobjects_
 上传的对象命名为myobjects<XXX>
 
 压测记录，在/0.4.2.c4/archive目录下。进程重启后，界面上不显示压测记录
