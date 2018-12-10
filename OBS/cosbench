@@ -1,3 +1,7 @@
+同样的工具，华为开源obscmdbench
+https://github.com/huaweicloud-obs/obscmdbench
+
+
 依赖JRE
 yum install java curl -y
 
