@@ -58,7 +58,8 @@ AWS使用失败，卡在无法创建桶这一步，手工创建后就好了。
 
 判断网络走内网
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-yum install iftop
+yum install iftop -y
+yum install bind-utils -y (nslookup)
 
 【get对象报错】
 Unable to verify integrity of data download. Client calculated content hash didn't match hash calculated by Amazon S3. The data may be corrupt.
