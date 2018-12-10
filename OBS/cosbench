@@ -1,6 +1,8 @@
 依赖JRE
 yum install java curl -y
 
+yum install zip unzip wget -y
+
 
 手工安装java（yum install java的话就不需要了）
 mkdir /usr/java; cp /home/jdk-6u45-linux-x64.bin /usr/java; chmod u+x /usr/java/jdk-6u45-linux-x64.bin; cd /usr/java/; ./jdk-6u45-linux-x64.bin;
