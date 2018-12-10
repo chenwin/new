@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<workload name="s3-elg" description="test for s3"> 
+  <storage type="s3" config="accesskey=AK;secretkey=SK;endpoint=http://s3-us-west-2.amazonaws.com;path_style_access=true"/>  
+  <workflow>
+    <workstage name="1-8KB-put">
+      <work type="prepare" workers="1" config="cprefix=chen-elg;containers=r(1,1);objects=r(1,10000);sizes=c(8)KB"/>
+    </workstage>
+    <workstage name="1-8KB-get">
+      <work name="main" workers="1" totalOps="10000"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(1,10000)"/>
+      </work>
+    </workstage>
+    <workstage name="1-64KB-put">
+      <work type="prepare" workers="1" config="cprefix=chen-elg;containers=r(1,1);objects=r(10001,20000);sizes=c(64)KB"/>
+    </workstage>
+    <workstage name="1-64KB-get">
+      <work name="main" workers="1" totalOps="10000"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(10001,20000)"/>
+      </work>
+    </workstage>
+    <workstage name="1-128KB-put">
+      <work type="prepare" workers="1" config="cprefix=chen-elg;containers=r(1,1);objects=r(20001,30000);sizes=c(128)KB"/>
+    </workstage>
+    <workstage name="1-128KB-get">
+      <work name="main" workers="1" totalOps="10000"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(20001,30000)"/>
+      </work>
+    </workstage>
+    <workstage name="1-4MB-put">
+      <work type="prepare" workers="1" config="cprefix=chen-elg;containers=r(1,1);objects=r(30001,40000);sizes=c(4)MB"/>
+    </workstage>
+    <workstage name="1-4MB-get">
+      <work name="main" workers="1" totalOps="10000"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(30001,40000)"/>
+      </work>
+    </workstage>
+    <workstage name="1-1GB-put">
+      <work type="prepare" workers="1" config="cprefix=chen-elg;containers=r(1,1);objects=r(40001,40010);sizes=c(1024)MB"/>
+    </workstage>
+    <workstage name="1-1GB-get">
+      <work name="main" workers="1" totalOps="10"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(40001,40010)"/>
+      </work>
+    </workstage>
+    <workstage name="10-8KB-put">
+      <work type="prepare" workers="10" config="cprefix=chen-elg;containers=r(1,1);objects=r(50001,60000);sizes=c(8)KB"/>
+    </workstage>
+    <workstage name="10-8KB-get">
+      <work name="main" workers="10" totalOps="10000"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(50001,60000)"/>
+      </work>
+    </workstage>
+    <workstage name="10-64KB-put">
+      <work type="prepare" workers="10" config="cprefix=chen-elg;containers=r(1,1);objects=r(60001,70000);sizes=c(64)KB"/>
+    </workstage>
+    <workstage name="10-64KB-get">
+      <work name="main" workers="10" totalOps="10000"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(60001,70000)"/>
+      </work>
+    </workstage>
+    <workstage name="10-128KB-put">
+      <work type="prepare" workers="10" config="cprefix=chen-elg;containers=r(1,1);objects=r(70001,80000);sizes=c(128)KB"/>
+    </workstage>
+    <workstage name="10-128KB-get">
+      <work name="main" workers="10" totalOps="10000"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(70001,80000)"/>
+      </work>
+    </workstage>
+    <workstage name="10-4MB-put">
+      <work type="prepare" workers="10" config="cprefix=chen-elg;containers=r(1,1);objects=r(81001,82000);sizes=c(4)MB"/>
+    </workstage>
+    <workstage name="10-4MB-get">
+      <work name="main" workers="10" totalOps="1000"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(81001,82000)"/>
+      </work>
+    </workstage>
+    <workstage name="100-8KB-put">
+      <work type="prepare" workers="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(82001,83000);sizes=c(8)KB"/>
+    </workstage>
+    <workstage name="100-8KB-get">
+      <work name="main" workers="100" totalOps="1000"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(82001,83000)"/>
+      </work>
+    </workstage>
+    <workstage name="100-64KB-put">
+      <work type="prepare" workers="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(83001,84000);sizes=c(64)KB"/>
+    </workstage>
+    <workstage name="100-64KB-get">
+      <work name="main" workers="100" totalOps="1000"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(83001,84000)"/>
+      </work>
+    </workstage>
+    <workstage name="100-128KB-put">
+      <work type="prepare" workers="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(85001,86000);sizes=c(128)KB"/>
+    </workstage>
+    <workstage name="100-128KB-get">
+      <work name="main" workers="100" totalOps="1000"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(85001,86000)"/>
+      </work>
+    </workstage>
+    <workstage name="100-4MB-put">
+      <work type="prepare" workers="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(86001,87000);sizes=c(4)MB"/>
+    </workstage>
+    <workstage name="100-4MB-get">
+      <work name="main" workers="100" totalOps="1000"> 
+        <operation type="read" ratio="100" config="cprefix=chen-elg;containers=r(1,1);objects=r(86001,87000)"/>
+      </work>
+    </workstage>
+  </workflow>
+</workload>
