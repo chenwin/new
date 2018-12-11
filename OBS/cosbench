@@ -73,6 +73,10 @@ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 yum install iftop -y
 yum install bind-utils -y (nslookup)
 
+参考（终端节点）
+http://blog.51cto.com/thedream/1893168
+https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/vpc-endpoints-s3.html
+
 【get对象报错】
 Unable to verify integrity of data download. Client calculated content hash didn't match hash calculated by Amazon S3. The data may be corrupt.
 
