@@ -321,7 +321,7 @@ ${__time(/1000,)函数不要用太多(中文注释也不要用太多)，导致�
     make install
 
 	配置对象存储的AK和SK
-	OHGCDIA4DV0UPBAWZQIX:cCXIWqAPGT3S6k53cSNEMA6rdJ1jtXbudb4QBYW5
+	AK:SK
 	echo 你的AK:你的SK > /etc/passwd-s3fs
 	chmod 600 /etc/passwd-s3fs
 
