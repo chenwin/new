@@ -1,0 +1,3 @@
+https://github.com/s3fs-fuse/s3fs-fuse
+mount方式
+适用于一次写入，多次读场景。
