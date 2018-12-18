@@ -87,6 +87,8 @@ start-all.sh 启动所有的cosbench processes.
 
 【添加多台driver】
 配置Control.conf
+/home/0.4.2.c4/conf/controller.conf下增加driver
+drivers =driver的总个数N
 [driver1]
 name = driver1
 url = http://*.11:18088/driver
@@ -94,6 +96,10 @@ url = http://*.11:18088/driver
 [driver2]
 name = driver2
 url = http://*.12:18088/driver
+
+[driverN]
+name = driverN
+url = http://192.168.10.116:18088/driver
 
 Driver.conf的配置
 如果要在不同机器启动dirver，需要分别运行start-driver.sh，并确保通信是否正常。
