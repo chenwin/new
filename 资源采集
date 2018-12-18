@@ -111,5 +111,12 @@ Valid type keywords are:
 最全面，用这个good
 dstat -cmsdnl -D vda -N eth0 --top-io --top-cpu --top-mem --disk-util --output ./200vod_server.csv
 
+==================================================================================================
 淘宝的监控工具monitor,tsar
 https://github.com/alibaba/tsar
+
+wget -O tsar.zip https://github.com/alibaba/tsar/archive/master.zip --no-check-certificate
+unzip tsar.zip
+cd tsar
+make
+make install
