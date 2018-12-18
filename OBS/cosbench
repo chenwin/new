@@ -89,6 +89,19 @@ start-all.sh 启动所有的cosbench processes.
 配置Control.conf
 /home/0.4.2.c4/conf/controller.conf下增加driver
 注意，drivers的数量一定要与[driver1]相同，否则服务可以启动，但是页面报错
+压测时，按提交的workloads里workers数/N，分发到N个work节点执行。
+
+例如workers="100"，则Driver的任务分布如下：
+1 - 10	
+11 - 20
+21 - 30
+31 - 40
+41 - 50
+51 - 60
+61 - 70
+71 - 80
+81 - 90
+
 drivers =driver的总个数N
 [driver1]
 name = driver1
