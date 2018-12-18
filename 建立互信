@@ -54,8 +54,10 @@ done
 
 =============
 for ip in `cat ips |grep -v ^# |awk '{print $1}'`;
-   do ssh $ip '命令';
+   do ssh $ip '命令' &;
 done
+
+无&顺序执行，有&并发执行。
 
 =================拷贝
 for ip in `cat ips |grep -v ^# |awk '{print $1}'`;
