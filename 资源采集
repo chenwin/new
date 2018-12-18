@@ -120,3 +120,5 @@ unzip tsar.zip
 cd tsar
 make
 make install
+
+tsar -l -i 1
