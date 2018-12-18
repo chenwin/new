@@ -58,6 +58,7 @@ for ip in `cat ips |grep -v ^# |awk '{print $1}'`;
 done
 
 无&顺序执行，有&并发执行。
+特别注意：在母机上下载好，再拷贝到其它机器。不要所有机器wget，费时还出问题。
 
 =================拷贝
 for ip in `cat ips |grep -v ^# |awk '{print $1}'`;
