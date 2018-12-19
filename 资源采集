@@ -123,3 +123,5 @@ make install
 
 tsar -l -i 1
 配置文件，/etc/tsar/tsar.conf，控制模块开关。
+output_file_path 采集到的数据默认保存到的文件（/var/log/tsar.data）
+参考https://www.cnblogs.com/zengkefu/p/5638763.html
