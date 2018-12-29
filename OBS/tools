@@ -1,3 +1,8 @@
 https://github.com/s3fs-fuse/s3fs-fuse
 mount方式
 适用于一次写入，多次读场景。
+
+
+安装gooyfs进行文件系统挂载对象存储，性能优于s3fs
+https://github.com/kahing/goofys
+https://bbs.huaweicloud.com/forum/thread-1037-1-1.html
