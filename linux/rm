@@ -1,0 +1,2 @@
+rm不支持exclude，可用用grep -v排除掉
+rm -rf `ls | grep -v 'test.sh'`
