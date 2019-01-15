@@ -9,3 +9,11 @@ sed -i -e '41 s/# //' -i -e '42 s/# //' /etc/inputrc
 
 只显示41行到42行
 sed -n '41,42p' /etc/inputrc
+
+注意必须用双引号,for循环中使用sed
+for i in `seq 10 20`
+do
+  cp test.js test$i.js
+  sed -i "s/Player/$i/g" test$i.js
+done
+
