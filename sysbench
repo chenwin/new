@@ -8,6 +8,7 @@ wget https://github.com/akopytov/sysbench/archive/1.0.zip
 make
 make install
 ln -s /usr/local/sysbench/bin/sysbench /usr/bin/sysbench
+sysbench memory --memory-block-size=8k --memory-total-size=16G run
 
 #https://help.aliyun.com/document_detail/35264.html?spm=5176.doc53632.3.2.RzuA15  阿里云 云数据库 RDS 版 > 性能白皮书 
 cd /home
