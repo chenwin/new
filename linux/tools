@@ -38,7 +38,8 @@ cd rt-tests
 git checkout stable/v1.0
 make all
 make install
-make cyclictest 
+make cyclictest
+cyclictest -D 20s -q
 ========================================================================================================
 netserver(bindwith)
 
