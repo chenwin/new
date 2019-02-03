@@ -26,6 +26,17 @@ https://software.intel.com/en-us/articles/intelr-memory-latency-checker
 ./mlc --latency_matrix -r -e
 
 https://software.intel.com/system/files/managed/40/f3/mlc_v3.6.tgz
+
+实时性能测试
+Cyclictest
+
+yum install numactl-devel
+git clone git://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git
+cd rt-tests
+git checkout stable/v1.0
+make all
+make install
+make cyclictest 
 ========================================================================================================
 netserver(bindwith)
 
