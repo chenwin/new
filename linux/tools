@@ -19,6 +19,13 @@ ln -s /home/stream /usr/local/bin/stream
 stream | tee file_path
 
 ========================================================================================================
+内存时延
+mlc
+https://software.intel.com/en-us/articles/intelr-memory-latency-checker
+
+./mlc --latency_matrix -r -e
+
+========================================================================================================
 netserver(bindwith)
 
 wget https://codeload.github.com/HewlettPackard/netperf/tar.gz/netperf-2.7.0 -O /home/netperf-netperf-2.7.0.tar.gz
