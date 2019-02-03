@@ -29,6 +29,8 @@ https://software.intel.com/system/files/managed/40/f3/mlc_v3.6.tgz
 
 实时性能测试
 Cyclictest
+版本选择下载地址
+https://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git
 
 yum install numactl-devel
 git clone git://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git
