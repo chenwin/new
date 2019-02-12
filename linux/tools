@@ -41,6 +41,8 @@ make all
 make install
 make cyclictest
 cyclictest -D 20s -q
+
+cyclictest -I 1000 -p 99 -l 10000 -t 1 -h 30 -m -a 1
 ========================================================================================================
 netserver(bindwith)
 
