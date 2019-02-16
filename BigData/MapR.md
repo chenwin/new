@@ -61,7 +61,12 @@ pre-install/iozone -I -r 1M -s 4G -k 10 -+n -i 0 -i 1 -i 2 -f /dev/sdb
 <h2 id="4.1">iperf带宽</h2>
 
     ./iperf -s
+    -s run in server mode
+    
     iperf -c 192.168.0.106 -t 30 -P1
+    -c run in client mode, connecting to <host>
+    -t time in seconds to transmit for
+    -P number of parallel client threads to run
 
 numa方式
 
