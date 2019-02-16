@@ -18,6 +18,10 @@ Benchmark Summary
 
   Geekbench Score            3307  12085
 
+-n
+--no-upload            do not upload results to the Geekbench Browser
+
+Upload results to the Geekbench Browser? [Y/n]n
 
 ========================================================================================================
 stream
