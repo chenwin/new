@@ -6,8 +6,11 @@
    * [rpctest传输速率](#4.2)
 * [ClusterShell集群管理](#5)
 <h2 id="1">安装MapRPS</h2>
+
     yum install wget -y
+    
     wget https://github.com/MapRPS/cluster-validation/archive/master.zip
+    
     unzip master.zip
 
 <h2 id="2">测试内存</h2>
