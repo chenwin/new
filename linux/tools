@@ -10,6 +10,15 @@ ln -s /home/dist/Geekbench-3.4.2-Linux/geekbench_x86_64 /usr/local/bin/geekbench
 geekbench_x86_64 -r lhcici521@163.com qpp6g-kq4el-bo72w-mdngp-2kcvx-eu2uq-gjrkp-l5q7r-qi36y
 geekbench_x86_64 -n | tee file_path
 
+结果参考
+Benchmark Summary
+  Integer Score              3609  14274
+  Floating Point Score       3412  13494
+  Memory Score               2493   4892
+
+  Geekbench Score            3307  12085
+
+
 ========================================================================================================
 stream
 wget http://www.cs.virginia.edu/stream/FTP/Code/stream.c
