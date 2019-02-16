@@ -15,6 +15,8 @@
 
 <h2 id="2">测试内存</h2>
 
+cd cluster-validation-master/pre-install/
+
 只关注Triad的结果
 
     for i in `seq 1 10`
