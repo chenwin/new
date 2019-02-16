@@ -25,6 +25,10 @@ cd cluster-validation-master/pre-install/
       sh memory-test.sh  | tee ./result/memory-test$i.log
     done
 
+./memory-test.sh | grep -e ^Func -e ^Triad
+Function      Rate (MB/s)   Avg time     Min time     Max time
+Triad:      24182.5756       0.0803       0.0794       0.0822
+
 内存时延
 
     ./lat_mem_rd 1 16
