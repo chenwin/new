@@ -50,6 +50,9 @@ Triad:      24182.5756       0.0803       0.0794       0.0822
 
 pre-install/iozone -I -r 1M -s 4G -k 10 -+n -i 0 -i 1 -i 2 -f /dev/sdb
 
+======================================
+https://github.com/bentu86/diskbench
+d2脚本在examples（本地SATA用d2）
 
 <h2 id="4">测试网络</h2>
 
