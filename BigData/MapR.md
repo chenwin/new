@@ -85,6 +85,7 @@ numa方式
 
     ./rpctest -server
     ./rpctest -client -b 32 5000 IP
+    注意：结果中mb/s,就是MB/s,因此需要*8
 
 <h2 id="5">ClusterShell集群管理</h2>
 
