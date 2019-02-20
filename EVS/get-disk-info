@@ -1,0 +1,3 @@
+仅能获取物理磁盘信息
+yum install smartmontools
+smartctl -a /dev/vda1
