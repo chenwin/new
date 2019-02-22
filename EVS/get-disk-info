@@ -6,6 +6,11 @@ smartctl -a /dev/vda
 
 2）组raid情形
 查看raid信息及raid组成磁盘信息, 获取<Device Id>: xxx
+
+官网获取megacli工具
+https://www.broadcom.com/site-search?q=megacli
+https://docs.broadcom.com/docs-and-downloads/raid-controllers/raid-controllers-common-files/8-04-07_MegaCLI.zip
+
 /opt/MegaRAID/MegaCli/MegaCli64 -LdPdInfo -aAL
 smartctl -a -d megaraid,<Device Id> /dev/sda
 
