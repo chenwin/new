@@ -1,3 +1,12 @@
 仅能获取物理磁盘信息
 yum install smartmontools
-smartctl -a /dev/vda1
+
+1）未组raid情形
+smartctl -a /dev/vda
+
+2）组raid情形
+查看raid信息及raid组成磁盘信息, 获取<Device Id>: xxx
+/opt/MegaRAID/MegaCli/MegaCli64 -LdPdInfo -aAL
+smartctl -a -d megaraid,<Device Id> /dev/sda
+
+
