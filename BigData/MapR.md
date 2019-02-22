@@ -52,6 +52,7 @@ pre-install/iozone -I -r 1M -s 4G -k 10 -+n -i 0 -i 1 -i 2 -f /dev/sdb
 
 iozopts="-I -r 1M -s ${size}G -k 10 -+n -i 0 -i 1 -i 2"
 
+ -k #   Use  POSIX async I/O (no bcopy) with # async operations.
 ======================================
 
 https://github.com/bentu86/diskbench
