@@ -4,6 +4,8 @@ mkfs.ext3 /dev/vdb1
 快递格式化fast format
 mkfs.ext3 -T largefile /dev/sdb
 
+echo -e "y\n" | mkfs.ext4 -T largefile -n /dev/sdb
+
 Linux 格式化和挂载数据盘 fdisk
 https://help.aliyun.com/document_detail/25426.html?spm=5176.doc25446.6.594.D3gPEm
 
