@@ -14,4 +14,8 @@ https://docs.broadcom.com/docs-and-downloads/raid-controllers/raid-controllers-c
 /opt/MegaRAID/MegaCli/MegaCli64 -LdPdInfo -aAL
 smartctl -a -d megaraid,<Device Id> /dev/sda
 
+open disk cache
+sdparm -p 0x8 /dev/sdb
+sdparm -p 0x8 --set=2:2:1=1 /dev/sdb -H
+
 
