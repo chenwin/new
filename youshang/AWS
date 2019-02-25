@@ -1,9 +1,13 @@
 ENA
 网络带宽配置ENA和选择“已启用 ENA: 是”的镜像
 
+确认开启命令：
 modinfo ena
+
 回显filename
+
 ethtool -i eth0
+
 回显driver: ena
 
 参考
