@@ -20,3 +20,7 @@ grep -rn hibench.masters.hostnames /home --exclude=*.py --exclude=*.pyc
 [    0.763421] microcode: CPU2 sig=0x50654, pf=0x1, revision=0x1
 [    0.763433] microcode: CPU3 sig=0x50654, pf=0x1, revision=0x1
 
+
+过滤包含A,B,C的结果，返回3项
+cat file |grep -E 'A|B|C'
+
