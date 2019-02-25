@@ -1,9 +1,22 @@
+ENA
 网络带宽配置ENA和选择“已启用 ENA: 是”的镜像
-在GuestOS输入modinfo ena来确认
 
-用户必须配置弹性网络适配器（ENA）， 这是 AWS 的下一代网络接口。依据 EC2 实例类型和大小，使用 ENA 的客户将会获得更高的吞吐量和更低的延迟。以下是预期效果:
+modinfo ena
+回显filename
+ethtool -i eth0
+回显driver: ena
+
+参考
+https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/enhanced-networking-ena.html
+
+用户必须配置弹性网络适配器（ENA）， 这是 AWS 的下一代网络接口。
+依据 EC2 实例类型和大小，使用 ENA 的客户将会获得更高的吞吐量和更低的延迟。
+
+以下是预期效果:
 
 在 EC2 和 Amazon Simple Storage Service （S3）之间的流量传输速度高达 25 Gbps，提高了 5 倍。
+
 在相同或不同可用区域内的 EC2 实例之间的单流通信（点对点）速度可达 5 Gbps，在多流通信（跨多个连接）情况下最多可达 25 Gbps。
+
 放置在集群组内的 EC2 实例之间的单流通信速度最多可达 10 Gbps，多流通信速度可增加到 25 Gbps。
-注意，一些较新的实例类型自带内置的 ENA 适配器，而对于使用其他实例类型的客户来说就需要对他们的实例进行更新了。为了验证实例是否启用了 ENA，并设置了 enaSupport 属性，可以在安装了Windows AWS 工具或AWS CLI的实例上运行命令 modinfo ENA，便可显示相关信息。
+
