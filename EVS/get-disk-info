@@ -17,5 +17,7 @@ smartctl -a -d megaraid,<Device Id> /dev/sda
 open disk cache
 sdparm -p 0x8 /dev/sdb
 sdparm -p 0x8 --set=2:2:1=1 /dev/sdb -H
+也可参考
+https://blog.csdn.net/u013000139/article/details/50371468
 
 
