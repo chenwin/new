@@ -10,6 +10,9 @@ ethtool -i eth0
 
 回显driver: ena
 
+yum update
+reboot
+
 参考
 https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/enhanced-networking-ena.html
 
