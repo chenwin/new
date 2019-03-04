@@ -1,0 +1,12 @@
+tmux是terminal multiplexer的缩写，也就是终端复用器的意思，就是能把一个shell分成好几个shell 啦，
+当然我们要用到的功能是，如果我们在tmux里面打开一个进程之后，还可以detach下来，而这个shell和他的子进程都不会被销毁，太棒了
+
+具体步骤是这样的
+
+进入tmux，敲了tmux回车就好了
+敲上你启动服务器的命令
+按Ctrl+b，松开两个键再按d（detach的意思）
+如果你想把服务其关掉的话
+
+敲上tmux a（attach的意思）
+你又回到了Minecraft服务器的后台了，这时候按Ctrl+c就好了
