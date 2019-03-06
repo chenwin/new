@@ -82,6 +82,8 @@ d2脚本在examples（本地SATA用d2）
     -c run in client mode, connecting to <host>
     -t time in seconds to transmit for
     -P number of parallel client threads to run
+P1 单流-1条流
+P4 多流-4条流
 
 numa方式
 
