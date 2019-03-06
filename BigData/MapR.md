@@ -51,7 +51,7 @@ Triad:      24182.5756       0.0803       0.0794       0.0822
 pre-install/iozone -I -r 1M -s 4G -k 10 -+n -i 0 -i 1 -i 2 -f /dev/sdb
 
 iozopts="-I -r 1M -s ${size}G -k 10 -+n -i 0 -i 1 -i 2"
-
+1M修改为15M，测试结果最好（随机读能到200MB/s）
 
 -r record_size_Kb
 例如512k
