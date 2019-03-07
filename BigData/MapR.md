@@ -69,6 +69,8 @@ https://github.com/bentu86/diskbench
 
 d2脚本在examples（本地SATA用d2）
 
+    lsblk -pd | grep 100G | awk '{print $1}' > disks.txt
+
 <h2 id="4">测试网络</h2>
 
 建立互信
