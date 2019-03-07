@@ -57,7 +57,10 @@ iozopts="-I -r 1M -s ${size}G -k 10 -+n -i 0 -i 1 -i 2"
 例如512k
  -k #   Use  POSIX async I/O (no bcopy) with # async operations.
  
-写死unset盘，函数倒数第三行
+ iozone参数详解
+ https://baike.baidu.com/item/iozone
+ 
+写死unset盘，disk-test.sh中find_unused_disks函数倒数第三行插入
 disklist="/dev/sdb /dev/sdz"
 
 ======================================
