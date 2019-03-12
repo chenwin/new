@@ -27,3 +27,5 @@ grep -rn 'Z_SYNC_FLUSH' / --include=*.js --include=*.h
 过滤包含A,B,C的结果，返回3项
 cat file |grep -E 'A|B|C'
 
+查找以physical开头的
+grep '^physical' /proc/cpuinfo
