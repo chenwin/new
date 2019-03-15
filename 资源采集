@@ -1,5 +1,7 @@
 yum install sysstat
 # vi res.sh
+cat /proc/cmdline > cmdline.info
+cat /proc/cpuinfo |grep flags |uniq > cpu-flag.info
 time=$1
 date1=`date +"%Y-%m-%d"`
 #windows not support :
