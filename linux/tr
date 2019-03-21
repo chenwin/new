@@ -13,6 +13,9 @@ hello world
 /dev/sde
 
 # cat disk.txt |tr '\n' ' '
-/dev/sdb /dev/sdc /dev/sdd /dev/sde 
+/dev/sdb /dev/sdc /dev/sdd /dev/sde
+
+按key=value显示内核启动参数
+tr ' ' '\n' < /proc/cmdline
 
 
