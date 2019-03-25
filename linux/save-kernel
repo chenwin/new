@@ -1,0 +1,18 @@
+#!/bin/sh
+save_sys_para(){
+    echo $1=$(cat "/proc/sys/"$(echo  $1 | sed 's/\./\//g'))
+}
+
+save_para(){
+    echo $1=$(cat $1)
+}
+
+while read line
+do
+    save_sys_para $line
+done < kernel.para
+
+==============================================================
+kernel.para文件如下
+fs.file-max
+fs.file-nr
