@@ -1,0 +1,2 @@
+强制myserver CPU运行在node1上，且内存分配在node1上
+numactl --membind 1 --cpunodebind 1 --localalloc myserver
