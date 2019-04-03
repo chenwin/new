@@ -43,12 +43,16 @@ Note: cannot parse the xml configuration from , due to The markup in the documen
 注意xml格式正确.
 配置xml文件说明：
 workers表示并发数，totalOps表示总的操作数，driver为不同的压力机器
-c(number)   常量
-u(min, max) 范围随机选取
-r(min,max)  范围顺序选取
-containers  表示桶数
-objects     表示对象数
-sizes       表示对象大小
+c(number)        常量
+u(min, max)      范围随机选取
+r(min,max)       范围顺序选取
+containers       桶数
+objects          对象个数
+sizes            对象大小
+LongConnection   长短链接。取值true/false
+interval         表示每次图形采样点周期，默认5秒。可提高精度修改为1秒
+http/https       endpoint=直接写https或http即可
+
 <work name="main" workers="8" totalOps="1600">
   <operation type="read" ratio="100" config="containers=r(1,32);objects=r(51,100);sizes=c(64)KB" />
 </work>
