@@ -10,6 +10,8 @@ CPUidle governor: menu
 或（推荐）
 yum install hwloc
 lstopo-no-graphics -.txt
+或（推荐）
+python cpu_layout.py
 
 redhat调优指南
 https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/performance_tuning_guide/sect-red_hat_enterprise_linux-performance_tuning_guide-performance_monitoring_tools-turbostat
