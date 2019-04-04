@@ -25,3 +25,12 @@ systemctl restart jenkins
 
 调整完毕。
 ======================================================================================================================
+
+解决空间占满问题。搜索构建job目录，删除10天以前的构建
+#!/bin/bash
+dir=find /usr/lib/jenkins/jobs/ -name builds
+for i in $dir
+do
+cd $i
+find ./ -type d -mtime +10 | xargs rm -rf
+done
