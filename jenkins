@@ -1,0 +1,6 @@
+查看包含隐藏文件
+du -sh .[!.]* * | sort -hr
+
+默认路径/var/lib/jenkins
+配置文件/etc/sysconfig/jenkins，查找JENKINS_HOME
+同步修改/etc/passwd里jenkins路径
