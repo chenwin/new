@@ -7,6 +7,9 @@ CPUidle governor: menu
 
 查看CPU拓扑
 # turbostat
+或（推荐）
+yum install hwloc
+lstopo-no-graphics -.txt
 
 redhat调优指南
 https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/performance_tuning_guide/sect-red_hat_enterprise_linux-performance_tuning_guide-performance_monitoring_tools-turbostat
