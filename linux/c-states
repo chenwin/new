@@ -1,7 +1,12 @@
-查看命令
-cpupower idle-info
+查看当前系统对 C-states 支持的情况，可以安装 cpupowerutils 这个包:
+# cpupower idle-info
+CPUidle driver: intel_idle
+CPUidle governor: menu
 
-turbostat
+# cpupower frequency-info
+
+查看CPU拓扑
+# turbostat
 
 redhat调优指南
 https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/performance_tuning_guide/sect-red_hat_enterprise_linux-performance_tuning_guide-performance_monitoring_tools-turbostat
