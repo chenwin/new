@@ -1,6 +1,27 @@
+CI自动构建工具
+
 查看包含隐藏文件
 du -sh .[!.]* * | sort -hr
 
 默认路径/var/lib/jenkins
-配置文件/etc/sysconfig/jenkins，查找JENKINS_HOME
-同步修改/etc/passwd里jenkins路径
+
+
+调整路径到/home/，步骤如下：
+cp -r /var/lib/jenkins /home/
+
+chown -R jenkins.jenkins /home/jenkins
+
+更改/etc/init.d/jenkins的jenkins目录
+DAEMON_ARGS="--name=$NAME --inherit --env=JENKINS_HOME=/home/jenkins --output=$JENKINS_LOG --pidfile=$PIDFILE"
+
+修改/etc/sysconfig/jenkins
+编辑文件中的JENKINS_HOME，JENKINS_HOME改成="/home/jenkins"
+
+修改/etc/passwd中的jenkins(如果jenkin用户先建的话不用改这个)
+把其中的Server:/var/lib/jenkins 改成 /home/jenkins
+
+重启jenkins
+systemctl restart jenkins
+
+调整完毕。
+======================================================================================================================
