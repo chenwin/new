@@ -140,6 +140,11 @@ done
 iperf(PPS)
 wget https://github.com/esnet/iperf/archive/3.3.tar.gz -O /home/iperf3.3.tar.gz
 tar -zxvf /home/iperf3.3.tar.gz -C /home
+cd iperf-3.3
+./configure
+make
+make install
+
 or
 yum install iperf3
 
