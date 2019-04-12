@@ -1,0 +1,9 @@
+PerfKitBenchmarker是Google云平台开源出来的一个性能benchmark测试工具（集），它包含了各种各样的测试工具/方法（如：bonnie、unixbench、speccpu等）
+多达20多种，支持GCE、AWS、Azure、DigitalOcean、Rackspace等国外的几大云提供商（2016年update:也支持阿里云了 ）。
+
+包括：bonnie++、coremark、fio、iperf、netperf、ping、speccpu2006、sysbench、unixbench等
+
+https://github.com/GoogleCloudPlatform/PerfKitBenchmarker
+
+Google还提供了一个Dashboard和性能分析的工具——PerfKitExplorer，可以用来配合PerfKitBenchmarker一起使用。项目地址在：
+https://github.com/GoogleCloudPlatform/PerfKitExplorer
