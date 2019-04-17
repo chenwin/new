@@ -47,10 +47,10 @@ Cyclictest
 版本选择下载地址
 https://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git
 
-yum install numactl-devel
+yum install numactl-devel gcc git -y
 git clone git://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git
 wget https://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git/snapshot/rt-tests-1.3.tar.gz
-cd rt-tests
+cd rt-tests-1.3
 git checkout stable/v1.0
 make all
 make install
@@ -58,6 +58,13 @@ make cyclictest
 cyclictest -D 20s -q
 
 cyclictest -I 1000 -p 99 -l 10000 -t 1 -h 30 -m -a 1
+========================================================================================================
+wget http://soft.laozuo.org/scripts/UnixBench5.1.3.tgz
+tar xf UnixBench5.1.3.tgz
+cd UnixBench
+make
+./Run
+
 ========================================================================================================
 netserver(bindwith)
 
