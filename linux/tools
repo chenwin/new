@@ -71,6 +71,9 @@ http://www.sohu.com/a/248896408_100113911
 继续搜索，发现有大神也指出了这个问题，并在Github上分享了Pipe-based Context Switching的补丁。
 补丁地址：https://github.com/qcsuper/byte-unixbench
 补丁思路：把两个线程强制绑定到不同CPU上运行，确保了测试不受Guest OS中的调度算法及CPU负载均衡算法的影响。
+
+2个补丁
+https://yq.aliyun.com/articles/674732
 ========================================================================================================
 netserver(bindwith)
 
