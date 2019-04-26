@@ -117,14 +117,17 @@ Tcp的链接与断开比http请求的链接和断开，需要消耗掉更多的�
 
 <h2 id="4">4 安装并配置Discuz</h2>
 <h2 id="4.1">4.1 下载Discuz</h2>
+
     wget http://download.comsenz.com/DiscuzX/3.2/Discuz_X3.2_SC_UTF8.zip
     mkdir -p /home/Discuz
     unzip Discuz_X3.2_SC_UTF8.zip -d /home/Discuz
 <h2 id="4.2">4.2 安装Discuz</h2>
+
     cp -r /home/Discuz/upload/* /var/www/html/
     chmod -R 777 /var/www/html
     service httpd restart
 <h2 id="4.3">4.3 配置Discuz</h2>
+
     管理员配置页面
     http://<IP 地址>/install
     
