@@ -11,6 +11,7 @@ http://blog.csdn.net/dreamstone_xiaoqw/article/details/77745363
 
 <h2 id="1">1 安装mysql</h2>
 <h2 id="1.1">1.1 安装mysql版本5.6.38</h2>
+
     # wget https://repo.mysql.com/mysql-community-release-el7-7.noarch.rpm
     # rpm -ivh mysql-community-release-el7-7.noarch.rpm (或者yum localinstall安装)
     # yum install mysql-community-server
