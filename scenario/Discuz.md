@@ -27,6 +27,7 @@ http://blog.csdn.net/dreamstone_xiaoqw/article/details/77745363
     mysql -u root -p  --socket=/mnt/mysql/mysql.sock
 
 <h2 id="1.2">1.2 修改mysql数据库路径</h2>
+
     # chown mysql:mysql /mnt/vdb1/mysql/
     # /usr/bin/mysql_install_db --user=mysql --basedir=/usr/ --datadir=/mnt/vdb1/mysql/
     或者
@@ -56,7 +57,8 @@ http://blog.csdn.net/dreamstone_xiaoqw/article/details/77745363
 [mysql压力测试工具tpcc-mysql安装测试使用](http://blog.csdn.net/laiyijian/article/details/70332409)
 
 <h2 id="1.3">1.3 使用内网，开启远程</h2>
-默认配置模板cat /usr/share/mysql/my-default.cnf
+
+    默认配置模板cat /usr/share/mysql/my-default.cnf
     # vi /etc/my.cnf
     port=3306
     bind-address=192.168.0.193
@@ -70,6 +72,7 @@ http://blog.csdn.net/dreamstone_xiaoqw/article/details/77745363
     mysql>FLUSH PRIVILEGES;
 
 <h2 id="1.4">1.4 卸载mysql</h2>
+
     # rpm -qa | grep -i mysql
     php-mysql-5.4.16-42.el7.x86_64
     mysql-community-client-5.6.38-2.el7.x86_64
@@ -80,6 +83,7 @@ http://blog.csdn.net/dreamstone_xiaoqw/article/details/77745363
     # rm -rf /usr/lib64/mysql
 
 <h2 id="2">2 安装Apache组件</h2>
+
     yum install httpd -y
     service httpd start
     chkconfig httpd on
