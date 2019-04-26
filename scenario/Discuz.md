@@ -108,6 +108,7 @@ Tcp的链接与断开比http请求的链接和断开，需要消耗掉更多的�
 
     ```cpp,monokai(设置背景黑色，)
 <table><tr><td bgcolor=#FFFFFF>
+	
     yum install php php-fpm php-mysql -y
     service php-fpm start
     netstat -nlpt | grep php-fpm
