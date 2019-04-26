@@ -236,6 +236,7 @@ vi /home/upload/source/class/forum/forum_upload.php
 
 
 <h2 id="4.6.5">4.6.5 清理用户</h2>
+
     mysql -u root -p
     show databases;
     use ultrax;
@@ -266,6 +267,7 @@ vi /home/upload/source/class/forum/forum_upload.php
 控制界面 » 工具 » 更新缓存
 
 <h2 id="4.6.6">4.6.6 清理帖子</h2>
+
     清理所有帖子
     DELETE FROM `pre_forum_post` WHERE `pid` not in(-1);
     DELETE FROM `pre_forum_thread` WHERE `tid` not in(-1);
@@ -472,3 +474,17 @@ ${__urlencode('$download-aid'))}
 
 [Discuz! 交流与讨论](http://www.discuz.net/forum.php?gid=1)
 
+Access denied for user 'root'@'localhost' (using password: YES)
+
+access denied的原因有如下可能：
+1）mysql的服务器停止
+2）用户的端口号或者IP导致  
+3）mysql的配置文件错误----my.ini等文件
+4）root用户的密码错误
+
+using password的原因有如下可能：
+1)错误的密码
+
+vi /etc/my.cnf
+在[mysqld]后添加skip-grant-tables（使用 set password for设置密码无效，且此后登录无需键入密码）
+systemctl restart mysqld.service
