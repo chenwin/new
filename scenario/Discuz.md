@@ -16,6 +16,7 @@ http://blog.csdn.net/dreamstone_xiaoqw/article/details/77745363
     rpm -ivh mysql-community-release-el7-7.noarch.rpm
     yum install mysql-community-server -y
     service mysqld start
+    chkconfig mysqld on
      (rpm -ivh也可以使用yum localinstall安装)
     # chown -R mysql:mysql /var/lib/mysql (groupadd mysql;useradd -g mysql mysql)
 
