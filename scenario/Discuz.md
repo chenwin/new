@@ -27,9 +27,14 @@ http://blog.csdn.net/dreamstone_xiaoqw/article/details/77745363
     mysql -u root -p  --socket=/mnt/mysql/mysql.sock
 
 <h2 id="1.2">1.2 修改mysql数据库路径</h2>
-
-    # chown mysql:mysql /mnt/vdb1/mysql/
-    # /usr/bin/mysql_install_db --user=mysql --basedir=/usr/ --datadir=/mnt/vdb1/mysql/
+    
+    echo -e "n\np\n1\n\n\nw\n" | fdisk /dev/vdb
+    mkfs.ext3 /dev/vdb1
+    mkdir -p /mnt/mysql
+    mount /dev/vdb1 /mnt/mysql
+    echo /dev/vdb1 '/mnt/mysql ext3    defaults    0  0' >> /etc/fstab
+    chown mysql:mysql /mnt/mysql/
+    /usr/bin/mysql_install_db --user=mysql --basedir=/usr/ --datadir=/mnt/mysql/
     或者
     # cp -pr /var/lib/mysql/ /mnt/vdb1/mysql/
     # vi /etc/my.cnf
