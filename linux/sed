@@ -1,6 +1,19 @@
 替换字符串
 sed -i 's/100.125.1.250/100.125.1.26/g' /etc/resolv.conf
 
+=======================================================================
+test-sed.txt中的内容如下：
+aaa/bbb/ccc/ddd/eee
+fff/ggg/ss
+我要将其中的“ccc/ddd”替换为“CCC/DDD”。那么Shell（Bash）脚本应该为：
+NEW_STRING="CCC/DDD"
+sed -i "s:ccc/ddd:${NEW_STRING}:" test-sed.txt
+
+其中：
+1、s后的冒号（:）是分隔符，而不是使用默认的反斜杠（/）。
+2、替换字符串是变量时，需要使用双引号。
+=======================================================================
+
 在13行加入service smokeping start
 sed -i '13a\service smokeping start' /etc/rc.local
 
