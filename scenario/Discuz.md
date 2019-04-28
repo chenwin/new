@@ -104,10 +104,11 @@ cat /etc/httpd/conf/httpd.conf |grep -v '#'
 
 默认值DocumentRoot "/var/www/html"（后面PHP用/var/www/html）
 
-修改Apache网站根目录/var/www/html
+修改Apache网站根目录/var/www/html为/mnt/html
 
     mkdir -p /mnt/html
     chmod -R 755 /mnt/html
+    service httpd restart
 https://blog.csdn.net/oyudabajiao/article/details/79777755
 
 默认开启长连接
