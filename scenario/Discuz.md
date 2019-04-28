@@ -35,11 +35,16 @@ http://blog.csdn.net/dreamstone_xiaoqw/article/details/77745363
     mount /dev/vdb1 /mnt/mysql
     echo /dev/vdb1 '/mnt/mysql ext4    defaults    0  0' >> /etc/fstab
     chown mysql:mysql /mnt/mysql/
-    /usr/bin/mysql_install_db --user=mysql --basedir=/usr/ --datadir=/mnt/mysql/
-    或者
+    /usr/bin/mysql_install_db --user=mysql --datadir=/mnt/mysql/
+    上面不需要指定--basedir=/usr/
+    
+    vi /etc/my.cnf
+    datadir=/mnt/mysql
+    
+    或者手工操作：
     # cp -pr /var/lib/mysql/ /mnt/vdb1/mysql/
     # vi /etc/my.cnf
-    # datadir=/var/lib/mysql 换成 datadir=/mnt/vdb1/mysql/
+    # datadir=/var/lib/mysql 换成 datadir=/mnt/mysql/
    
     修改数据库最大连接数量（参考http://blog.51cto.com/12927979/2047537）
     max_connections=1000
