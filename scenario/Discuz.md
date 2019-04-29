@@ -159,12 +159,14 @@ Tcp的链接与断开比http请求的链接和断开，需要消耗掉更多的�
     关键配置文件
     /var/www/html/config/config_global.php
 <h2 id="4.4">4.4 重装Discuz</h2>
+
     rm -rf /var/www/html/data/install.lock
     如果重装页面出不来，再拷贝一份
     cp /home/upload/install/index.php /var/www/html/install/
 
 <h2 id="4.5">4.5 Discuz自动化配置</h2>
 
+右上角可以直接输入配置关键字快速搜索
 <h2 id="4.5.1">4.5.1 关闭注册验证码(must)</h2>
     登陆管理界面后台，上面倒数第6个sheet选项页，"防灌水"->左边的“验证设置”->"验证码设置"
     “注册时启用验证码”
