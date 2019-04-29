@@ -162,7 +162,7 @@ Tcp的链接与断开比http请求的链接和断开，需要消耗掉更多的�
 
     rm -rf /var/www/html/data/install.lock
     如果重装页面出不来，再拷贝一份
-    cp /home/upload/install/index.php /var/www/html/install/
+    cp /home/Discuz/upload/install/index.php /var/www/html/install/
 
 <h2 id="4.5">4.5 Discuz自动化配置</h2>
 
