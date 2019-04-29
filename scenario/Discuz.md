@@ -186,6 +186,9 @@ Tcp的链接与断开比http请求的链接和断开，需要消耗掉更多的�
 
 <h2 id="4.5.5">4.5.5 ”密码错误次数过多(建议)</h2> 
 密码错误次数过多，请 15 分钟后重新登录
+修改source/function/function_member.php
+$return = (!$login || (TIMESTAMP - $login['lastupdate'] > 900)) ? 5 : max(0, 5 - $login['count'])
+将900秒（15分钟）修改为你想要的秒数即可，其中5代表尝试密码次数
 
 <h2 id="4.5.6">4.5.6 ”同IP注册限制(当IP被限制时才需要配置)</h2> 
 限时注册IP注册间隔限制(小时)：修改为0
