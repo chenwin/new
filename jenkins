@@ -34,3 +34,22 @@ do
 cd $i
 find ./ -type d -mtime +10 | xargs rm -rf
 done
+
+==================================================================================================================
+搭建jenkins实现自动化部署
+https://www.cnblogs.com/rslai/p/8135460.html
+
+Jenkins初始化配置
+https://www.cnblogs.com/zhuochong/p/10082372.html
+
+安装
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
+rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+yum install java git -y
+yum install jenkins -y
+service jenkins start
+
+登录
+http://192.168.3.231:8080
+
+必须安装git，否则Jenkins连接git时出现“Failed to connect to repository"
