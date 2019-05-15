@@ -1,2 +1,4 @@
 stat -c %a /etc/my.cnf
 以数字查看文件的权限
+/tmp的权限是1777，非常特殊
+chmod 1777 /tmp
