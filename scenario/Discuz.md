@@ -2,6 +2,10 @@ http://blog.csdn.net/dreamstone_xiaoqw/article/details/77745363
 
 * [1 安装mysql](#1)
 	* [1.1 安装mysql版本5.6.37](#1.1)
+	* [1.2 修改mysql数据库路径](#1.2)
+	* [1.3 使用内网](#1.3)
+	* [1.4 卸载mysql](#1.4)
+	* [1.5 常见问题解决](#1.5)
 * [2 安装Apache组件](#2)
 * [3 安装PHP](#3)
 * [4 安装并配置Discuz](#4)
@@ -93,6 +97,10 @@ http://blog.csdn.net/dreamstone_xiaoqw/article/details/77745363
     # chkconfig --del mysql
     # whereis mysql
     # rm -rf /usr/lib64/mysql
+    
+<h2 id="1.5">1.5 mysql常见问题解决</h2>
+
+https://opms.jcloud.com/archives/3203
 
 <h2 id="2">2 安装Apache组件</h2>
 
