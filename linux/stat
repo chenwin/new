@@ -1,0 +1,2 @@
+stat -c %a /etc/my.cnf
+以数字查看文件的权限
