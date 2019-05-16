@@ -102,6 +102,9 @@ http://blog.csdn.net/dreamstone_xiaoqw/article/details/77745363
 
 https://opms.jcloud.com/archives/3203
 
+更改mysql数据存放到数据盘
+https://blog.csdn.net/song_csdn1550/article/details/52222906
+
 <h2 id="2">2 安装Apache组件</h2>
 
     yum install httpd -y
