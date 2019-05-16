@@ -1,7 +1,11 @@
 http://blog.csdn.net/dreamstone_xiaoqw/article/details/77745363
 
 腾讯安装discuz指导文档
+
 https://cloud.tencent.com/document/product/213/8043
+
+LAMP一键安装
+https://github.com/teddysun/lamp
 
 * [1 安装mysql](#1)
 	* [1.1 安装mysql版本5.6.37](#1.1)
