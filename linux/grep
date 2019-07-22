@@ -1,10 +1,15 @@
 遍历/home下所有目录的文件，排除指定文件后缀
 grep -rn hibench.masters.hostnames /home --exclude=*.py --exclude=*.pyc
 
-查询多个条件
+查询多个条件，匹配多项
 grep -e 1358 -e java
 或者（-E是大写，匹配条件要加 引号）
 grep -E "1358|java"
+
+
+
+匹配多项。过滤包含A,B,C的结果，返回3项
+cat file |grep -E 'A|B|C'
 
 sort    从小到大
 sort -r 从大到小
@@ -38,9 +43,6 @@ grep -rn 'Z_SYNC_FLUSH' / --include=*.js --include=*.h
 [    0.763421] microcode: CPU2 sig=0x50654, pf=0x1, revision=0x1
 [    0.763433] microcode: CPU3 sig=0x50654, pf=0x1, revision=0x1
 
-
-过滤包含A,B,C的结果，返回3项
-cat file |grep -E 'A|B|C'
 
 查找以physical开头的
 grep '^physical' /proc/cpuinfo
