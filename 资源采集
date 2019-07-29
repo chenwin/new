@@ -32,7 +32,7 @@ do
     echo  "$load > $cpu "
     perf top > ./$path/perf-top.log &
     sleep 10
-	pkill -9 perf
+    pkill -9 perf
     #ps -ef |grep perf |awk '{print $2}' |xargs kill -9
     break
   fi
