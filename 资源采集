@@ -38,11 +38,17 @@ do
   fi
 done
 
+#元数据https://support.huaweicloud.com/usermanual-ecs/zh-cn_topic_0042400609.html
+#https://www.alibabacloud.com/help/zh/doc-detail/49122.htm
+#连接超时时间用--connect-timeout参数，数据传输的最大允许时间用-m参数,-s不显示进度
+#华为/openstack/latest/meta_data.json
+#华为meta-data/public-ipv4,阿里meta-data/eipv4
+curl --connect-timeout 3 -m 5 -s http://169.254.169.254/latest/meta-data/instance-type > hw-flavor.txt&
+curl --connect-timeout 3 -m 5 -s http://100.100.100.200/latest/meta-data/instance/instance-type > ali-flavor.txt&
 
 
 
-
-
+===================================================================================================================================
 不知道哪个CPU会高，用下面采集TOP4（如果要采集更多，修改-A 10为更大），存为一个单独文件。
 1.txt只是中间过程文件，2.txt才是最终结果
 每轮采集10组数据，采集seq里指定的5次，做成入参
