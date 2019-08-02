@@ -33,6 +33,8 @@ do
     perf top > ./$path/perf-top.log &
     sleep 10
     pkill -9 perf
+    perf record -F 99 -a -g -- sleep 60
+    perf script > out.perf
     #ps -ef |grep perf |awk '{print $2}' |xargs kill -9
     break
   fi
@@ -47,7 +49,9 @@ curl --connect-timeout 3 -m 5 -s http://169.254.169.254/latest/meta-data/instanc
 curl --connect-timeout 3 -m 5 -s http://100.100.100.200/latest/meta-data/instance/instance-type > ali-flavor.txt&
 
 
-
+处理out.perf
+./stackcollapse-perf.pl /home/out.perf > out.perf-folded
+./flamegraph.pl out.perf-folded > perf-kernel.svg
 ===================================================================================================================================
 不知道哪个CPU会高，用下面采集TOP4（如果要采集更多，修改-A 10为更大），存为一个单独文件。
 1.txt只是中间过程文件，2.txt才是最终结果
