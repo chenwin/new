@@ -37,7 +37,7 @@ go build && ./gohttpserver
 --delete                   enable delete support
 
 指定目录作为存放路径root,访问鉴权
-./gohttpserver --root=/mnt/test --title=xian --upload --auth-type http --auth-http username:password
+./gohttpserver --root=/mnt/test --title=xian --upload --auth-type http --auth-http <username>:<password>
 
 访问http://IP:8000/
 
