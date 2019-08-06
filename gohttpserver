@@ -1,3 +1,8 @@
+简单的下载功能（适用于小的文本文件）
+python -m SimpleHTTPServer 8080
+http://<IP>:8080/
+
+
 上传下载web服务器
 yum install go -y
 go get -v github.com/codeskyblue/gohttpserver
