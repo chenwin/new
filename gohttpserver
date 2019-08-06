@@ -5,7 +5,7 @@ go get -v github.com/codeskyblue/gohttpserver
 go env查看GOPATH
 以下GOPATH=/root/go
 
-echo 'export GOPATH=root/go' > /etc/profile
+echo 'export GOPATH=/root/go' > /etc/profile
 source /etc/profile
 
 国内使用go get安装golang 官方包可能会失败,错误如Get https://golang.org/x/net/html?或
