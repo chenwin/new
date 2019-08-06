@@ -1,0 +1,20 @@
+源代码
+https://patchwork.kernel.org/patch/10122703/
+
+下载内核对应的devel
+wget http://mirror.centos.org/altarch/7/updates/aarch64/Packages/kernel-devel-4.14.0-115.5.1.el7a.aarch64.rpm
+rpm -ivh kernel-devel-4.14.0-115.5.1.el7a.aarch64.rpm
+
+把Makefile和.c放到1个目录下，开始编译
+make
+insmod ipi_benchmark.ko
+dmesg
+
+[691568.268699] Dry-run:                         0,             201669 ns
+[691568.275926] Self-IPI:                  3377253,            7197545 ns
+[691570.667929] Normal IPI:             2348870026,         2391996010 ns
+[691571.256290] Broadcast IPI:                   0,          588335494 ns
+[691571.850798] Broadcast lock:                  0,          594485485 ns
+
+
+http://web.mit.edu/kolya/.f/root/net.mit.edu/sipb.mit.edu/contrib/linux/lib/cpumask.c:cpumask_any_but
