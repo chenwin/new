@@ -48,6 +48,8 @@ done
 curl --connect-timeout 3 -m 5 -s http://169.254.169.254/latest/meta-data/instance-type > hw-flavor.txt&
 curl --connect-timeout 3 -m 5 -s http://100.100.100.200/latest/meta-data/instance/instance-type > ali-flavor.txt&
 
+#最后可以简化log的大小
+grep ^top -A 20 top.txt > top-less.txt
 
 处理out.perf
 ./stackcollapse-perf.pl /home/out.perf > out.perf-folded
