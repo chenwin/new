@@ -1,0 +1,92 @@
+server端elasticsearch安装指导,依赖Java
+https://www.elastic.co/downloads/elasticsearch
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.3.2.zip
+bin/elasticsearch
+curl http://localhost:9200/
+
+#can not run elasticsearch as root
+groupadd elasticsearch
+useradd  elasticsearch -g elasticsearch -p elasticsearch
+chown -R elasticsearch:elasticsearch elasticsearch-6.3.2
+
+
+===================================================================================================================
+压测端esrally
+yum install git java 
+pip3 install esrally
+
+
+
+#fatal error: Python.h: No such file or directory
+yum -y install python34-devel
+
+#must be a git repository,官方文档
+https://esrally.readthedocs.io/en/1.0.0/
+
+#SystemSetupError: ("Your git version is [['git version 1.8.3.1']] but Rally requires at least git 1.9. Please update git
+git高级版本需要手工安装。
+参考-----CentOS 最新版本git的安装教程
+https://www.cnblogs.com/boxuan/articles/6434109.html
+
+依赖
+yum install crul curl-devel zlib-devel openssl-devel perl cpio expat-devel gettext-devel gcc perl-ExtUtils-MakeMaker
+
+wget https://www.kernel.org/pub/software/scm/git/git-1.9.4.tar.gz
+tar xzf git-1.9.4.tar.gz
+cd git-1.9.4
+autoconf
+./configure
+make
+make install
+echo "export PATH=$PATH:/usr/local/git/bin" >> /etc/bashrc
+source /etc/bashrc
+
+
+
+# Cannot race. ('Cannot download Elasticsearch distribution from [https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-6.0.0.tar.gz]. 
+Please check that the specified version [6.0.0] is correct.', None)
+esrally --distribution-version=6.3.2
+
+#SystemSetupError: ("Install a JDK with one of the versions [10, 9, 8] and point to it with one of ['JAVA10_HOME', 'JAVA9_HOME', 'JAVA8_HOME', 'JAVA_HOME'].", None)
+cat << EOF >> /etc/profile
+export JAVA_HOME=/usr/java/jdk1.6.0_45
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export PATH=$PATH:$JAVA_HOME/bin
+EOF
+
+====
+pip3
+yum install python34
+yum install python34-setuptools
+easy_install-3.4 pip
+
+
+
+压测
+esrally --distribution-version=6.3.2
+
+
+
+
+
+
+
+======================================================================================================================
+esrally --offline --load-driver-hosts=172.31.189.171,172.31.189.169,172.31.189.170,172.31.189.167,172.31.189.168 --
+track=geonames --pipeline=benchmark-only --targethosts=172.31.189.182:9200,172.31.189.181:9200,172.31.189.180:9200,172.31.189.179:9200,172.31.189.178:9200 --
+client-options="basic_auth_user:'elastic',basic_auth_password:'changeme'" --user-tag="version:i2_test_1100"
+
+
+esrally --offline --track=geonames --pipeline=benchmark-only --distribution-version=6.0.0 --track=tiny --challenge=append-fast-no-conflicts
+
+
+esrally --distribution-version=6.0.0 --track=geopoint --challenge=append-fast-with-conflicts
+
+
+深入理解
+https://www.cnblogs.com/dreamroute/p/8484457.html
+
+图文讲解（白话文）
+http://developer.51cto.com/art/201904/594615.htm
