@@ -20,7 +20,7 @@ vmstat -n -t -S M 1 $time > ./$path/vmstat.txt&
 top -H -p $pid -bd 1 -n 60 > ./$path/server-threads.txt&
 
 #简化top输出的大小
-sleep $time && grep ^top -A 20 top.txt > top-less.txt &
+sleep $time && grep ^top -A 20 ./$path/top.txt > ./$path/top-less.txt &
 
 cpus=`cat /proc/cpuinfo |grep "processor"|wc -l`
 cishu=echo "scale=0;$time/3;" | bc
