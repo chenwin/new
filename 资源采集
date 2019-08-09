@@ -18,6 +18,7 @@ mpstat -P ALL 1 $time > ./$path/mpstat.txt&
 iostat -xcmt 1 $time > ./$path/iostat.txt&
 vmstat -n -t -S M 1 $time > ./$path/vmstat.txt&
 top -H -p $pid -bd 1 -n 60 > ./$path/server-threads.txt&
+cat /proc/$pid/environ| tr '\000' '\n' > ./$path/server-environ.txt&
 
 #简化top输出的大小
 sleep $time && grep ^top -A 20 ./$path/top.txt > ./$path/top-less.txt &
@@ -37,8 +38,9 @@ do
     perf top > ./$path/perf-top.log &
     sleep 10
     pkill -9 perf
+    perf stat -a -- sleep 3 > ./$path/perf-stat.log &
     perf record -F 99 -a -g -- sleep 60
-    perf script > out.perf
+    perf script > ./$path/out.perf
     #ps -ef |grep perf |awk '{print $2}' |xargs kill -9
     break
   fi
