@@ -18,6 +18,7 @@ mpstat -P ALL 1 $time > ./$path/mpstat.txt&
 iostat -xcmt 1 $time > ./$path/iostat.txt&
 vmstat -n -t -S M 1 $time > ./$path/vmstat.txt&
 top -H -p $pid -bd 1 -n 60 > ./$path/server-threads.txt&
+#空字节('')分隔
 cat /proc/$pid/environ| tr '\000' '\n' > ./$path/server-environ.txt&
 
 #简化top输出的大小
@@ -60,6 +61,13 @@ curl --connect-timeout 3 -m 5 -s http://100.100.100.200/latest/meta-data/instanc
 处理out.perf
 ./stackcollapse-perf.pl /home/out.perf > out.perf-folded
 ./flamegraph.pl out.perf-folded > perf-kernel.svg
+
+insn per cycle(IPC)
+if IPC<1.0
+  NUMA，提升CPU缓存，减少内存IO
+if IPC>1.0
+  CPU火焰图，优化代码指令，更快的时钟频率(GHz)
+CPU比主内存快，当CPU 100%，瓶颈不一定是CPU，也可能是DRAM（等待内存）。
 ===================================================================================================================================
 不知道哪个CPU会高，用下面采集TOP4（如果要采集更多，修改-A 10为更大），存为一个单独文件。
 1.txt只是中间过程文件，2.txt才是最终结果
