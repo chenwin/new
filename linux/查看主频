@@ -1,0 +1,25 @@
+yum install cpufrequtils
+
+#cpufreq-set -c CPU号 -f 要设置频率
+#例
+cpufreq-set -c 0 -f 2.4GHz
+cpufreq-set -c 1 -f 2.4GHz
+cpufreq-set -c 2 -f 2.4GHz
+cpufreq-set -c 3 -f 2.4GHz
+cpufreq-set -c 4 -f 2.4GHz
+cpufreq-set -c 5 -f 2.4GHz
+cpufreq-set -c 6 -f 2.4GHz
+cpufreq-set -c 7 -f 2.4GHz
+#设置的频率不能超过CPU上限
+#如果是多核CPU每个编号都要设置一次
+#以上例子是八核CPU所以要输入八次，每个CPU编号都要输一次
+
+查看cpu类型、当前频率、支持频率、运行模式等
+cpufreq-info
+
+cpufreq-set -d 频率下限 
+cpufreq-set -u 频率上限
+cpufreq-set -g 调整运行模式
+
+参考
+https://sunpma.com/115.html
