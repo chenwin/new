@@ -49,6 +49,7 @@ done
 #连接超时时间用--connect-timeout参数，数据传输的最大允许时间用-m参数,-s不显示进度
 #华为/openstack/latest/meta_data.json
 #华为meta-data/public-ipv4,阿里meta-data/eipv4
+#route -n获取IP地址，如169.254.169.254或100.100.100.200
 curl --connect-timeout 3 -m 5 -s http://169.254.169.254/latest/meta-data/instance-type > hw-flavor.txt&
 curl --connect-timeout 3 -m 5 -s http://100.100.100.200/latest/meta-data/instance/instance-type > ali-flavor.txt&
 
