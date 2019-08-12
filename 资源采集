@@ -3,6 +3,7 @@
 
 #yum install sysstat perf -y
 #vi res.sh
+export LC_TIME=en_uk.utf8
 cat /proc/cmdline > ./$path/cmdline.info
 cat /proc/cpuinfo |grep flags |uniq > ./$path/cpu-flag.info
 time=$1
