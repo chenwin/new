@@ -1,4 +1,4 @@
-如果想用24小时制式，则sar和iostat前面增加LC_TIME=en_uk.utf8
+如果想用24小时制式，则sar、iostat和mpstat 前面增加LC_TIME=en_uk.utf8
 比如LC_TIME=en_uk.utf8 iostat -xcmt 1
 
 #yum install sysstat perf -y
