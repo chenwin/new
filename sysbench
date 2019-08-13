@@ -53,6 +53,9 @@ ulimit -n 1000000
 #max user processes
 ulimit -u 65535
 
+
+oltp.lua需要修改为环境上的真实路径(find), mysql-host、mysql-user和mysql-password根据实际情况填写。
+
 #准备数据
 sysbench --num-threads=100 --max-time=3600 --max-requests=999999999 \
          --test=/home/sysbench/sysbench/tests/db/oltp.lua --oltp-table-size=10000000 \
