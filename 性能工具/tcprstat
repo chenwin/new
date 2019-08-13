@@ -1,0 +1,43 @@
+tcprstat分析服务的响应速度利器
+
+安装tcprstat
+yum -y install bzr
+bzr branch lp:tcprstat
+cd ./tcprstat
+chmod +x bootstrap
+./bootstrap
+./configure
+yum install glibc-static bison yacc flex patch -y
+ln -sf /home/tcprstat/src/tcprstat /usr/bin/tcprstat
+
+
+
+tcprstat -p 3306 -t 1 -n 5 -l 192.168.52.250
+
+
+tcprstat -p 3306 -t 1 -n 5
+timestamp   count   max     min avg med  stddev  95_max  95_avg  95_std  99_max  99_avg  99_std
+1283261499  1870    559009  39  883 153  13306   1267    201     150     6792    323     685
+1283261500  1865    25704   29  578 142  2755    889     175     107     23630   333     1331
+1283261501  1887    26908   33  583 148  2761    714     176     94      23391   339     1340
+1283261502  2015    304965  35  624 151  7204    564     171     79      8615    237     507
+1283261503  1650    289087  35  462 146  7133    834     184     120     3565    244     358
+从上可知，查询的最大响应时间是559009（单位微妙），即0.559009秒
+
+
+也可以读取tcpdump的文件进行分析
+tcpdump -i eth0 -nn port 80  -w ./tcpdump.log 
+tcprstat -l 10.234.9.103 -t 2 -n 5 -r ./tcpdump.log 
+timestamp       count   max     min     avg     med     stddev  95_max  95_avg  95_std  99_max  99_avg  99_std
+1403180482      2       28017   26717   27367   28017   650     26717   26717   0       26717   26717   0
+1403180484      0       0       0       0       0       0       0       0       0
+
+
+注意：
+如果运行的时候提示 pcap: SIOCGIFFLAGS: bonding_masters: No such device。
+那说明没能自动提取服务器ip。需要使用-l参数手动指定。
+
+参考：
+https://yq.aliyun.com/articles/27293
+
+https://github.com/Lowercases/tcprstat
