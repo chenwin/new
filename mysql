@@ -19,13 +19,16 @@ chkconfig mysql on
 # mysql -u root -p
 
 修改数据库最大连接数量（参考http://blog.51cto.com/12927979/2047537）
-max_connections=1000
+echo "LimitNOFILE = 65535" >>  /usr/lib/systemd/system/mysqld.service
+systemctl  daemon-reload
+vim /etc/my.cnf　　　　// 添加max_connections = 期望值
+systemctl  restart  mysqld
+
 ulimit -n
 vi /usr/lib/systemd/system/mysqld.service,增加
 LimitNOFILE=65535
 LimitNPROC=65535
-# systemctl daemon-reload
-# systemctl restart mysql.service
+
 
 使用内网，开启远程
 # vi /etc/my.cnf
