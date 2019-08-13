@@ -21,7 +21,7 @@ chkconfig mysql on
 修改数据库最大连接数量（参考http://blog.51cto.com/12927979/2047537）
 echo "LimitNOFILE = 65535" >>  /usr/lib/systemd/system/mysqld.service
 systemctl  daemon-reload
-vim /etc/my.cnf　　　　// 添加max_connections = 期望值
+vim /etc/my.cnf　　　　// 添加max_connections = 期望值，max_user_connections = 期望值
 systemctl  restart  mysqld
 
 ulimit -n
