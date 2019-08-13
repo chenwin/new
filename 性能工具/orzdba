@@ -1,0 +1,18 @@
+git clone https://github.com/chenwin/orzdba
+./orzdba -lazy
+
+对于orzdba脚本，在160行修改root密码，才能运行orzdba脚本,修改后样子如下：
+
+my $MYSQL    = qq{mysql -s --skip-column-names -uroot -P$port -pLisx_new_123 };
+
+改成这样后，会出现mysql5.6的明文密码告警：Warning: Using a password on the command line interface can be insecure.我是如下解决的.
+
+在mysql的根目录新建隐藏文件,权限为400
+
+-bash-4.1$ cat .my.cnf
+[client]
+password=lisx123
+user=dbalisx
+
+修改orzdba脚本的第160行处
+my $MYSQL    = qq{mysql -s --skip-column-names -udbalisx -P$port -pLisx_new_123};
