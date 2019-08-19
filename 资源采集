@@ -43,7 +43,7 @@ do
     perf top > ./$path/perf-top.log &
     sleep 10
     pkill -9 perf
-    perf stat -a -- sleep 3 > ./$path/perf-stat.log &
+    perf stat -a -- sleep 3 > ./$path/perf-stat.log
     perf record -F 99 -a -g -- sleep 60
     perf script > ./$path/out.perf
     #ps -ef |grep perf |awk '{print $2}' |xargs kill -9
