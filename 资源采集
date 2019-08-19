@@ -29,7 +29,7 @@ cat /proc/$pid/environ| tr '\000' '\n' > ./$path/server-environ.txt&
 sleep $time && grep ^top -A 20 ./$path/top.txt > ./$path/top-less.txt &
 
 cpus=`cat /proc/cpuinfo |grep "processor"|wc -l`
-cishu=echo "scale=0;$time/3;" | bc
+cishu=`echo "scale=0;$time/3;" | bc`
 #for i in `seq 3600`
 for i in `seq $cishu`
 do
