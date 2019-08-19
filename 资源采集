@@ -38,6 +38,7 @@ do
   cpu=`echo "$cpus*0.75" | bc`
   if [[ `echo "$load < $cpu"|bc` -eq 1 ]] ; then
     #echo  "$load < $cpu "
+    :
   else
     echo  "$load > $cpu "
     perf top > ./$path/perf-top.log &
