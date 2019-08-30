@@ -4,6 +4,8 @@ yum install expect
 for ip in `cat ips |grep -v ^# |awk '{print $1}'`;do ssh $ip 'yum install -y sysstat';done
 
 注意命令中含有',整个命令需要用" "
+比如
+for ip in `cat ips |grep -v ^# |awk '{print $1}'`;do ssh $ip "grep BW= *.log |awk '{ print $4 }' |awk -F')' '{ print $1 }' &";done
 
 ==================================================================
 log_user 0
