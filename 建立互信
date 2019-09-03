@@ -3,6 +3,15 @@ yum install expect
 
 for ip in `cat ips |grep -v ^# |awk '{print $1}'`;do ssh $ip 'yum install -y sysstat';done
 
+
+从ips读取41行到50行，针对这10行操作；sleep 0.25刚好。不sleep，某些节点命令不会执行。
+for i in `sed -n '41,50p' ips`
+do
+  ssh $ip 'sh write-20m.sh 3600 &' &
+  sleep 0.25
+done
+
+
 注意命令中含有',整个命令需要用" "
 比如
 for ip in `cat ips |grep -v ^# |awk '{print $1}'`;do ssh $ip "grep BW= *.log |awk '{ print $4 }' |awk -F')' '{ print $1 }' &";done
