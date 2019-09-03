@@ -1,2 +1,7 @@
 去掉注释和空行
 cat /etc/sudoers |grep -v '#' |grep -v '^$'
+
+cat filename | tail -n 100 显示文件最后100行
+cat filename | head -n ...
+head(查看前几行)
+tail(查看末尾几行)
