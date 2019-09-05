@@ -1,0 +1,48 @@
+参考
+CLI概述good
+https://support.huaweicloud.com/devg-sdk/zh-cn_topic_0070637155.html
+
+CLI命令行使用指导
+https://bbs.huaweicloud.com/forum/forum.php?mod=viewthread&tid=1813&highlight=
+
+https://docs.openstack.org/mitaka/user-guide/common/cli_install_openstack_command_line_clients.html
+
+
+yum install python-devel python-pip -y
+pip install python-openstackclient
+
+pip install --upgrade pip --trusted-host mirrors.aliyun.com
+pip install --upgrade six --trusted-host mirrors.aliyun.com
+
+强制升级--ignore-installed ipaddress
+
+重置密码
+openstack --os-password PASSWORD server list
+
+nova list --limit 3
+
+neutron net-list            查询网络
+neutron security-group-list 查询安全组
+nova flavor-list            查询规格
+nova server-group-list      查询云服务器组
+nova keypair-list           查询密钥对
+glance image-list           查询镜像
+
+
+创建网络：
+neutron net-create test333           创建网络
+neutron subnet-create test333 10.108.100.0/24 --name test-subnet (CIDR要在VPC网段内，比如VPC网段为10.108.0.0/16，subnet网段可以为10.108.100.0/24)          在网络下创建子网
+neutron router-list       查询路由器，对应于console控制台页面的虚拟机私有云VPC
+neutron router-inte**ce-add bcc0e8c3-a734-4c54-b206-95e3cc94bf39(路由器uuid)  8ccd2559-e0e5-4866-b4f1-54e0946df8e8(子网uuid)      将子网添加到router上，这样才能与其他子网三层互通，才能绑定EIP，配置VPN隧道
+
+卷操作：
+cinder create 100 --name data-volume --volume-type SAS(SATA/SAS/SSD) --availability-zone cn-north-1a(可用区)   
+nova volume-attach 9d9025bd-fa5d-4bd7-9b39-6ddf0689c5be(server_uuid)  b4e08076-bb3a-4a63-ac1f-30fee7e64f99(volume_uuid)   挂载卷到虚拟机(注意：虚拟机ECS与卷EVS要在相同的AZ下)
+
+
+AZ=ru-northwest-2a
+cinder create 40 --name sys-volume --volume-type SAS --availability-zone $AZ --image 1e6727b0-25b9-47a9-93e5-501eb72c6f01
+cinder create 10 --name data-volume --volume-type SSD --availability-zone $AZ
+nova boot --flavor c3.large.2 --boot-volume sys-volid \          
+         --availability-zone $AZ \
+	 --nic net-id=cda08cb9-a8af-4e5f-b3cc
