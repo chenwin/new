@@ -24,6 +24,7 @@ nova list --status active
 
 关闭运行的虚拟机
 nova list --status active  | awk '/ACTIVE/{print $2}'  |xargs -n1 nova stop
+nova list --status SHUTOFF | awk '/SHUTOFF/{print $2}' |xargs -n1 nova start
 
 neutron net-list            查询网络
 neutron security-group-list 查询安全组
