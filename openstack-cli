@@ -20,6 +20,7 @@ pip install --upgrade six --trusted-host mirrors.aliyun.com
 openstack --os-password PASSWORD server list
 
 nova list --limit 3
+nova list --status active
 
 neutron net-list            查询网络
 neutron security-group-list 查询安全组
