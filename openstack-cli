@@ -22,6 +22,9 @@ openstack --os-password PASSWORD server list
 nova list --limit 3
 nova list --status active
 
+关闭运行的虚拟机
+nova list --status active  | awk '/ACTIVE/{print $2}'  |xargs -n1 nova stop
+
 neutron net-list            查询网络
 neutron security-group-list 查询安全组
 nova flavor-list            查询规格
