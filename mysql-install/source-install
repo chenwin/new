@@ -1,0 +1,15 @@
+
+wget https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-8.0/mysql-8.0.15-1.el7.x86_64.rpm-bundle.tar
+tar xvf mysql-8.0.15-1.el7.x86_64.rpm-bundle.tar
+yum install libaio ncurses-compat-libs perl numactl openssl-devel -y
+
+rpm -e --nodeps `rpm -qa | grep mariadb`
+
+
+rpm -ivh mysql-community-common-8.0.15-1.el7.x86_64.rpm
+rpm -ivh mysql-community-libs-8.0.15-1.el7.x86_64.rpm
+rpm -ivh mysql-community-client-8.0.15-1.el7.x86_64.rpm
+rpm -ivh mysql-community-server-8.0.15-1.el7.x86_64.rpm
+
+参考
+http://blog.itpub.net/31015730/viewspace-2152272/
