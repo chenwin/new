@@ -12,6 +12,9 @@ Linux iZ2zeit9l5fo5zg9pajbrdZ 3.10.0-693.2.2.el7.x86_64 #1 SMP Tue Sep 12 22:26:
 http://rpm.pbone.net/index.php3/stat/4/idpl/37924679/dir/scientific_linux_7/com/kernel-devel-3.10.0-693.el7.x86_64.rpm.html
 
 把Makefile和.c放到1个目录下，开始编译
+mv ipi_benchmark-x86.c ipi_benchmark.c
+mv ipi_benchmark-arm.c ipi_benchmark.c
+
 make
 insmod ipi_benchmark.ko
 dmesg
