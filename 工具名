@@ -1,0 +1,28 @@
+端口映射 IPOP
+代码格式化 coolformat
+代理 CCproxy
+远程执行pexec
+代码格式化（工程级） https://sourceforge.net/projects/astyle/
+AStyle.exe --style=ansi -s4 -S -N -L -m0 -M40 -p -D --convert-tabs %f
+
+
+
+
+
+代码检测
+fortify
+coverity
+
+WhatsUp是一款用于网络监控的软件，可以构建一张张网络拓扑图，实时监控各个网络设备的运行情况
+
+eNsp
+eNSP是一款由华为提供的免费的eNSP不仅可以模拟单台路由器和交换机的特性操作，还能够组成大规模网络进行实战演练。
+https://www.52pojie.cn/thread-886442-1-1.html
+
+
+APK提取图片资源
+https://blog.csdn.net/xiaokai1226/article/details/82467605
+
+
+PS3模拟器
+https://droidbull.com/ps3-emulator/#more-478
