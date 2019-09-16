@@ -11,5 +11,32 @@ rpm -ivh mysql-community-libs-8.0.15-1.el7.x86_64.rpm
 rpm -ivh mysql-community-client-8.0.15-1.el7.x86_64.rpm
 rpm -ivh mysql-community-server-8.0.15-1.el7.x86_64.rpm
 
+rpm -ivh mysql-community-common-8.0.15-1.el7.x86_64.rpm
+rpm -ivh mysql-community-libs-8.0.15-1.el7.x86_64.rpm
+rpm -ivh mysql-community-client-8.0.15-1.el7.x86_64.rpm
+rpm -ivh mysql-community-server-8.0.15-1.el7.x86_64.rpm
+
+systemctl start mysqld.service
+grep "password" /var/log/mysqld.log
+grep "password" /var/log/mysqld.log |awk -F':' '{print $4}'
+
+mysql -uroot -p"00oSn&9qUw-y"
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'CHen@1234';
+
+
+cp -r /var/lib/mysql/* /mnt/mysql/
+chown -R mysql:mysql /mnt/mysql/
+
+
+CREATE USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'CHen@1234';
+grant all on *.* to 'root'@'%';
+flush privileges;
+create database sbtest;
+
+show variables like 'log_bin';
+关闭logbin，/etc/my.cnf添加
+skip-log-bin
+
+
 参考
 http://blog.itpub.net/31015730/viewspace-2152272/
