@@ -3,6 +3,9 @@ wget https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-8.0/mysql-8.0.15
 tar xvf mysql-8.0.15-1.el7.x86_64.rpm-bundle.tar
 yum install libaio ncurses-compat-libs perl numactl openssl-devel -y
 
+wget https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-8.0/mysql-8.0.15-1.el7.aarch64.rpm-bundle.tar
+tar xvf mysql-8.0.15-1.el7.aarch64.rpm-bundle.tar
+
 rpm -e --nodeps `rpm -qa | grep mariadb`
 
 
