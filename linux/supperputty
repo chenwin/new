@@ -16,6 +16,15 @@ https://www.dell.com/support/article/cn/zh/cndhs1/how11710/%E5%A6%82%E4%BD%95%E4
 勾选Printable Output（可打印输出）
 根据需要更改输出文件的名称，然后浏览至首选的存储位置
 
+【屏幕锁定-防止滚动】
+切屏时或命令输出时常用。
+PuTTY : how to disable the EXTREMELY annoying "auto-scroll down" of the terminal window while trying to read past commands ? 
+- right click the title bar of the PuTTY session window and select "Change settings"
+- select the "Window" category
+- untick the "Reset scrollbar on display activity" option
+For more about PuTTY, read : http://doc.callmematthi.eu/TOC_software.html#PuTTY
+参考http://shaarli.callmematthi.eu/?ukskig
+
 【编辑会话】
 自动带用户名和密码登录
 Edit编辑会话
