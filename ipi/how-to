@@ -5,8 +5,8 @@ https://patchwork.kernel.org/patch/10122703/
 wget http://mirror.centos.org/altarch/7/updates/aarch64/Packages/kernel-devel-4.14.0-115.5.1.el7a.aarch64.rpm
 rpm -ivh kernel-devel-4.14.0-115.5.1.el7a.aarch64.rpm
 
-]# uname -a
-Linux iZ2zeit9l5fo5zg9pajbrdZ 3.10.0-693.2.2.el7.x86_64 #1 SMP Tue Sep 12 22:26:13 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
+]# uname -r
+3.10.0-693.2.2.el7.x86_64
 
 然后在http://rpm.pbone.net/index.php3搜索kernel-devel 3.10.0-693.2.2.el7.x86_64
 http://rpm.pbone.net/index.php3/stat/4/idpl/37924679/dir/scientific_linux_7/com/kernel-devel-3.10.0-693.el7.x86_64.rpm.html
@@ -19,6 +19,9 @@ mv ipi_benchmark-arm.c ipi_benchmark.c
 make
 insmod ipi_benchmark.ko
 dmesg
+
+make时如果报错，bulid路径找不到，则
+ln -s /usr/src/kernels/4.14.0-115.5.1.el7a.aarch64 build
 
 [691568.268699] Dry-run:                         0,             201669 ns
 [691568.275926] Self-IPI:                  3377253,            7197545 ns
