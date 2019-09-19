@@ -1,16 +1,19 @@
 源代码
 https://patchwork.kernel.org/patch/10122703/
 
-下载内核对应的devel
+下载内核对应的devel（uname -r查看内核版本）
 wget http://mirror.centos.org/altarch/7/updates/aarch64/Packages/kernel-devel-4.14.0-115.5.1.el7a.aarch64.rpm
 rpm -ivh kernel-devel-4.14.0-115.5.1.el7a.aarch64.rpm
 
-]# uname -r
-3.10.0-693.2.2.el7.x86_64
-
-然后在http://rpm.pbone.net/index.php3搜索kernel-devel 3.10.0-693.2.2.el7.x86_64
-http://rpm.pbone.net/index.php3/stat/4/idpl/37924679/dir/scientific_linux_7/com/kernel-devel-3.10.0-693.el7.x86_64.rpm.html
-http://rpm.pbone.net/index.php3/stat/4/idpl/38887199/dir/scientific_linux_7/com/kernel-devel-3.10.0-693.2.2.el7.x86_64.rpm.html
+选择最快mirror下载rpm。https://www.centos.org/download/mirrors/
+推荐
+http://mirrors.tuna.tsinghua.edu.cn/centos/
+http://mirrors.aliyun.com/centos/
+========================================================================================================
+下载内核对应的devel
+wget http://mirror.centos.org/altarch/7/updates/aarch64/Packages/$(uname -r).rpm
+wget http://mirror.centos.org/centos-7/7/updates/x86_64/Packages/$(uname -r).rpm
+rpm -ivh $(uname -r).rpm
 
 把Makefile和.c放到1个目录下，开始编译
 mv ipi_benchmark-x86.c ipi_benchmark.c
@@ -20,7 +23,7 @@ make
 insmod ipi_benchmark.ko
 dmesg
 
-make时如果报错，bulid路径找不到，则
+make时如果报错，bulid路径找不到，则在/lib/modules/$(uname -r)/的目录下
 ln -s /usr/src/kernels/4.14.0-115.5.1.el7a.aarch64 build
 
 [691568.268699] Dry-run:                         0,             201669 ns
