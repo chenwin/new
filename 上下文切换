@@ -7,7 +7,10 @@ wget https://buildlogs.centos.org/c7.1708.u.x86_64/kernel/20171204203818/3.10.0-
 yum install kernel-3.10.0-693.11.1.el7.x86_64.rpm
 awk -F\' '$1=="menuentry " {print $2}' /etc/grub2.cfg
 
-
+yum installl screen
+ctrl+a然后点击d，将当前screen隐藏；
+screen -ls 查询当前所有的screen：
+使用screen -r <screen-ID>进入其中一个screen
 
 降低内核
 rpm -qa |grep kernel-3.10
