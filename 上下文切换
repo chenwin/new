@@ -12,6 +12,9 @@ ctrl+a然后点击d，将当前screen隐藏；
 screen -ls 查询当前所有的screen：
 使用screen -r <screen-ID>进入其中一个screen
 
+参考：Linux内核3.x升级至5.x
+https://blog.csdn.net/zsx0728/article/details/93991388
+
 降低内核
 rpm -qa |grep kernel-3.10
 
