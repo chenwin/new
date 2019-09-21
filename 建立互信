@@ -3,6 +3,8 @@ yum install expect
 
 for ip in `cat ips |grep -v ^# |awk '{print $1}'`;do ssh $ip 'yum install -y sysstat';done
 
+参考
+https://www.cyberciti.biz/faq/linux-unix-osx-bsd-ssh-run-command-on-remote-machine-server/
 
 从ips读取41行到50行，针对这10行操作；sleep 0.25刚好。不sleep，某些节点命令不会执行。
 for i in `sed -n '41,50p' ips`
