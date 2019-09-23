@@ -1,3 +1,10 @@
 Loadrunner
 Jmeter
 Gatling
+
+Mock Server
+https://github.com/dreamhead/moco
+
+Mock Server的作用？
+现今的业务系统很少有孤立存在的，它们或多或少需要使用兄弟团队或是其他公司提供的服务，这给我们的联调和测试造成了麻烦。
+对于这种情况，我们常见的解决方案是搭建一个临时的server，模拟那些服务，提供数据进行联调和测试。这就是 mock server 出现原因。
