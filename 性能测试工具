@@ -5,11 +5,11 @@ Gatling
 
 Selenium 官网：http://seleniumhq.org/
 Selenium Github 主页：https://github.com/SeleniumHQ/selenium
-Selenium 是用于测试 Web 应用程序用户界面 (UI) 的常用框架。它是一款用于运行端到端功能测试的超强工具。
-您可以使用多个编程语言编写测试，并且 Selenium 能够在一个或多个浏览器中执行这些测试。
-与其他测试工具相比，使用 Selenium 的最大好处是：
-Selenium 测试直接在浏览器中运行，就像真实用户所做的一样。
-Selenium 测试可以在 Windows、Linux 和 Macintosh上的 Internet Explorer、Chrome和 Firefox 中运行。
+Selenium 是用于测试 Web 应用程序用户界面 (UI) 的常用框架，
+使用多个编程语言编写测试，在多个操作系统的一个或多个浏览器中(Internet Explorer、Chrome和Firefox)执行测试。
+
+Selenium是基于WEB应用的验收测试工具集合，直接运行在浏览器中，通过一系列命令来模拟用户操作，Selenium可以将这些命令转化成实际的HTTP请求在浏览器中运行 。
+关于Selenium的命名比较有意思，当时QTP mercury是主流的商业自化工具，是化学元素汞（俗称水银），而Selenium是开源自动化工具，是化学元素硒，硒可以对抗汞。
 
 Mock Server
 https://github.com/dreamhead/moco
