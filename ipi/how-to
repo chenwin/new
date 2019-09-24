@@ -5,6 +5,10 @@ https://patchwork.kernel.org/patch/10122703/
 wget http://mirror.centos.org/altarch/7/updates/aarch64/Packages/kernel-devel-4.14.0-115.5.1.el7a.aarch64.rpm
 rpm -ivh kernel-devel-4.14.0-115.5.1.el7a.aarch64.rpm
 
+find rpm
+http://rpm.pbone.net/
+ftp://ftp.pbone.net/mirror/ftp.centos.org/7.6.1810/updates/x86_64/Packages/kernel-devel-3.10.0-957.21.3.el7.x86_64.rpm
+
 选择最快mirror下载rpm。https://www.centos.org/download/mirrors/
 推荐
 http://mirrors.tuna.tsinghua.edu.cn/centos/
