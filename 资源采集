@@ -67,6 +67,8 @@ curl --connect-timeout 3 -m 5 -s http://100.100.100.200/latest/meta-data/instanc
 ./stackcollapse-perf.pl /home/out.perf > out.perf-folded
 ./flamegraph.pl out.perf-folded > perf-kernel.svg
 
+cat /proc/interrupts |tr -s ' '
+
 insn per cycle(IPC)
 if IPC<1.0
   NUMA，提升CPU缓存，减少内存IO
