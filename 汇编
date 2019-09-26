@@ -1,7 +1,12 @@
 C中嵌入式汇编__asm__
 
 本文主要说明-E,-S,-c,-o 四个编译选项，他们分别对应C语言程序编译中的几个步骤。
-以编译程序test.c为例
+以编译程序test.c为例。
+ -E                       Preprocess only; do not compile, assemble or link
+ -S                       Compile only; do not assemble or link
+ -c                       Compile and assemble, but do not link
+ -o <file>                Place the output into <file>
+
 
 -E: 预处理，主要是进行宏展开等步骤，生成的文件为test.i
 gcc -E test.c
