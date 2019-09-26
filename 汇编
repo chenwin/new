@@ -1,0 +1,19 @@
+C中嵌入式汇编__asm__
+
+本文主要说明-E,-S,-c,-o 四个编译选项，他们分别对应C语言程序编译中的几个步骤。
+以编译程序test.c为例
+
+-E: 预处理，主要是进行宏展开等步骤，生成的文件为test.i
+gcc -E test.c
+
+-S: 编译，生成汇编代码，生成的文件为test.S
+gcc -S test.c
+
+-c: 汇编：生成机器码，生成的文件为test.o
+gcc -c test.c
+
+(-o): 链接：生成可执行文件
+gcc test.c (-o test)
+————————————————
+版权声明：本文为CSDN博主「兔纸兔子」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/rabbit_zhen/article/details/87212887
