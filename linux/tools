@@ -200,6 +200,9 @@ lat: 8krandwrite/randread
 
 local disk:
 
+限速fio压测
+fio -ioengine=libaio -group_reporting -direct=1 -rw=$1 -bs=$2k -iodepth=32 -rate=$3m -runtime=$4 -time_based -name=/dev/vdb --output=./bw.log
+
 ========================================================================================================
 #cpu url https://www.geekbench.com/geekbench3/download/linux/#download
 #fio url https://github.com/axboe/fio/releases
