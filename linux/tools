@@ -1,3 +1,6 @@
+可参考https://github.com/bingjin/CloudTesting
+
+
 base_install
 yum install tar wget gcc make -y
 apt-get install make gcc g++
