@@ -1,0 +1,166 @@
+print( x, end=" " )  # 不换⾏输出，默认换⾏
+print(b, end=',')    # 输出的内容用,间隔开
+
+
+>>> 2 / 4  # 除法，得到⼀个浮点数 0.5 
+>>> 2 // 4 # 除法，得到⼀个整数 0
+
+str = 'Runoob'
+print (str)        # 输出字符串
+print (str[0:])    # 输出字符串
+print (str[0:-1])  # 输出第⼀个到倒数第⼆个的所有字符
+print (str * 2) # 输出字符串两次
+输出
+Runoob
+Runoob
+Runoo
+RunoobRunoob
+
+字符串：
+1、反斜杠可以用来转义，使用r可以让反斜杠不发生转义。
+2、字符串可以用+运算符连接在一起，用*运算符重复。
+3、Python中的字符串有两种索引方式，从左往右以0开始，从右往左以-1开始。
+
+swapcase() 将字符串中大写转换为小写，小写转换为大写
+translate(table, deletechars="")
+根据 str 给出的表(包含 256 个字符)转换 string 的字符, 要过滤掉的字符放到 deletechars 参数中
+
+# set可以进⾏集合运算
+a = set('abracadabra') 
+b = set('alacazam')
+print(a)
+print(a - b) # a 和 b 的差集
+print(a | b) # a 和 b 的并集
+print(a & b) # a 和 b 的交集
+print(a ^ b) # a 和 b 中不同时存在的元素
+
+列表是有序的对象集合，字典是无序的对象集合。两者之间的区别在于：字典当中的元素是通过键来存取的，而不是通过偏移存取。
+
+while 循环使用 else 语句
+count = 0
+while count < 5: 
+	print (count, " ⼩于 5")
+	count = count + 1
+else:
+	print (count, " ⼤于或等于 5")
+
+迭代器
+迭代是Python最强大的功能之一，是访问集合元素的一种方式。
+迭代器是一个可以记住遍历的位置的对象。
+迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。
+迭代器有两个基本的方法：iter() 和 next()。
+字符串，列表或元组对象都可用于创建迭代器。
+
+list=[5,6,7,8]
+it = iter(list) # 创建迭代器对象
+for x in it: print (x, end=" ")
+输出结果如下：
+5 6 7 8 
+
+在 python 中，strings, tuples, 和 numbers 是不可更改的对象，而 list,dict 等则是可以修改的对象。
+1）不可变类型：变量赋值 a=5 后再赋值 a=10，这里实际是新生成一个 int 值对象 10，再让 a 指向它，而 5 被丢弃，不是改变a的值，相当于新生成了a。
+2）可变类型：变量赋值 la=[1,2,3,4] 后再赋值 la[2]=5 则是将 list la 的第三个元素值更改，本身la没有动，只是其内部的一部分值被修改了。
+
+python 函数的参数传递：
+1）不可变类型：类似 c++ 的值传递，如 整数、字符串、元组。如fun（a），传递的只是a的值，没有影响a对象本身。比如在 fun（a）内部修改 a 的值，只是修改另一个复制的对象，不会影响 a 本身。
+2）可变类型：类似 c++ 的引用传递，如 列表，字典。如 fun（la），则是将 la 真正的传过去，修改后fun外部的la也会受影响
+
+list.index(x) 返回列表中第一个值为 x 的元素的索引。如果没有匹配的元素就会返回一个错误。
+
+列表推导式
+列表推导式提供了从序列创建列表的简单途径。
+每个列表推导式都在 for 之后跟一个表达式，然后有零到多个 for 或 if 子句。返回结果是一个根据表达从其后的 for 和 if 上下文环境中生成出来的列表。如果希望表达式推导出一个元组，就必须使用括号。
+>>> vec = [2, 4, 6]
+>>> [[x, x**2] for x in vec]
+[[2, 4], [4, 16], [6, 36]]
+
+>>> [3*x for x in vec if x > 3]
+[12, 18]
+
+
+>>> vec1 = [2, 4, 6]
+>>> vec2 = [4, 3, -9]
+>>> [x*y for x in vec1 for y in vec2] [8, 6, -18, 16, 12, -36, 24, 18, -54]
+
+
+集合--去重
+>>> # 以下演⽰了两个集合的操作
+...
+>>> a = set('abracadabra')
+>>> b = set('alacazam')
+>>> a # a 中唯⼀的字⺟ {'a', 'r', 'b', 'c', 'd'}
+>>> a - b # 在 a 中的字⺟，但不在 b 中 {'r', 'd', 'b'}
+>>> a | b # 在 a 或 b 中的字⺟ {'a', 'c', 'r', 'd', 'b', 'm', 'z', 'l'}
+>>> a & b # 在 a 和 b 中都有的字⺟ {'a', 'c'}
+>>> a ^ b # 在 a 或 b 中的字⺟，但不同时在 a 和 b 中 {'r', 'd', 'b', 'm', 'z', 'l'}
+
+
+>>> tel = {'sape': 4139, 'guido': 4127, 'jack': 4098}
+>>> sorted(tel.keys())
+['guido', 'irv', 'jack']
+
+
+同时遍历两个或更多的序列，可以使用 zip() 组合：
+>>> questions = ['name', 'quest', 'favorite color']
+>>> answers = ['lancelot', 'the holy grail', 'blue']
+>>> for q, a in zip(questions, answers):
+... print('What is your {0}? It is {1}.'.format(q, a))
+
+
+for x in range(1, 11):
+	print(repr(x).rjust(2), repr(x*x).rjust(3), end=' ')
+	print(repr(x*x*x).rjust(4))
+输出平方和立方表
+1  1    1 
+4 16   64
+5 25  125
+6 36  216
+7 49  343
+8 64  512
+9 81  729
+10 100 1000
+字符串对象的 rjust() 方法, 它可以将字符串靠右, 并在左边填充空格。
+
+str.format() 的基本使用如下:
+>>> print('{}⽹址： "{}!"'.format('菜鸟教程', 'www.runoob.com'))
+菜鸟教程⽹址： "www.runoob.com!"
+括号及其里面的字符 (称作格式化字段) 将会被 format() 中的参数替换。
+在括号中的数字用于指向传入对象在 format() 中的位置，如下所示：
+>>> print('{0} 和 {1}'.format('Google', 'Runoob'))
+Google 和 Runoob
+>>> print('{1} 和 {0}'.format('Google', 'Runoob'))
+Runoob 和 Google
+
+读取键盘输入
+str = input("请输⼊：");
+print ("你输⼊的内容是: ", str)
+
+关键词 with 语句就可以保证诸如文件之类的对象在使用完之后一定会正确的执行他的清理方法: 
+with open("myfile.txt") as f: 
+    for line in f: 
+        print(line, end="")
+以上这段代码执行完毕后，就算在处理过程中出问题了，文件 f 总是会关闭。
+
+
+性能度量
+timeit模块
+>>> from timeit import Timer
+>>> Timer('t=a; a=b; b=t', 'a=1; b=2').timeit()
+
+timeit(stmt='pass', setup='pass', timer=<defaulttimer>, number=1000000)
+参数：
+stmt：要执行的那段代码
+setup：执行代码的准备工作，不计入时间，一般是import之类的
+timer：这个在win32下是time.clock()，linux下是time.time()，默认的，不用管
+number：要执行stmt多少遍
+
+
+单元测试
+import unittest
+class TestStatisticalFunctions(unittest.TestCase):
+	def test_average(self):
+		self.assertEqual(average([20, 30, 70]), 40.0)
+		self.assertEqual(round(average([1, 5, 7]), 1), 4.3)
+		self.assertRaises(ZeroDivisionError, average, [])
+		self.assertRaises(TypeError, average, 20, 30, 70)
+unittest.main() # Calling from the command line invokes all tests
