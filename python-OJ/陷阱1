@@ -1,0 +1,21 @@
+深浅copy
+
+import copy
+origin = [1, 2, [3, 4]]
+cop1 = copy.copy(origin)
+cop2 = copy.deepcopy(origin)
+origin[2][0] = "hey!"
+origin.append(5)
+print(origin)
+print(cop1)
+print(cop2)
+
+输出：
+[1, 2, ['hey!', 4], 5]
+[1, 2, ['hey!', 4]]
+[1, 2, [3, 4]]
+分析解答：
+cop1是shallow copy，跟着origin把原有元素改变了（注意：是原有元素，不会新增元素）
+cop2是deep copy，并没有变
+
+=====================================================================================================
