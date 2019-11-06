@@ -1,6 +1,10 @@
 print( x, end=" " )  # 不换⾏输出，默认换⾏
 print(b, end=',')    # 输出的内容用,间隔开
 
+enumerate得到列表下标
+drinks = ["coffee", "tea", "milk", "water"]
+for index, drink in enumerate(drinks):
+    print("Item {} is {}".format(index, drink))
 
 >>> 2 / 4  # 除法，得到⼀个浮点数 0.5 
 >>> 2 // 4 # 除法，得到⼀个整数 0
