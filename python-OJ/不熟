@@ -1,7 +1,7 @@
 print( x, end=" " )  # 不换⾏输出，默认换⾏
 print(b, end=',')    # 输出的内容用,间隔开
 
-enumerate得到列表下标
+enumerate得到列表下标.在for循环中同时迭代索引和元素本身
 drinks = ["coffee", "tea", "milk", "water"]
 for index, drink in enumerate(drinks):
     print("Item {} is {}".format(index, drink))
@@ -37,6 +37,11 @@ print(a - b) # a 和 b 的差集
 print(a | b) # a 和 b 的并集
 print(a & b) # a 和 b 的交集
 print(a ^ b) # a 和 b 中不同时存在的元素
+
+集合用于去重，非常方便。
+# deduplicate a list *fast*
+print(set(["ham", "eggs", "bacon", "ham"]))
+>>>{'bacon', 'eggs', 'ham'}
 
 列表是有序的对象集合，字典是无序的对象集合。两者之间的区别在于：字典当中的元素是通过键来存取的，而不是通过偏移存取。
 
