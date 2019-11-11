@@ -1,4 +1,13 @@
 excel技巧
 COUNTIFS 是一个统计函数，用于统计满足N个条件的单元格的数量
-=COUNTIFS(Sheet1!G:G,"China",Sheet1!B:B,"xi'an")
-G列为china且B列为xi'an的单元格个数
+=COUNTIFS(Sheet1!G:G,"man",Sheet1!B:B,"xi'an")
+G列为man且B列为xi'an的单元格个数
+
+SUMIFS 函数是一个数学与三角函数，用于计算其满足多个条件的全部参数的总量。
+=COUNTIFS(Sheet1!A:A,Sheet1!G:G,"man",Sheet1!B:B,"xi'an")
+假设A列为人口数量，则“xi'an的man”的总数
+
+AVERAGEIFS返回满足多个条件的所有单元格的平均值（算术平均值）
+
+https://support.office.com/zh-cn/article/SUMIFS-%E5%87%BD%E6%95%B0-C9E748F5-7EA7-455D-9406-611CEBCE642B
+
