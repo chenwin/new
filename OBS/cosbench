@@ -1,6 +1,9 @@
 同样的工具，华为开源obscmdbench
 https://github.com/huaweicloud-obs/obscmdbench
 
+curl命令
+curl -k --user "<name:pass>" -v -H content-type -X POST -d "{}" http://XXX
+
 2种方式区别：
 virtual-host：http://<bucket>.<server>/object
 path-style：http://<server>/<bucket>/object
