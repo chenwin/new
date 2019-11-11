@@ -1,4 +1,4 @@
 excel技巧
-COUNTIF 是一个统计函数，用于统计满足1个或N个条件的单元格的数量
-=COUNTIF(Sheet1!G:G,"China",Sheet1!B:B,"xi'an")
+COUNTIFS 是一个统计函数，用于统计满足N个条件的单元格的数量
+=COUNTIFS(Sheet1!G:G,"China",Sheet1!B:B,"xi'an")
 G列为china且B列为xi'an的单元格个数
