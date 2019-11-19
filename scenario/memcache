@@ -43,3 +43,31 @@ for port in `seq 11211 11218`
 do
     memcached -u root -d -p $port
 done
+
+
+ret.sh
+========================================================================================================
+B=$1
+dir=$2
+rm -rf $B-ret.csv
+
+for T in 1 2 4 8 16 32 64 128 256
+do
+    echo "$T-ret,c1,c4,c8,c16,c32,c64,c128,c256" >> $B-ret.csv
+    for j in `seq 5`
+    do
+        nums=(0,0,0,0,0,0,0,0)
+        x=0
+        for c in 1 4 8 16 32 64 128 256
+        do
+            x=$(($x+1))
+            nums[$x]=`grep TPS ./$dir/$B-T$T-c$c-$j.log |awk '{print $7}'`
+            if [ -z "${nums[$x]}" ]
+            then
+                nums[$x]=0
+            fi
+        done
+        echo "T$T-$j,${nums[1]},${nums[2]},${nums[3]},${nums[4]},${nums[5]},${nums[6]},${nums[7]},${nums[8]}" >> $B-ret.csv
+    done
+    echo "AVG,-,-,-,-,-,-,-,-" >> $B-ret.csv
+done
