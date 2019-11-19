@@ -9,7 +9,8 @@ cp /home/redis-4.0.9/redis.conf /usr/local/redis/
 cd /usr/local/redis/bin/
 
 #redis.conf把daemonize no 改成daemonize yes,后台启动。Port: 6379
-./redis-server ./redis.conf
+#bind 192.168.10.221  修改127.0.0.1为内网IP
+./redis-server /usr/local/redis/redis.conf
 
 测试
 [root@redis]# ./bin/redis-cli 
