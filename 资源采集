@@ -1,6 +1,8 @@
 如果想用24小时制式，则sar、iostat和mpstat 前面增加LC_TIME=en_uk.utf8
 比如LC_TIME=en_uk.utf8 iostat -xcmt 1
 
+sar里的带宽转换，大B乘以8转换为小b，然后再除以1000
+
 #yum install sysstat perf -y
 #vi res.sh
 export LC_TIME=en_uk.utf8
