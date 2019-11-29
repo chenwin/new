@@ -1,0 +1,74 @@
+yum install bc wget -y
+
+mkdir -p cpu
+
+cpu_numss=`cat /proc/cpuinfo| grep "processor"| wc -l`
+cpu_nums=`expr $cpu_numss - 1`
+
+for i in `seq 20`
+do
+  for cpu_num in `seq 0 $cpu_nums`
+  do
+    (time echo "scale=5000; 4*a(1)" | taskset -c ${cpu_num} bc -l -q) >& ./cpu/$i-cpu$cpu_num.log &
+  done
+
+  for j in `seq 30`
+  do
+    sleep 5
+    if [ `ps -ef |grep bc |grep -v grep |wc -l` -eq 0 ]; then     
+      break
+    fi
+  done
+done
+
+#grep real *.log |awk '{print $2}' |awk -F'm|s' '{sum+=$2} END {print sum/NR}'
+
+mkdir -p mem
+stream_array_size=64000000
+wget http://www.cs.virginia.edu/stream/FTP/Code/stream.c
+gcc -O stream.c -fopenmp -DSTREAM_ARRAY_SIZE=${stream_array_size} -DNTIME=30 -mcmodel=medium -o stream_multi
+./stream_multi | tee ./mem/stream_multi.log
+gcc -O stream.c -DSTREAM_ARRAY_SIZE=${stream_array_size} -DNTIME=30 -mcmodel=medium -o stream_single
+./stream_single | tee ./mem/stream_single.log
+
+
+mkdir -p disk
+yum install libaio libaio-devel fio -y
+fio --ioengine=libaio --bs=4k --rw=randwrite --filename=/dev/vdb -runtime=1800 --direct=1 -numjobs=8 -iodepth=128 --name=test --group_reporting=1 --output=./disk/init.log
+
+fio --ioengine=libaio --bs=4k --rw=randwrite --filename=/dev/vdb -runtime=300 --direct=1 -numjobs=8 -iodepth=128 --name=test --group_reporting=1 --output=./disk/w-IOPS.log
+fio --ioengine=libaio --bs=4k --rw=randread --filename=/dev/vdb -runtime=300 --direct=1 -numjobs=8 -iodepth=128 --name=test --group_reporting=1 --output=./disk/r-IOPS.log
+fio --ioengine=libaio --bs=4k --rw=randrw --filename=/dev/vdb -runtime=300 --direct=1 -numjobs=8 -iodepth=128 --name=test --group_reporting=1 --rwmixread=70 --output=./disk/rw-IOPS.log
+fio --ioengine=libaio --bs=1024k --rw=write --filename=/dev/vdb -runtime=300 --direct=1 -numjobs=8 -iodepth=64 --name=test --group_reporting=1 --rwmixread=70 --output=./disk/w-BW.log
+fio --ioengine=libaio --bs=1024k --rw=read --filename=/dev/vdb -runtime=300 --direct=1 -numjobs=8 -iodepth=64 --name=test --group_reporting=1 --rwmixread=70 --output=./disk/r-BW.log
+fio --ioengine=libaio --bs=1024k --rw=rw --filename=/dev/vdb -runtime=300 --direct=1 -numjobs=8 -iodepth=64 --name=test --group_reporting=1 --rwmixread=70 --output=./disk/rw-BW.log
+fio --ioengine=libaio --bs=4k --rw=randread --filename=/dev/vdb -runtime=1000 --direct=1 -numjobs=1 -iodepth=1 --name=test --group_reporting=1 --output=./disk/r-latency.log
+fio --ioengine=libaio --bs=4k --rw=randwrite --filename=/dev/vdb -runtime=1000 --direct=1 -numjobs=1 -iodepth=1 --name=test --output=./disk/w-latency.log
+
+
+wget https://codeload.github.com/HewlettPackard/netperf/tar.gz/netperf-2.7.0 -O netperf-netperf-2.7.0.tar.gz
+tar -zxvf netperf-netperf-2.7.0.tar.gz
+cd netperf-netperf-2.7.0
+./configure
+make
+make install
+
+: << !
+#server
+for port in `seq 7001 7064`
+do
+  netserver -p $port
+done
+
+#pps
+for port in `seq 7001 7064`
+do
+  netperf -H $1 -l 300 -t $2_STREAM -p ${port} -- -m 1 -D &
+done
+
+#bw
+for port in `seq 7001 7064`
+do
+  netperf -H $1 -l 300 -t $2_STREAM -p ${port} -- -m 1400 -D &
+done
+!
