@@ -1,0 +1,39 @@
+mkdir -p $1
+echo > nohup.out
+
+for i in `seq 5`
+do
+    for d in 1 10 100 1000 10000
+    do
+        for n in 1 5 50 500 5000 50000 500000 5000000
+        do
+        ./redis-benchmark -h 192.168.10.221 -p 6379 -n $n -c 1000 -t ping,set,get,lpush,lpop -d $d -P 1 -q --csv > $1/P1-d$d-n$n-$i.log
+        done
+    done
+done
+
+
+===============================================================================================
+P=$1
+dir=$2
+rm -rf *.csv
+
+for d in 1 10 100 1000 10000
+do
+    echo "redis,d$d" >> $P-d$d-ret.csv
+    for n in 1 5 50 500 5000 50000 500000 5000000
+    do
+        echo "n$n,PING_INLINE,PING_BULK,SET,GET,LPUSH,LPOP" >> $P-d$d-ret.csv
+        for i in `seq 5`
+        do
+            PING_INLINE=`grep PING_INLINE ./$dir/$P-d$d-n$n-$i.log |awk -F',' '{print $2}'`
+            PING_BULK=`grep PING_BULK ./$dir/$P-d$d-n$n-$i.log |awk -F',' '{print $2}'`
+            SET=`grep SET ./$dir/$P-d$d-n$n-$i.log |awk -F',' '{print $2}' | head -n1`
+            GET=`grep GET ./$dir/$P-d$d-n$n-$i.log |awk -F',' '{print $2}'`
+            LPUSH=`grep LPUSH ./$dir/$P-d$d-n$n-$i.log |awk -F',' '{print $2}'`
+            LPOP=`grep LPOP ./$dir/$P-d$d-n$n-$i.log |awk -F',' '{print $2}'`            
+            echo "$i,$PING_INLINE,$PING_BULK,$SET,$GET,$LPUSH,$LPOP" >> $P-d$d-ret.csv
+        done
+    done
+    echo "AVG,-,-,-,-,-,-" >> $P-d$d-ret.csv
+done
