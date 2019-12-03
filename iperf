@@ -13,6 +13,13 @@ do
   iperf3 -s -p $i > /dev/null 2>&1 &
 done
 
+-P, --parallel  # number of parallel client streams to run，default 1
+-l, --len       #[KMG]    length of buffer to read or write
+                           (default 128 KB for TCP, dynamic or 1 for UDP)
+-u, --udp                 use UDP rather than TCP
+
+
+
 杀进程 pkill -9 iperf3
 
 客户端
