@@ -18,7 +18,9 @@ done
                            (default 128 KB for TCP, dynamic or 1 for UDP)
 -u, --udp                 use UDP rather than TCP
 
-
+Why default packet size is less in udp than tcp in iperf3
+As I see the tcp defualt packet size is 128KB whereas the UDP default is just 8KB
+https://github.com/esnet/iperf/issues/918
 
 杀进程 pkill -9 iperf3
 
