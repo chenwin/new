@@ -1,3 +1,4 @@
+excel jiqiao
 excel技巧
 COUNTIFS 是一个统计函数，用于统计满足N个条件的单元格的数量
 =COUNTIFS(Sheet1!G:G,"man",Sheet1!B:B,"xi'an")
