@@ -1,3 +1,6 @@
+
+free -m -t -s 1
+
 压力构造工具
 ubuntu:
 apt-get install stress
