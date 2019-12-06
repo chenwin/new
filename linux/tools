@@ -36,6 +36,12 @@ gcc -O3 -fopenmp -DSTREAM_ARRAY_SIZE=<num> -DNTIMES=<num> stream.c -o stream
 ln -s /home/stream /usr/local/bin/stream
 stream | tee file_path
 
+1、内存数组大小的设置，必须要远大于L3 Cache的大小，否则就是测试缓存的吞吐性能；
+2、CPU数目很有关系，一般来说，一两个核的计算能力，是远远到不了内存带宽的，整机的CPU全部运行起来，才可以有效地测试内存带宽。当然跑单核的stream测试也有意义，可以测试内存的延时。/3、
+3、开启NUMA，可以有效地提供内存的吞吐性能，降低内存时延
+4、通过icc编译，可以有效地提供内存带宽性能分。原因是Intel优化了CPU的指令，通过指令向量化和指令Prefetch操作，加速了数据的读写操作以及指令操作。
+
+https://www.jianshu.com/p/3465d6af4425
 ========================================================================================================
 内存时延
 mlc
