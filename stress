@@ -4,3 +4,6 @@ apt-get install stress
 stress -c 1 (2核的虚拟机，写1表示CPU加压50%)
 
 stress --vm-bytes 512m --vm-keep -m 1
+
+stress --vm-bytes $(awk '/MemFree/ {printf "%d\n",$2*0.5;}' < /proc/meminfo)k --vm-keep -m 1
+0.5表示压测1半内存
