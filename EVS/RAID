@@ -1,0 +1,11 @@
+使用mdadm命令创建RAID阵列/dev/md0
+mdadm --create /dev/md0 --level=0 --raid-devices=5 /dev/vdb
+--level=0表示用于将阵列条带化的RAID0模式
+--level=1表示用于将阵列镜像化的RAID1模式
+
+查看创建的RAID阵列/dev/md0信息
+mdadm --detail /dev/md0
+
+创建RAID阵列
+create RAID
+https://help.aliyun.com/document_detail/131209.html?spm=a2c4g.11186623.6.1081.5d0c658bF1f74V
