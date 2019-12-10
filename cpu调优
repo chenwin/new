@@ -8,6 +8,9 @@ ll /sys/class/net/eth0/queues/
 修改
 ethtool -L eth0 combined 2
 
+配置网卡多队列，开启RPS特性
+https://help.aliyun.com/document_detail/52559.html?spm=a2c4g.11186623.6.917.4f476b3fJNw3lz
+
 
 问题：
 压测过程中产生的中断都落在CPU0上处理,占用率100%(进程名ksoftirdq)，没有均衡到各个CPU，导致单个CPU过载而形成瓶颈。
