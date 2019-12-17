@@ -2,6 +2,9 @@
 yum install smartmontools
 smartctl -a /dev/vdb
 
+RPS and RFS
+https://www.ruilog.com/blog/view/8819159f9246.html
+
 如果想用24小时制式，则sar、iostat和mpstat 前面增加LC_TIME=en_uk.utf8
 比如LC_TIME=en_uk.utf8 iostat -xcmt 1
 
